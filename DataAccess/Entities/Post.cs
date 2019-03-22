@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,9 @@ namespace DataAccess.Entities
         public string Content { get; set; }
 
         public PostType PostType { get; set; }
-
+        
         public int UserId { get; set; }
+        public virtual User User { get; set; }
 
         public int SubRedditId { get; set; }
 

@@ -1,0 +1,48 @@
+﻿@model Reddit.ViewModels.Home.LoginVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <fieldset>
+                            <legend><b>Login</b></legend>
+                            @Html.ValidationMessage("authenticationFailed", new { style = "color: red;" })
+                            <table>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Username)</td>
+                                    <td>@Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Password)</td>
+                                    <td>@Html.PasswordFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" value="Login" /></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

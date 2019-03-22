@@ -49,6 +49,16 @@ namespace DataAccess.Repositories
                     us.MapRightKey("UsersAdminsToSubReddits");
                 }
                 );
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.Posts)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>()
+                .HasRequired(u => u.SubReddits)
+                .WithMany()
+                .WillCascadeOnDelete(false);
         }
     }
 }
