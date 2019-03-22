@@ -8,6 +8,7 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 .idea
+.intellij
 # User-specific files
 *.rsuser
 *.suo
@@ -347,5 +348,13 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+
+DataAccess/bin
+DataAccess/obj
+Reddit/bin
+Reddit/obj
+Reddit.Tests/bin
+Reddit.Tests/obj
+Reddit.csproj.user
 
 # End of https://www.gitignore.io/api/visualstudio
