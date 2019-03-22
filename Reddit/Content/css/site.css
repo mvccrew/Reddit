@@ -31,6 +31,83 @@ body {
     padding: 3% 3% 0 3%;
 }
 
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+h1 i {
+    color: #91a1a5;
+    position: relative;
+    top: 3px;
+    right: 4px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    float: left;
+    margin-left: 30px;
+    padding: 8px;
+    font-weight: 600;
+    border-bottom: 2px solid #91a1a5;
+}
+
+a {
+    text-decoration: none;
+    color: #bd6151;
+    font-size: 1rem;
+}
+
+#login a {
+    color: #91a1a5;
+}
+
+nav li:hover {
+    border-bottom-color: #bd6151;
+}
+
+.dynamic-badge {
+    position: relative;
+}
+
+    .dynamic-badge[data-badge]:after {
+        content: attr(data-badge);
+        position: absolute;
+        top: -0.8rem;
+        left: -1rem;
+        font-size: 0.6rem;
+        font-weight: 600;
+        text-align: center;
+        line-height: 21px;
+        background: #91a1a5;
+        color: #f7f3de;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+    }
+
+#footer-container {
+    padding: 1%;
+    margin-top: 5.6rem;
+    background: #91a1a5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
 @media only screen and (min-width: 993px) and (max-width : 1200px) {
     html {
         font-size: 16px;

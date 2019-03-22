@@ -19,16 +19,15 @@
                     <li>
                         <a href="/Account/Index">профил</a>
                     </li>
-                    <li><a href="/Products/Index">продукти</a></li>
                     <li><a href="/Home/About">контакти</a></li>
                     <li id="login">
                         @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                         {
-                            <a href="/Account/Login">влез</a>
+                            <a href="/Home/Login">влез</a>
                         }
                         else
                         {
-                            <a href="/Account/Logout">излез</a>
+                            <a href="/Home/Logout">излез</a>
                         }
                     </li>
                 </ul>
