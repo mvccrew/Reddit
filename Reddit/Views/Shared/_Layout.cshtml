@@ -1,40 +1,45 @@
-﻿
-<!DOCTYPE html>
-
-<html>
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+    <link rel="stylesheet" href="~/Content/css/site.css" />
+    @RenderSection("styles", required: false)
 </head>
 <body>
-    <div>
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <h1 style="float:left;">User Manager</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <ul style="list-style:none;">
-                        <li style="float:left; margin:0 10px;">
-                            <a href="/Home/Index">Home</a>
-                        </li>
-                        <li style="float:left; margin:0 10px;">
-                            <a href="/Users/Index">Users</a>
-                        </li>
-                        <li style="float:left; margin:0 10px;">
-                            <a href="/Contacts/Index">Contacts</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @RenderBody()
-                </td>
-            </tr>
-        </table>
+    <div id="main-container">
+        <header id="header-container">
+            <a href="/Home/Index"><h1><i class="fab fa-reddit"></i>reddit</h1></a>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/Account/Index">профил</a>
+                    </li>
+                    <li><a href="/Products/Index">продукти</a></li>
+                    <li><a href="/Home/About">контакти</a></li>
+                    <li id="login">
+                        @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                        {
+                            <a href="/Account/Login">влез</a>
+                        }
+                        else
+                        {
+                            <a href="/Account/Logout">излез</a>
+                        }
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main id="content-container">
+            @RenderBody()
+        </main>
     </div>
+    <footer id="footer-container">
+        <h3>&copy; 2019 mvccrew OOD</h3>
+    </footer>
 </body>
 </html>

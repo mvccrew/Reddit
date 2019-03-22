@@ -1,0 +1,118 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+html, body {
+    background: #ebdbb2;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Open Sans';
+    font-size: 18px;
+    color: #bd6151;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+#main-container {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0;
+    flex: 1 0 auto;
+}
+
+#header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3% 3% 0 3%;
+}
+
+@media only screen and (min-width: 993px) and (max-width : 1200px) {
+    html {
+        font-size: 16px;
+    }
+
+    #main-container {
+        width: 80%;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width : 992px) {
+    html {
+        font-size: 16px;
+    }
+
+    #main-container {
+        width: 80%;
+    }
+
+    #header-container {
+        padding: 2% 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        #header-container nav {
+            margin-top: 2.8rem;
+        }
+
+    li {
+        text-align: center;
+        float: left;
+        padding: 5px;
+        margin: 0 40px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width : 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    #main-container {
+        width: 90%;
+    }
+
+    #header-container {
+        padding: 2% 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        #header-container nav {
+            margin-top: 2.8rem;
+        }
+
+    li {
+        text-align: center;
+        float: left;
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    html {
+        font-size: 14px;
+    }
+
+    #main-container {
+        width: 90%;
+    }
+
+    #header-container {
+        padding: 0;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    li {
+        text-align: center;
+        float: none;
+        padding: 5px;
+        margin: 30px 0 0 0;
+    }
+}
