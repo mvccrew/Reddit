@@ -1,0 +1,40 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <h1 style="float:left;">User Manager</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul style="list-style:none;">
+                        <li style="float:left; margin:0 10px;">
+                            <a href="/Home/Index">Home</a>
+                        </li>
+                        <li style="float:left; margin:0 10px;">
+                            <a href="/Users/Index">Users</a>
+                        </li>
+                        <li style="float:left; margin:0 10px;">
+                            <a href="/Contacts/Index">Contacts</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @RenderBody()
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
