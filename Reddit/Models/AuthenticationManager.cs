@@ -7,7 +7,7 @@ using DataAccess.Services;
 
 namespace Reddit.Models
 {
-    public class AuthenticationManager
+    public abstract class AuthenticationManager
     {
         public static User LoggedUser
         {
@@ -27,16 +27,15 @@ namespace Reddit.Models
         {
             AuthenticationService authenticationService = null;
 
-            if (HttpContext.Current != null && HttpContext.Current.Session["LoggedUser"] != null)
+            if (HttpContext.Current != null && HttpContext.Current.Session["LoggedUser"] == null)
                 HttpContext.Current.Session["LoggedUser"] = new AuthenticationService();
 
             authenticationService = (AuthenticationService)HttpContext.Current.Session["LoggedUser"];
             authenticationService.AuthenticateUser(username, password);
         }
-
         public static void Logout()
         {
             HttpContext.Current.Session["LoggedUser"] = null;
-        } 
+        }
     }
 }

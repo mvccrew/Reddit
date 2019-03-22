@@ -33,12 +33,13 @@ namespace Reddit.Controllers
                 if (AuthenticationManager.LoggedUser == null)
                     ModelState.AddModelError("authenticationFailed", "Wrong username or password!");
             }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
             
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()
@@ -71,17 +72,22 @@ namespace Reddit.Controllers
                 return View(model);
             }
 
-            User item = new User();
-            item.Email = model.Email;
-            item.Username = model.Username;
-            item.Password = model.Password;
-            item.FirstName = model.FirstName;
-            item.LastName = model.LastName;
+            User item = new User
+            {
+                Username = model.Username,
+                Password = model.Password,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Email = model.Email
+            };
+
             repo.Insert(item);
 
+            // automatic login after registration
+            AuthenticationManager.Authenticate(item.Username, item.Password);
+
             return RedirectToAction("Index", "Home");
-
-
+            
         }
     }
 }

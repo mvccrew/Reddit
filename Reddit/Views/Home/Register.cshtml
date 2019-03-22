@@ -1,0 +1,66 @@
+﻿@model Reddit.ViewModels.Home.RegisterVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        <fieldset>
+                            <legend><b>Register</b></legend>
+                            @Html.ValidationMessage("authenticationFailed", new { style = "color: red;" })
+                            <table>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Username)</td>
+                                    <td>@Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Password)</td>
+                                    <td>@Html.PasswordFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.RetypePassword)</td>
+                                    <td>@Html.PasswordFor(model => model.RetypePassword) @Html.ValidationMessageFor(model => model.RetypePassword, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.FirstName)</td>
+                                    <td>@Html.TextBoxFor(model => model.FirstName) @Html.ValidationMessageFor(model => model.FirstName, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.LastName)</td>
+                                    <td>@Html.TextBoxFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Email)</td>
+                                    <td>@Html.TextBoxFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email, null, new { style = "color: red;" })</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" value="Register" /></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
+
+
