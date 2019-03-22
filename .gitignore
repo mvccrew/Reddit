@@ -348,4 +348,12 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
+DataAccess/bin
+DataAccess/obj
+Reddit/bin
+Reddit/obj
+Reddit.Tests/bin
+Reddit.Tests/obj
+Reddit.csproj.user
+
 # End of https://www.gitignore.io/api/visualstudio
