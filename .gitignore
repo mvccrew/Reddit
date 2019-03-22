@@ -355,6 +355,6 @@ Reddit/bin
 Reddit/obj
 Reddit.Tests/bin
 Reddit.Tests/obj
-Reddit.csproj.user
+Reddit/Reddit.csproj.user
 
 # End of https://www.gitignore.io/api/visualstudio
