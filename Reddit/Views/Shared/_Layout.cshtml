@@ -24,12 +24,20 @@
                         @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                         {
                             <a href="/Home/Login">влез</a>
+                            
                         }
                         else
                         {
                             <a href="/Home/Logout">излез</a>
                         }
                     </li>
+                    
+                        @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                        {
+                            <li><a href="@Url.Action("Register","Home")">Register</a></li>
+
+                        }
+                    
                 </ul>
             </nav>
         </header>

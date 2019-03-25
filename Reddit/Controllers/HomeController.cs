@@ -78,7 +78,9 @@ namespace Reddit.Controllers
                 Password = model.Password,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Email = model.Email
+                Email = model.Email,
+                CreationDate = DateTime.Now
+                
             };
 
             repo.Insert(item);

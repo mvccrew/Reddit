@@ -63,6 +63,9 @@ namespace DataAccess.Repositories
                 .HasRequired(u => u.User)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<User>()
+                .Property(u => u.CreationDate)
+                .HasColumnType("datetime2");
         }
     }
 }
