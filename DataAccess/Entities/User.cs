@@ -22,8 +22,6 @@ namespace DataAccess.Entities
 
         public bool IsAdmin { get; set; }
 
-        public int MyProperty { get; set; }
-
         public virtual ICollection<Post> Posts { get; set; }
 
         public virtual ICollection<SubReddit> SubReddits { get; set; }

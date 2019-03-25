@@ -50,13 +50,17 @@ namespace DataAccess.Repositories
                 }
                 );
 
-            modelBuilder.Entity<User>()
+            /*modelBuilder.Entity<User>()
                 .HasRequired(u => u.Posts)
                 .WithMany()
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
                 .HasRequired(u => u.SubReddits)
+                .WithMany()
+                .WillCascadeOnDelete(false);*/
+            modelBuilder.Entity<Post>()
+                .HasRequired(u => u.User)
                 .WithMany()
                 .WillCascadeOnDelete(false);
         }
