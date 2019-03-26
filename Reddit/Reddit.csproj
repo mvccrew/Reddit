@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\img\reddit.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
