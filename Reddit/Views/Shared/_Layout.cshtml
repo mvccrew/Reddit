@@ -22,7 +22,8 @@
                 <input id="bmenub" type="checkbox" class="show">
                 <label for="bmenub" class="burger pseudo button">&#9776;</label>
 
-                <div class="menu"><a href="/Profile/Index">profile</a>
+                <div class="menu">
+                    <a href="/Profile/Index">profile</a>
                     @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                     {
                         <a href="/Home/Login">login</a>
@@ -32,13 +33,19 @@
                     {
                         <a href="/Home/Logout">logout</a>
                     }
-
                     @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                     {
                         <a href="@Url.Action("Register","Home")">register</a>
 
                     }
-
+                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
+                         Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                    {
+                        <li style="float:left; margin:0 10px;">|</li>
+                        <li style="float:left; margin:0 10px; border-bottom: 2px solid red; text-decoration: none;">
+                            <a style="text-decoration: none;" href="/Users/Index">Users Panel</a>
+                        </li>
+                    }
                 </div>
             </nav>
         </header>

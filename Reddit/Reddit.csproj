@@ -111,6 +111,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -126,6 +127,9 @@
     <Compile Include="ViewModels\Share\BaseFilterVM.cs" />
     <Compile Include="ViewModels\Share\BaseIndexVM.cs" />
     <Compile Include="ViewModels\Share\PagerVM.cs" />
+    <Compile Include="ViewModels\Users\EditVM.cs" />
+    <Compile Include="ViewModels\Users\FilterVM.cs" />
+    <Compile Include="ViewModels\Users\IndexVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -137,6 +141,8 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

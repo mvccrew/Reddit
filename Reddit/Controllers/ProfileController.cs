@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Repositories;
+using Reddit.Filters;
 using Reddit.ViewModels.Profile;
 using Reddit.ViewModels.Share;
 using System;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
+    [AuthenticationFilter]
     public class ProfileController : BaseController<User, UsersRepository, FilterVM, IndexVM, EditVM>
     {
         public override ActionResult Index(IndexVM model)
