@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel="stylesheet" href="~/Content/css/site.css" />
     @RenderSection("styles", required: false)
+    <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
@@ -29,35 +30,24 @@
 
                 <div id="mainNavbar" class="navbar-menu">
                     <div class="navbar-start">
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                Navigate
-                            </a>
-
-                            <div class="navbar-dropdown">
-                                <a href="/SubReddit" class="navbar-item">
-                                    <span class="icon has-text-info">
-                                        <i class="fas fa-place-of-worship"></i>
-                                    </span>
-                                    &nbsp;
-                                    Home
-                                </a>
-                                <a class="navbar-item">
-                                    <span class="icon has-text-info">
-                                        <i class="fas fa-globe-asia"></i>
-                                    </span>
-                                    &nbsp;
-                                    All
-                                </a>
-                                <hr class="navbar-divider">
-                                <a class="navbar-item">
-                                    и тука останалите събредити
-                                </a>
+                        <div class="navbar-item">
+                            <div class="field">
+                                <div class="control">
+                                    <div class="select">
+                                        <select>
+                                            <option selected>
+                                                Home
+                                            </option>
+                                            <option>All</option>
+                                            <option>subreddits</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="field navbar-item">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" placeholder="Search" style="width: 60rem;">
+                                <input class="input" type="text" placeholder="Search">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-search"></i>
                                 </span>
