@@ -66,6 +66,7 @@
                                 else
                                 {
                                     <a class="button is-outlined is-info navbar-item" href="/Home/Logout">sign out</a>
+                                     <a class="navbar-item" href="/Profile/Index">profile</a>
                                 }
                                 @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                                 {
@@ -74,7 +75,6 @@
                                 }
                             </div>
                         </div>
-                        <a class="navbar-item" href="/Profile/Index">profile</a>
                         @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
                              Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
                         {

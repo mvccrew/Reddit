@@ -52,6 +52,7 @@ namespace Reddit.ViewModels.SubReddit
             item.Theme = Theme;
             item.Rules = Rules;
             AuthenticationManager.LoggedUser.Id = UserId;
+            item.CreationDate = DateTime.Now;
         }
     }
 }
