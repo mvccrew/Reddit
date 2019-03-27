@@ -5,47 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://unpkg.com/picnic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
     <link rel="stylesheet" href="~/Content/css/site.css" />
     @RenderSection("styles", required: false)
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
     <div id="main-container">
         <header id="header-container">
-            <nav style="position: relative;">
-                <a class="brand" href="/Home/Index">
-                    <img class="logo" src="~/Content/img/reddit.png" alt="reddit logo" />
-                    <h1 style="display: inline-block">reddit</h1>
-                </a>
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/Home/Index">
+                        <img src="~/Content/img/reddit.png" alt="logo">&nbsp;
+                        <h1 class="title">reddit</h1>
+                    </a>
 
-                <input id="bmenub" type="checkbox" class="show">
-                <label for="bmenub" class="burger pseudo button">&#9776;</label>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
 
-                <div class="menu">
-                    <a href="/Profile/Index">profile</a>
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                    {
-                        <a href="/Home/Login">login</a>
+                <div id="mainNavbar" class="navbar-menu">
+                    <div class="navbar-start">
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Navigate
+                            </a>
 
-                    }
-                    else
-                    {
-                        <a href="/Home/Logout">logout</a>
-                    }
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                    {
-                        <a href="@Url.Action("Register","Home")">register</a>
+                            <div class="navbar-dropdown">
+                                <a href="/SubReddit" class="navbar-item">
+                                    <span class="icon has-text-info">
+                                        <i class="fas fa-place-of-worship"></i>
+                                    </span>
+                                    &nbsp;
+                                    Home
+                                </a>
+                                <a class="navbar-item">
+                                    <span class="icon has-text-info">
+                                        <i class="fas fa-globe-asia"></i>
+                                    </span>
+                                    &nbsp;
+                                    All
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item">
+                                    и тука останалите събредити
+                                </a>
+                            </div>
+                        </div>
+                        <div class="field navbar-item">
+                            <p class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" placeholder="Search" style="width: 60rem;">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
 
-                    }
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
-                         Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
-                    {
-                        <li style="float:left; margin:0 10px;">|</li>
-                        <li style="float:left; margin:0 10px; border-bottom: 2px solid red; text-decoration: none;">
-                            <a style="text-decoration: none;" href="/Users/Index">Users Panel</a>
-                        </li>
-                    }
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                                {
+                                    <a class="button is-outlined is-info navbar-item" href="/Home/Login">sign in</a>
+
+                                }
+                                else
+                                {
+                                    <a class="button is-outlined is-info navbar-item" href="/Home/Logout">sign out</a>
+                                }
+                                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                                {
+                                    <a class="button is-info navbar-item" href="@Url.Action("Register","Home")">sign up</a>
+
+                                }
+                            </div>
+                        </div>
+                        <a class="navbar-item" href="/Profile/Index">profile</a>
+                        @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
+                             Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                        {
+                            <a class="navbar-item" style="text-decoration: none;" href="/Users/Index">Users Panel</a>
+                        }
+                    </div>
                 </div>
             </nav>
         </header>
@@ -55,14 +100,16 @@
             <div>
                 @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
                 {
-                <a>Create Post</a>
-                <a href="/SubReddit/Edit"> Create SubReddit</a>
+                    <a>Create Post</a>
+                    <a href="/SubReddit/Edit"> Create SubReddit</a>
                 }
             </div>
         </main>
+
+        <footer id="footer-container">
+            <h3>&copy; 2019 mvccrew OOD</h3>
+        </footer>
     </div>
-    <footer id="footer-container">
-        <h3>&copy; 2019 mvccrew OOD</h3>
-    </footer>
+    <script src="~/Scripts/nav-toggle.js"></script>
 </body>
 </html>
