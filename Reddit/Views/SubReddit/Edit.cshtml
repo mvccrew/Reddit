@@ -1,0 +1,74 @@
+﻿@model Reddit.ViewModels.SubReddit.EditVM
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<fieldset>
+    <legend>Edit</legend>
+
+    <form action="/SubReddit/Edit" method="post">
+        @Html.HiddenFor(m => m.Id)
+        <table>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Name, null, new { style = "color:red" })
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Description)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Description)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Description, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Theme)
+                </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Theme)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Theme, null, new { style = "color:red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(m => m.Rules)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(m => m.Rules)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(m => m.Rules)
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input style="float:right;" type="submit" value="Save" />
+                    <a href="@Url.Action("Index","Home")">Back to list</a>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    </form>
+</fieldset>
+
+

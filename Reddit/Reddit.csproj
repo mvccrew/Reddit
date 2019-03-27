@@ -99,12 +99,18 @@
     <Content Include="Content\css\site.css" />
     <Content Include="Content\img\reddit.png" />
     <Content Include="Global.asax" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SubRedditController.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -117,6 +123,9 @@
     <Compile Include="ViewModels\Share\BaseFilterVM.cs" />
     <Compile Include="ViewModels\Share\BaseIndexVM.cs" />
     <Compile Include="ViewModels\Share\PagerVM.cs" />
+    <Compile Include="ViewModels\SubReddit\EditVM.cs" />
+    <Compile Include="ViewModels\SubReddit\FilterVM.cs" />
+    <Compile Include="ViewModels\SubReddit\IndexVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -126,6 +135,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\SubReddit\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

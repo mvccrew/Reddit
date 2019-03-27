@@ -9,5 +9,6 @@ namespace DataAccess.Repositories
 {
     public class SubRedditsRepository : BaseRepository<SubReddit>
     {
+
     }
 }
