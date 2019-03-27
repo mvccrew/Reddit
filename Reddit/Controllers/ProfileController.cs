@@ -13,34 +13,18 @@ using System.Web.Mvc;
 namespace Reddit.Controllers
 {
     [AuthenticationFilter]
-    public class ProfileController : BaseController<User, UsersRepository, FilterVM, IndexVM, EditVM>
+    public class ProfileController : Controller
     {
-        public override ActionResult Index(IndexVM model)
-        {
-            model.Pager = model.Pager ?? new PagerVM();
-            model.Pager.Page = model.Pager.Page <= 0 ? 1 : model.Pager.Page;
-            model.Pager.ItemsPerPage = model.Pager.ItemsPerPage <= 0 ? 10 : model.Pager.ItemsPerPage;
+        
 
-            model.Filter = model.Filter ?? new FilterVM();
-            PopulateIndexVM(model);
-
-            Expression<Func<User, bool>> filter = model.Filter.GenerateFilter();
-
-            UsersRepository repo = new UsersRepository();
-            model.Items = repo.GetAll(filter, model.Pager.Page, model.Pager.ItemsPerPage);
-            model.User = repo.GetById(model.UserId);
-            model.Pager.PagesCount = (int)Math.Ceiling(repo.Count(filter) / (double)(model.Pager.ItemsPerPage));
-
-            return View(model);
-        }
-
-        /*[HttpGet]
+        [HttpGet]
         public ActionResult Index(IndexVM model)
         {
             UsersRepository repo = new UsersRepository();
+            
             model.User = repo.GetById(model.UserId);
 
-            return View();
+            return View(model);
         }
 
         [HttpGet]
@@ -73,7 +57,7 @@ namespace Reddit.Controllers
             repo.Save(item);
 
             return RedirectToAction("Index", "Profile", new { UserId = item.Id });
-        }*/
+        }
 
     }
 }

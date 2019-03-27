@@ -30,19 +30,16 @@
                             <td><i>Last Name</i></td>
                             <td><i>Email</i></td>
                         </tr>
-                        @foreach (var item in Model.Items)
-                        {
-                            if (item.Id == Model.User.Id)
-                            {
+                        
                                 <tr>
-                                    <td>@item.Username</td>
-                                    <td>@item.FirstName</td>
-                                    <td>@item.LastName</td>
-                                    <td>@item.Email</td>
-                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Profile", new { Id = item.Id})">edit</a></td>
+                                    <td>@Model.User.Username</td>
+                                    <td>@Model.User.FirstName</td>
+                                    <td>@Model.User.LastName</td>
+                                    <td>@Model.User.Email</td>
+                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Profile", new { Id = Model.User.Id})">edit</a></td>
                                 </tr>
-                            }
-                        }
+                            
+                        
                     </table>
                 </td>
             </tr>
