@@ -22,8 +22,7 @@
                 <input id="bmenub" type="checkbox" class="show">
                 <label for="bmenub" class="burger pseudo button">&#9776;</label>
 
-                <div class="menu">
-                    <a href="/Account/Index">profile</a>
+                <div class="menu"><a href="/Profile/Index">profile</a>
                     @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                     {
                         <a href="/Home/Login">login</a>

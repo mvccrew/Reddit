@@ -20,6 +20,8 @@ namespace DataAccess.Repositories
 
         public RedditDb() : base("name=RedditDbConnection")
         {
+            Database.SetInitializer<RedditDb>(new RedditDbInitializer());
+
             this.Users = this.Set<User>();
             this.SubReddits = this.Set<SubReddit>();
             this.Comments = this.Set<Comment>();
