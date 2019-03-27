@@ -1,4 +1,4 @@
-﻿using DataAccess.Entities;
+﻿    using DataAccess.Entities;
 using DataAccess.Repositories;
 using Reddit.ViewModels.Share;
 using System;
@@ -21,7 +21,7 @@ namespace Reddit.Controllers
         public virtual void PopulateEditVM(TEditVM model) { }
 
         [HttpGet]
-        public ActionResult Index(TIndexVM model)
+        public virtual ActionResult Index(TIndexVM model)
         {
             model.Pager = model.Pager ?? new PagerVM();
             model.Pager.Page = model.Pager.Page <= 0 ? 1 : model.Pager.Page;

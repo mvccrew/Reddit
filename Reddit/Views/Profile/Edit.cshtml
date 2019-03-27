@@ -1,0 +1,70 @@
+﻿@model Reddit.ViewModels.Profile.EditVM
+
+@{
+    ViewBag.Title = "EditProfile";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h1 style="font-size:26px;">@Model.FirstName's info</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Edit", "Profile", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.Username)
+                        <fieldset>
+                            <legend style="color:black">Edit @Model.Username's Info</legend>
+                            <table>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.FirstName)</td>
+                                    <td>@Html.TextBoxFor(model => model.FirstName) @Html.ValidationMessageFor(model => model.FirstName)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.LastName)</td>
+                                    <td>@Html.TextBoxFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Password)</td>
+                                    <td>@Html.PasswordFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.RetypePassword)</td>
+                                    <td>@Html.PasswordFor(model => model.RetypePassword) @Html.ValidationMessageFor(model => model.RetypePassword)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Email)</td>
+                                    <td>@Html.TextBoxFor(model => model.Email) @Html.ValidationMessageFor(model => model.Email)</td>
+                                </tr>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.RetypeEmail)</td>
+                                    <td>@Html.TextBoxFor(model => model.RetypeEmail) @Html.ValidationMessageFor(model => model.RetypeEmail)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" value="Save" />&nbsp;<a style="text-decoration: none;" href="@Url.Action("Index", "Profile")">cancel</a></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

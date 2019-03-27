@@ -1,0 +1,50 @@
+﻿@model Reddit.ViewModels.Profile.IndexVM
+
+@{
+    ViewBag.Title = "ProfileIndex";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <title>Profile</title>
+</head>
+<body>
+    <div>
+        <table>
+            @{ Model.User = Reddit.Models.AuthenticationManager.LoggedUser; }
+            <tr>
+                <td>
+                    <h1 style="font-size:26px;">@(Model.User == null ? "Nobody" : Model.User.FirstName)'s info</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td><i>Username</i></td>
+                            <td><i>First Name</i></td>
+                            <td><i>Last Name</i></td>
+                            <td><i>Email</i></td>
+                        </tr>
+                        
+                                <tr>
+                                    <td>@Model.User.Username</td>
+                                    <td>@Model.User.FirstName</td>
+                                    <td>@Model.User.LastName</td>
+                                    <td>@Model.User.Email</td>
+                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Profile", new { Id = Model.User.Id})">edit</a></td>
+                                </tr>
+                            
+                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
