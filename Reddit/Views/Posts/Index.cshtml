@@ -43,7 +43,7 @@
                                     <td>@item.Title</td>
                                     <td>@item.Content</td>
                                     <td style="float:left; margin:0 10px;"></td>
-                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id,SubRedditId=Model.SubRedditId })">Edit</a></td>
+                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id, SubRedditId = Model.SubRedditId })">Edit</a></td>
                                     <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Posts", new { Id = item.Id })">Delete</a></td>
                                 </tr>
                             }
@@ -93,6 +93,14 @@
                 </td>
             </tr>
         </table>
+        <div style="float:right;margin-left:20px;">
+            <p>Community Details</p>
+            <p>/r/@Model.SubReddit.Name}</p>
+            <p>Subscribers:@Model.SubReddit.SubscribedUsers.Count()</p>
+            <p>Theme:@Model.SubReddit.Theme</p>
+            <p>Description:@Model.SubReddit.Description</p>
+            <p>@Model.SubReddit.Rules</p>
+        </div>
     </div>
 </body>
 </html>

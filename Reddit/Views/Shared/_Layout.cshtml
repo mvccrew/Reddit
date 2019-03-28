@@ -34,12 +34,13 @@
                             <div class="field">
                                 <div class="control">
                                     <div class="select">
-                                        <select>
-                                            <option selected>
+                                        <select onchange="location = this.value;">
+                                            <option selected value="@Url.Action("Index","Home")">
                                                 Home
                                             </option>
-                                            <option>All</option>
-                                            <option>subreddits</option>
+                                            <option value="@Url.Action("GetAllSubreddits","Home")">All</option>
+                                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                                            {<option value="@Url.Action("GetAllSubreddits","Home",new { userId=Reddit.Models.AuthenticationManager.LoggedUser.Id})">Subscribed Subreddits</option>}
                                         </select>
                                     </div>
                                 </div>

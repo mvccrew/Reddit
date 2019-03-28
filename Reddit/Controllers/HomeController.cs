@@ -91,5 +91,15 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Home");
             
         }
+
+        public ActionResult GetAllSubreddits(SubRedditsVM model,int? userId)
+        {
+            SubRedditsRepository repo = new SubRedditsRepository();
+            if (userId == null)
+                model.SubRedditsList = repo.GetAll(null);
+            else
+                model.SubRedditsList = repo.GetAll(null).Where(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
+            return View(model);
+        }
     }
 }

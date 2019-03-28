@@ -123,6 +123,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Home\LoginVM.cs" />
     <Compile Include="ViewModels\Home\RegisterVM.cs" />
+    <Compile Include="ViewModels\Home\SubRedditsVM.cs" />
     <Compile Include="ViewModels\Posts\EditVM.cs" />
     <Compile Include="ViewModels\Posts\FilterVM.cs" />
     <Compile Include="ViewModels\Posts\IndexVM.cs" />
@@ -156,6 +157,7 @@
     <Content Include="Views\SubReddit\Index.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Home\GetAllSubreddits.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

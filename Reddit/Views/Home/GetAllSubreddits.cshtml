@@ -1,0 +1,29 @@
+﻿@model Reddit.ViewModels.Home.SubRedditsVM
+
+@{
+    ViewBag.Title = "GetAllSubreddits";
+}
+
+@if (Model.SubRedditsList.Count > 0)
+{
+<table>
+    <tr>
+        <td>Name:</td>
+        <td>Theme:</td>
+        <td>Subscribers:</td>
+    </tr>
+    @foreach (var item in Model.SubRedditsList)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Theme</td>
+            <td>@item.SubscribedUsers.Count()</td>
+        </tr>
+    }
+</table>
+}
+else
+{
+    <p>Please first subscribe to a subreddit</p>
+}
+
