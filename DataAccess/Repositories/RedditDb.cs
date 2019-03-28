@@ -30,6 +30,7 @@ namespace DataAccess.Repositories
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<User>()
                 .HasMany<SubReddit>(u => u.SubscribedToSubReddits)
                 .WithMany(u => u.SubscribedUsers)
@@ -71,6 +72,11 @@ namespace DataAccess.Repositories
             modelBuilder.Entity<User>()
                 .Property(u => u.CreationDate)
                 .HasColumnType("datetime2");
-        }
+
+            modelBuilder.Entity<SubReddit>()
+                .HasRequired(u => u.User)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+                    }
     }
 }

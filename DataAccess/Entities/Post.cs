@@ -25,6 +25,8 @@ namespace DataAccess.Entities
         public PostType PostType { get; set; }
         
         public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        [InverseProperty("Posts")]
         public virtual User User { get; set; }
 
         public int SubRedditId { get; set; }
