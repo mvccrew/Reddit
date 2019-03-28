@@ -155,6 +155,7 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\SubReddit\Index.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

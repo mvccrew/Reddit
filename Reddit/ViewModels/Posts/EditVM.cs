@@ -1,10 +1,12 @@
 ﻿using DataAccess.Entities;
+using Reddit.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Reddit.ViewModels.Posts
 {
@@ -12,7 +14,15 @@ namespace Reddit.ViewModels.Posts
     {
         public int Id { get; set; }
 
+        [Required]
+        [DisplayName("SubReddit: ")]
+        public int SelectedSubReddit { get; set; }
+        public List<SelectListItem> SubRedditsList { get; set; }
         public int SubRedditId { get; set; }
+
+        public int UserId { get; set; }
+
+        public DataAccess.Entities.SubReddit SubReddit { get; set; }
 
         public PostType PostType { get; set; }
 
@@ -33,6 +43,7 @@ namespace Reddit.ViewModels.Posts
         {
             Id = item.Id;
             SubRedditId = item.SubRedditId;
+            UserId = item.UserId;
             PostType = item.PostType;
             Title = item.Title;
             Content = item.Content;
@@ -41,7 +52,8 @@ namespace Reddit.ViewModels.Posts
         public void PopulateEntity(Post item)
         {
             item.Id = Id;
-            item.SubRedditId = SubRedditId;
+            item.SubRedditId = SelectedSubReddit;
+            item.UserId = AuthenticationManager.LoggedUser.Id;
             item.PostType = PostType;
             item.Title = Title;
             item.Content = Content;

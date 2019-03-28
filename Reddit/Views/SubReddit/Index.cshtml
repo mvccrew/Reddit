@@ -33,17 +33,24 @@
                     <br /><hr />
                     <a style="text-decoration: none; float:right; margin:0 10px" href="@Url.Action("Edit", "SubReddit")"><b>Create new</b></a>
                     <table>
-                        @{Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
                         <tr>
                             <td><i>Name</i></td>
                         </tr>
                         @foreach (var item in Model.Items)
                         {
-                            <tr>
-                                    <td>@item.Name</td>
-                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
-                                    <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
-                            </tr>
+                        <tr>
+                            <td>@item.Name</td>
+                            <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
+                            <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
+                            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                            {
+                                <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Login", "Home")">Login to Subscribe</a></td>
+                            }
+                            else
+                            {
+                                <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a></td>
+                            }
+                        </tr>
                         }
                     </table>
                     @{

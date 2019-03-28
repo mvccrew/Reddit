@@ -1,5 +1,7 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Repositories;
+using Reddit.Filters;
+using Reddit.Models;
 using Reddit.ViewModels.Posts;
 using Reddit.ViewModels.Share;
 using System;
@@ -11,6 +13,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
+    [AuthenticationFilter]
     public class PostsController : Controller
     {
         public ActionResult Index(IndexVM model)
@@ -35,7 +38,7 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id, int? subRedditId)
+        public ActionResult Edit(int? id)
         {
             Post item = null;
 
@@ -45,10 +48,24 @@ namespace Reddit.Controllers
 
             EditVM model = item == null ? new EditVM() : new EditVM(item);
 
-            if (model.Id <= 0)
+            model.SubRedditsList = new List<SelectListItem>();
+
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
+            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthenticationManager.LoggedUser.Id).ToList();
+
+            foreach (SubReddit subReddit in subscribedSubReddits)
             {
-                model.SubRedditId = subRedditId.Value;
+                model.SubRedditsList.Add(
+                    new SelectListItem()
+                    {
+                        Value = subReddit.Id.ToString(),
+                        Text = subReddit.Name,
+                        Selected = subReddit.Id == model.SelectedSubReddit
+                    });
             }
+
+            model.SubRedditId = model.SelectedSubReddit;
+
             return View(model);
         }
 
@@ -59,14 +76,15 @@ namespace Reddit.Controllers
             {
                 return View(model);
             }
-
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
             PostsRepository repo = new PostsRepository();
+
             Post item = new Post();
             model.PopulateEntity(item);
 
             repo.Save(item);
 
-            return RedirectToAction("Index", "Songs", new { PlayListId = item.SubRedditId });
+            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
         [HttpGet]
@@ -78,7 +96,7 @@ namespace Reddit.Controllers
 
             repo.Delete(item);
 
-            return RedirectToAction("Index", "Songs", new { SubRedditId = item.SubRedditId });
+            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
     }
 }
