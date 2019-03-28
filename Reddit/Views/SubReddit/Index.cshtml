@@ -39,14 +39,11 @@
                         </tr>
                         @foreach (var item in Model.Items)
                         {
-                            if (item.UserId == Reddit.Models.AuthenticationManager.LoggedUser.Id)
-                            {
-                                <tr>
+                            <tr>
                                     <td>@item.Name</td>
                                     <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
                                     <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
-                                </tr>
-                            }
+                            </tr>
                         }
                     </table>
                     @{
