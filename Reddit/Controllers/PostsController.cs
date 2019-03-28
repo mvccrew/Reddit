@@ -64,7 +64,7 @@ namespace Reddit.Controllers
                     });
             }
 
-            model.SubRedditId = model.SelectedSubReddit;
+            //model.SubRedditId = model.SelectedSubReddit;
 
             return View(model);
         }
@@ -80,6 +80,7 @@ namespace Reddit.Controllers
             PostsRepository repo = new PostsRepository();
 
             Post item = new Post();
+            if(model.SubRedditId==0)model.SubRedditId = model.SelectedSubReddit;
             model.PopulateEntity(item);
 
             repo.Save(item);

@@ -42,6 +42,7 @@ namespace Reddit.ViewModels.Posts
         public EditVM(Post item)
         {
             Id = item.Id;
+            SelectedSubReddit = item.SubRedditId;
             SubRedditId = item.SubRedditId;
             UserId = item.UserId;
             PostType = item.PostType;
@@ -52,7 +53,7 @@ namespace Reddit.ViewModels.Posts
         public void PopulateEntity(Post item)
         {
             item.Id = Id;
-            item.SubRedditId = SelectedSubReddit;
+            item.SubRedditId = SubRedditId;
             item.UserId = AuthenticationManager.LoggedUser.Id;
             item.PostType = PostType;
             item.Title = Title;
