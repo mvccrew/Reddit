@@ -37,7 +37,7 @@ namespace DataAccess.Repositories
                 {
                     us.MapLeftKey("UserId");
                     us.MapRightKey("SubRedditId");
-                    us.MapRightKey("UsersSubscribedToSubReddits");
+                    us.ToTable("UsersSubscribedToSubReddits");
                 }
                 );
 
@@ -48,23 +48,26 @@ namespace DataAccess.Repositories
                 {
                     us.MapLeftKey("UserId");
                     us.MapRightKey("SubRedditId");
-                    us.MapRightKey("UsersAdminsToSubReddits");
+                    us.ToTable("UsersAdminsToSubReddits");
                 }
                 );
 
-            /*modelBuilder.Entity<User>()
-                .HasRequired(u => u.Posts)
-                .WithMany()
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<User>()
-                .HasRequired(u => u.SubReddits)
+                .HasMany<User>(u => u.Friends)
                 .WithMany()
-                .WillCascadeOnDelete(false);*/
+                .Map(us =>
+                {
+                    us.MapLeftKey("UserId");
+                    us.MapRightKey("FriendUserId");
+                    us.ToTable("UsersToUsersFriends");
+                }
+                );
+
             modelBuilder.Entity<Post>()
                 .HasRequired(u => u.User)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<User>()
                 .Property(u => u.CreationDate)
                 .HasColumnType("datetime2");

@@ -11,10 +11,12 @@ using Reddit.Models;
 namespace Reddit.ViewModels.SubReddit
 {
     public class EditVM : BaseEditVM<DataAccess.Entities.SubReddit>
-
     {
 
         public int Id { get; set; }
+
+        public int UserId { get; set; }
+
         [DisplayName("SubReddit Name:")]
         [Required(ErrorMessage = "This field is required")]
         public string Name { get; set; }
@@ -30,28 +32,25 @@ namespace Reddit.ViewModels.SubReddit
         [DisplayName("Rules:")]
         [Required(ErrorMessage = "This field is required")]
         public string Rules { get; set; }
-
-
-        public int UserId { get; set; }
-
+        
         public override void PopulateModel(DataAccess.Entities.SubReddit item)
         {
             Id = item.Id;
+            UserId = item.UserId;
             Name = item.Name;
             Description = item.Description;
             Theme = item.Theme;
             Rules = item.Rules;
-            UserId = AuthenticationManager.LoggedUser.Id;
         }
 
         public override void PopulateEntity(DataAccess.Entities.SubReddit item)
         {
             item.Id = Id;
+            item.UserId = UserId;
             item.Name = Name;
             item.Description = Description;
             item.Theme = Theme;
             item.Rules = Rules;
-            AuthenticationManager.LoggedUser.Id = UserId;
             item.CreationDate = DateTime.Now;
         }
     }

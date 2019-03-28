@@ -2604,4 +2604,4 @@ $.format = $.validator.format;
 		}
 	});
 })(jQuery);
->>>>>>> 4467e79b78c24af7f97ea16bb6010a1768258f79
+ 4467e79b78c24af7f97ea16bb6010a1768258f79

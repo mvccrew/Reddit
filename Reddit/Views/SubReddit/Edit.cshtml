@@ -1,7 +1,7 @@
 ﻿@model Reddit.ViewModels.SubReddit.EditVM
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "SubRedditsEdit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,6 +10,7 @@
 
     <form action="/SubReddit/Edit" method="post">
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.UserId)
         <table>
             <tr>
                 <td>
@@ -22,7 +23,7 @@
                     @Html.ValidationMessageFor(m => m.Name, null, new { style = "color:red" })
                 </td>
             </tr>
-            
+
             <tr>
                 <td>
                     @Html.LabelFor(m => m.Description)
@@ -49,7 +50,6 @@
                 <td>
                     @Html.LabelFor(m => m.Rules)
                 </td>
-
                 <td>
                     @Html.TextBoxFor(m => m.Rules)
                 </td>
@@ -57,7 +57,6 @@
                     @Html.ValidationMessageFor(m => m.Rules)
                 </td>
             </tr>
-
             <tr>
                 <td></td>
                 <td>
@@ -67,7 +66,6 @@
                 <td></td>
             </tr>
         </table>
-
     </form>
 </fieldset>
 

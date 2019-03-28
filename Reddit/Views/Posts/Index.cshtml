@@ -1,0 +1,102 @@
+﻿@model Reddit.ViewModels.Posts.IndexVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <title>Posts</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h1 style="font-size:26px;">Posts</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form style="float:right" action="/Songs/Index" method="get">
+                        @Html.HiddenFor(model => model.SubRedditId)
+                        @Html.LabelFor(model => model.Filter.PostTitle)
+                        @Html.TextBoxFor(model => model.Filter.PostTitle)
+                        <input type="submit" value="Search" />
+                    </form>
+                    <br /><hr />SubReddit: @Model.SubReddit.Name <br /><hr />
+                    <a style="text-decoration: none; float:right" href="@Url.Action("Edit", "Posts", new { Id = 0, SubRedditId = Model.SubReddit.Id })"><b>Create new</b></a>
+                    <table>
+                        <tr>
+                            <td><i>Name</i></td>
+                            <td><i>Artist</i></td>
+                            <td><i>Genre</i></td>
+                        </tr>
+                        @foreach (var item in Model.Posts)
+                        {
+                            if (item.SubRedditId == Model.SubRedditId)
+                            {
+                                <tr>
+                                    <td>@item.Title</td>
+                                    <td>@item.Content</td>
+                                    <td>@item.Comments</td>
+                                    <td style="float:left; margin:0 10px;"></td>
+                                    <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id })">Edit</a></td>
+                                    <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Posts", new { Id = item.Id })">Delete</a></td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    @{
+                        string pageLink = "?";
+                        for (int i = 0; i < this.Request.QueryString.Count; i++)
+                        {
+                            if (this.Request.QueryString.GetKey(i) != "Pager.Page")
+                            {
+                                pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
+                            }
+                        }
+                    }
+                    <ul style="list-style-type:none;">
+                        @for (int i = 0; i < Model.Pager.PagesCount; i++)
+                        {
+                            <li style="float:left;">
+                                <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i + 1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i + 1) ? "bold" : "normal")">@(i + 1)</a>
+                            </li>
+                        }
+                    </ul>
+                    <script>
+                        function ddlItemsPerpage_OnChange() {
+                            @{
+                                string itemsPerPageLink = "?";
+                                for (int i = 0; i < this.Request.QueryString.Count; i++)
+                                {
+                                    if (!this.Request.QueryString.GetKey(i).StartsWith("Pager"))
+                                    {
+                                        itemsPerPageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
+                                    }
+                                }
+                            }
+
+                            var link = "/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(itemsPerPageLink)" + "Pager.ItemsPerPage=" + $("#ddlItemsPerpage").val();
+
+                            window.location.href = link;
+                        }
+                    </script>
+                    <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
+                        <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
+                        <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
+                        <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
+

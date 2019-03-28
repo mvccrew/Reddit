@@ -16,7 +16,6 @@ namespace Reddit.Controllers
     public class ProfileController : Controller
     {
         
-
         [HttpGet]
         public ActionResult Index(IndexVM model)
         {
