@@ -13,7 +13,65 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    font-size: 18px;
     overflow-x: hidden;
     font-family: 'Roboto', sans-serif;
-    color: #bd6151;
+    color: #444;
+}
+
+.navbar input:focus, .navbar select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 58.5px);
+    width: 100%;
+}
+
+#main-search {
+    width: 550px;
+}
+
+.navbar option[disabled] {
+    font-size: 0.7rem;
+    color: #9182fa;
+}
+
+#content-container {
+    flex: 1 0 auto;
+}
+
+.footer {
+    padding: 3%;
+    flex-shrink: 0;
+}
+
+@media only screen and (min-width: 993px) and (max-width : 1200px) {
+    html {
+        font-size: 16px;
+    }
+    #main-search {
+        width: 530px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width : 992px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 577px) and (max-width : 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    html {
+        font-size: 14px;
+    }
 }

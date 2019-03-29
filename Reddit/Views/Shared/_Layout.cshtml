@@ -11,10 +11,10 @@
     <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
-<body>
+<body class="has-navbar-fixed-top">
     <div id="main-container">
         <header id="header-container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="/Home/Index">
                         <img src="~/Content/img/reddit.png" alt="logo">&nbsp;
@@ -35,12 +35,15 @@
                                 <div class="control">
                                     <div class="select">
                                         <select onchange="location = this.value;">
-                                            <option selected value="@Url.Action("Index","Home")">
+                                            <option disabled>Reddit feeds</option>
+                                            <option value="@Url.Action("Index","Home")">
                                                 Home
                                             </option>
                                             <option value="@Url.Action("GetAllSubreddits","Home")">All</option>
+                                            <option disabled>Subscribed subreddits</option>
                                             @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-                                            {<option value="@Url.Action("GetAllSubreddits","Home",new { userId=Reddit.Models.AuthenticationManager.LoggedUser.Id})">Subscribed Subreddits</option>}
+                                            {
+                                                <option value="@Url.Action("GetAllSubreddits","Home",new { userId=Reddit.Models.AuthenticationManager.LoggedUser.Id})">Subscribed Subreddits</option>}
                                         </select>
                                     </div>
                                 </div>
@@ -48,7 +51,7 @@
                         </div>
                         <div class="field navbar-item">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" placeholder="Search">
+                                <input id="main-search" class="input" type="text" placeholder="Search">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-search"></i>
                                 </span>
@@ -67,7 +70,7 @@
                                 else
                                 {
                                     <a class="button is-outlined is-info navbar-item" href="/Home/Logout">sign out</a>
-                                     <a class="navbar-item" href="/Profile/Index">profile</a>
+                                    <a class="navbar-item" href="/Profile/Index">profile</a>
                                 }
                                 @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
                                 {
@@ -97,8 +100,12 @@
             </div>
         </main>
 
-        <footer id="footer-container">
-            <h3>&copy; 2019 mvccrew OOD</h3>
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>&copy; 2019 mvccrew OOD</strong>
+                </p>
+            </div>
         </footer>
     </div>
     <script src="~/Scripts/nav-toggle.js"></script>
