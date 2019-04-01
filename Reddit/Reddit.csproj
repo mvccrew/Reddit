@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Controllers\SubRedditController.cs" />
@@ -121,6 +122,8 @@
     </Compile>
     <Compile Include="Models\AuthenticationManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Comments\EditVM.cs" />
+    <Compile Include="ViewModels\Comments\IndexVM.cs" />
     <Compile Include="ViewModels\Home\LoginVM.cs" />
     <Compile Include="ViewModels\Home\RegisterVM.cs" />
     <Compile Include="ViewModels\Home\SubRedditsVM.cs" />
@@ -158,6 +161,8 @@
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
     <Content Include="Views\Home\GetAllSubreddits.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

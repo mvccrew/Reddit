@@ -18,18 +18,8 @@ namespace Reddit.Controllers
     {
         public ActionResult Index(IndexVM model)
         {
-            model.Pager = model.Pager ?? new PagerVM();
-            model.Pager.Page = model.Pager.Page <= 0 ? 1 : model.Pager.Page;
-            model.Pager.ItemsPerPage = model.Pager.ItemsPerPage <= 0 ? 10 : model.Pager.ItemsPerPage;
-
-            model.Filter = model.Filter ?? new FilterVM();
-            model.Filter.SubRedditId = model.SubRedditId;
-
-            Expression<Func<Post, bool>> filter = model.Filter.GenerateFilter();
-
             PostsRepository repo = new PostsRepository();
-            model.Posts = repo.GetAll(filter, model.Pager.Page, model.Pager.ItemsPerPage);
-            model.Pager.PagesCount = (int)Math.Ceiling(repo.Count(filter) / (double)(model.Pager.ItemsPerPage));
+            model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId);
 
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
             model.SubReddit = subRedditsRepo.GetById(model.SubRedditId);
@@ -80,7 +70,8 @@ namespace Reddit.Controllers
             PostsRepository repo = new PostsRepository();
 
             Post item = new Post();
-            if(model.SubRedditId==0)model.SubRedditId = model.SelectedSubReddit;
+            if(model.SubRedditId == 0)
+                model.SubRedditId = model.SelectedSubReddit;
             model.PopulateEntity(item);
 
             repo.Save(item);

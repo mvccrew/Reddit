@@ -15,7 +15,7 @@
     @foreach (var item in Model.SubRedditsList)
     {
         <tr>
-            <td>@item.Name</td>
+            <td><a href="/Posts?SubRedditId=@Model.SubRedditsList.Where(m => m.Name == item.Name).FirstOrDefault().Id">@item.Name</a></td>
             <td>@item.Theme</td>
             <td>@item.SubscribedUsers.Count()</td>
         </tr>

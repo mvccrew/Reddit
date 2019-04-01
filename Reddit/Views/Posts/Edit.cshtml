@@ -1,7 +1,7 @@
 ﻿@model Reddit.ViewModels.Posts.EditVM
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "PostsEdit";
 }
 
 <!DOCTYPE html>
@@ -9,14 +9,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>Posts</title>
 </head>
 <body>
     <div>
         <table>
             <tr>
                 <td>
-                    <h1 style="font-size:26px;">Songs</h1>
+                    <h1 style="font-size:26px;">Posts</h1>
                 </td>
             </tr>
             <tr>
@@ -29,7 +29,6 @@
                         @Html.HiddenFor(model => model.Id)
                         @Html.HiddenFor(model => model.SubRedditId)
                         <fieldset>
-                            <legend>@(Model.Id > 0 ? "Edit" : "New") Song</legend>
                             <table>
                                 <tr>
                                     @if (Model.Id == 0)
@@ -43,7 +42,17 @@
                                     <td>@Html.TextBoxFor(model => model.Content) @Html.ValidationMessageFor(model => model.Content)</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2"><input type="submit" value="Save" />&nbsp;<a style="text-decoration: none;" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a></td>
+                                    <td colspan="2">
+                                        <input type="submit" value="Save" />&nbsp;
+                                        @if (Model.SubRedditId != 0)
+                                        {
+                                            <a style="text-decoration: none;" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a>
+                                        }
+                                        else
+                                        {
+                                            <a style="text-decoration: none;" href="@Url.Action("Index", "Home")">Cancel</a>
+                                        }
+                                    </td>
                                 </tr>
                             </table>
                         </fieldset>

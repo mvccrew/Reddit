@@ -1,0 +1,53 @@
+﻿@model Reddit.ViewModels.Comments.EditVM
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <h1 style="font-size:26px;">Comments</h1>
+                </td>
+            </tr>
+            @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+            <tr>
+                <td>
+                    @using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.PostId)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.HiddenFor(model => model.ParentCommentId)
+                        <fieldset>
+                            <table>
+                                <tr>
+                                    <td>@Html.LabelFor(model => model.Text)</td>
+                                    <td>@Html.TextAreaFor(model => model.Text) @Html.ValidationMessageFor(model => model.Text)</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><input type="submit" value="Save" />&nbsp;<a style="text-decoration: none;" href="@Url.Action("Index", "Comments", new { PostId = Model.PostId })">Cancel</a></td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    }
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+
+
