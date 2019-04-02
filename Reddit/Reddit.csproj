@@ -163,6 +163,7 @@
     <Content Include="Views\Home\GetAllSubreddits.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Partials\_SearchBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

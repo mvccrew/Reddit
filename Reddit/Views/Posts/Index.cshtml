@@ -21,15 +21,11 @@
                     <h1 style="font-size:26px;">Posts</h1>
                 </td>
             </tr>
-            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-            {
-                <<a class="button is-outlined is-info navbar-item" href="@Url.Action("Login", "Home")">Login to Subscribe</a>
-            }
-            else
-            {
-                <a class="button is-outlined is-info navbar-item" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>
-            }
-
+            <tr>
+                  <td>
+                     <a class="button is-outlined is-info navbar-item" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>
+                  </td>
+                </tr>
             <tr>
                 <td>
                     <br /><hr />SubReddit: @Model.SubReddit.Name <br /><hr />
@@ -42,8 +38,8 @@
                         {
                             if (item.SubRedditId == Model.SubRedditId)
                             {
-                                <tr>
-                                    <td>@item.Title</td>
+                                <tr style="border: 1px solid black;">
+                                    <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
                                     <td>@item.Content</td>
                                     <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id, SubRedditId = Model.SubRedditId })">Edit</a></td>
                                     <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Posts", new { Id = item.Id })">Delete</a></td>

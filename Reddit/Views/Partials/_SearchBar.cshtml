@@ -1,0 +1,11 @@
+﻿@model Reddit.ViewModels.SubReddit.IndexVM
+
+<div class="field navbar-item">
+    <form action="/SubReddit/Index" method="get">
+        <p class="control has-icons-left has-icons-right">
+            @Html.TextBoxFor(m => m.Filter.Name, new { @id = "main-search", @class = "input", @placeholder = "Search" })
+            <span class="icon is-small is-left">
+                <i class="fas fa-search"></i>
+            </span>
+    </form>
+</div>

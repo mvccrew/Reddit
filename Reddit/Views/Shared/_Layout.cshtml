@@ -36,29 +36,23 @@
                                     <div class="select">
                                         <select onchange="location = this.value;">
                                             <option disabled>Reddit feeds</option>
-                                            <option value="@Url.Action("Index","Home")">
+                                            <option value="@Url.Action("Index", "Home")">
                                                 Home
                                             </option>
-                                            <option value="@Url.Action("GetAllSubreddits","Home")">All</option>
+                                            <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
                                             <option disabled>Subscribed subreddits</option>
                                             @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
                                             {
-                                                <option value="@Url.Action("GetAllSubreddits","Home",new { userId=Reddit.Models.AuthenticationManager.LoggedUser.Id})">Subscribed Subreddits</option>}
+                                                <option value="@Url.Action("GetAllSubreddits", "Home", new { userId = Reddit.Models.AuthenticationManager.LoggedUser.Id })">Subscribed Subreddits</option>}
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="field navbar-item">
-                            <p class="control has-icons-left has-icons-right">
-                                <input id="main-search" class="input" type="text" placeholder="Search">
-                                <span class="icon is-small is-left">
-                                    <i class="fas fa-search"></i>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
 
+                        @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.SubReddit.IndexVM());}
+
+                    </div>
                     <div class="navbar-end">
                         <div class="navbar-item">
                             <div class="buttons">

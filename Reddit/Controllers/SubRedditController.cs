@@ -20,7 +20,7 @@ namespace Reddit.Controllers
 
             repo.Subscribe(id, AuthenticationManager.LoggedUser.Id);
 
-            return RedirectToAction("Index", "SubReddit");
+            return RedirectToAction("Index", "Home");
         }
 
     }

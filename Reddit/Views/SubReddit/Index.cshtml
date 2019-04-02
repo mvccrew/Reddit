@@ -25,12 +25,6 @@
             <tr>
                 <td>
                     @Html.HiddenFor(model => model.UserId)
-                    <form style="float:right" action="/SubReddit/Index" method="get">
-                        @Html.LabelFor(model => model.Filter.Name)
-                        @Html.TextBoxFor(model => model.Filter.Name)
-                        <input type="submit" value="Search" />
-                    </form>
-                    <br /><hr />
                     <a style="text-decoration: none; float:right; margin:0 10px" href="@Url.Action("Edit", "SubReddit")"><b>Create new</b></a>
                     <table>
                         <tr>
