@@ -22,14 +22,14 @@
                 </a>
                 <select class="subreddit-dropdown form-select">
                     <option disabled>Reddit feeds</option>
-                    <option value="@Url.Action("Index", "Home")">Home</option>
+                    <option  value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
                     @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
                     {
                         <option disabled>Subreddits</option>
                         foreach(SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
                         {
-                            <option value="@Url.Action("")">@subreddit.Name</option>
+                        <option value="@Url.Action("")">@subreddit.Name</option>
                         }
                     }
                 </select>
@@ -49,10 +49,8 @@
                     {
                         <a class="btn btn-success btn-block" href="/Users/Index">Users Panel</a>
                     }
-                    else
-                    {
-                        <a class="btn btn-block" href="/Profile/Index">profile</a>
-                    }
+                    
+                        <a class="btn btn-block" href="/Profile/Index">profile &nbsp; @Reddit.Models.AuthenticationManager.LoggedUser.Karma Karma</a>
                     <a href="/Home/Logout" class="btn btn-block">log out</a>
                 }
                 @if (Reddit.Models.AuthenticationManager.LoggedUser == null)

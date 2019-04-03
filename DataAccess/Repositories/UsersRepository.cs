@@ -9,5 +9,14 @@ namespace DataAccess.Repositories
 {
     public class UsersRepository : BaseRepository<User>
     {
+        public void ChangeKarma(int userId, int value)
+        {
+            UsersRepository repo = new UsersRepository();
+            User user = repo.GetById(userId);
+
+            user.Karma += value;
+
+            repo.Save(user);
+        }
     }
 }
