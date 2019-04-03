@@ -101,5 +101,20 @@ namespace Reddit.Controllers
                 model.SubRedditsList = repo.GetAll(null).Where(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
             return View(model);
         }
+        public ActionResult GetPostsForIndex(PostIndexVM model)
+        {
+            PostsRepository repo = new PostsRepository();
+            SubRedditsRepository subRedditsRepository = new SubRedditsRepository();
+
+            model.Posts = repo.GetAll(null).OrderByDescending(a => a.Rating).ToList();
+            if (AuthenticationManager.LoggedUser != null)
+            {
+                model.SubReddits = subRedditsRepository.GetAll(null)
+                .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthenticationManager.LoggedUser.Id)).ToList();
+
+            }
+
+            return PartialView("~/Views/Partials/_IndexAllPosts.cshtml", model);
+        }
     }
 }

@@ -6,21 +6,21 @@
 
 @if (Model.SubRedditsList.Count > 0)
 {
-<table>
-    <tr>
-        <td>Name:</td>
-        <td>Theme:</td>
-        <td>Subscribers:</td>
-    </tr>
-    @foreach (var item in Model.SubRedditsList)
-    {
+    <table>
         <tr>
-            <td><a href="/Posts?SubRedditId=@Model.SubRedditsList.Where(m => m.Name == item.Name).FirstOrDefault().Id">@item.Name</a></td>
-            <td>@item.Theme</td>
-            <td>@item.SubscribedUsers.Count()</td>
+            <td>Name:</td>
+            <td>Theme:</td>
+            <td>Subscribers:</td>
         </tr>
-    }
-</table>
+        @foreach (var item in Model.SubRedditsList)
+        {
+            <tr>
+                <td><a href="/Posts?SubRedditId=@Model.SubRedditsList.Where(m => m.Name == item.Name).FirstOrDefault().Id" class="button is-outlined is-info navbar-item">@item.Name</a></td>
+                <td><a class="button is-info navbar-item">@item.Theme</a></td>
+                <td><a class="button is-info navbar-item">@item.SubscribedUsers.Count()</a></td>
+            </tr>
+        }
+    </table>
 }
 else
 {

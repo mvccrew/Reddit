@@ -126,6 +126,7 @@
     <Compile Include="ViewModels\Comments\EditVM.cs" />
     <Compile Include="ViewModels\Comments\IndexVM.cs" />
     <Compile Include="ViewModels\Home\LoginVM.cs" />
+    <Compile Include="ViewModels\Home\PostIndexVM.cs" />
     <Compile Include="ViewModels\Home\RegisterVM.cs" />
     <Compile Include="ViewModels\Home\SubRedditsVM.cs" />
     <Compile Include="ViewModels\Posts\EditVM.cs" />
@@ -167,6 +168,7 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Partials\_SearchBar.cshtml" />
     <Content Include="Views\Partials\_Vote.cshtml" />
+    <Content Include="Views\Partials\_IndexAllPosts.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
