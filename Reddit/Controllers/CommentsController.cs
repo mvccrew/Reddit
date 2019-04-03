@@ -29,7 +29,7 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id, int? PostId)
+        public ActionResult Edit(int? id, int? PostId, int? parentCommentId)
         {
             Comment item = null;
 

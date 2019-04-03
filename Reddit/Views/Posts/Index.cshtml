@@ -39,6 +39,7 @@
                             if (item.SubRedditId == Model.SubRedditId)
                             {
                                 <tr style="border: 1px solid black;">
+                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(postId: item.Id));}</td>
                                     <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
                                     <td>@item.Content</td>
                                     <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id, SubRedditId = Model.SubRedditId })">Edit</a></td>

@@ -18,6 +18,8 @@ namespace DataAccess.Repositories
 
         public DbSet<Post> Posts { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public RedditDb() : base("name=RedditDbConnection")
         {
             Database.SetInitializer<RedditDb>(new RedditDbInitializer());
@@ -26,6 +28,7 @@ namespace DataAccess.Repositories
             this.SubReddits = this.Set<SubReddit>();
             this.Comments = this.Set<Comment>();
             this.Posts = this.Set<Post>();
+            this.Votes = this.Set<Vote>();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

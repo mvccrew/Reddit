@@ -116,6 +116,7 @@
     <Compile Include="Controllers\SubRedditController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\VotesController.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -143,6 +144,7 @@
     <Compile Include="ViewModels\Users\EditVM.cs" />
     <Compile Include="ViewModels\Users\FilterVM.cs" />
     <Compile Include="ViewModels\Users\IndexVM.cs" />
+    <Compile Include="ViewModels\Votes\VoteVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -164,6 +166,7 @@
     <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Partials\_SearchBar.cshtml" />
+    <Content Include="Views\Partials\_Vote.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -173,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
