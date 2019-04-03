@@ -1,107 +1,82 @@
-﻿<!DOCTYPE html>
+﻿@using DataAccess.Entities
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
     <link rel="stylesheet" href="~/Content/css/site.css" />
     @RenderSection("styles", required: false)
     <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
-<body class="has-navbar-fixed-top">
+<body>
     <div id="main-container">
-        <header id="header-container">
-            <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="/Home/Index">
-                        <img src="~/Content/img/reddit.png" alt="logo">&nbsp;
-                        <h1 class="title">reddit</h1>
-                    </a>
-
-                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
-                </div>
-
-                <div id="mainNavbar" class="navbar-menu">
-                    <div class="navbar-start">
-                        <div class="navbar-item">
-                            <div class="field">
-                                <div class="control">
-                                    <div class="select">
-                                        <select onchange="location = this.value;">
-                                            <option disabled>Reddit feeds</option>
-                                            <option value="@Url.Action("Index", "Home")">
-                                                Home
-                                            </option>
-                                            <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
-                                            <option disabled>Subscribed subreddits</option>
-                                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-                                            {
-                                                <option value="@Url.Action("GetAllSubreddits", "Home", new { userId = Reddit.Models.AuthenticationManager.LoggedUser.Id })">Subscribed Subreddits</option>}
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.SubReddit.IndexVM());}
-
-                    </div>
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                                {
-                                    <a class="button is-outlined is-info navbar-item" href="/Home/Login">sign in</a>
-
-                                }
-                                else
-                                {
-                                    <a class="button is-outlined is-info navbar-item" href="/Home/Logout">sign out</a>
-                                    <a class="navbar-item" href="/Profile/Index">profile</a>
-                                }
-                                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                                {
-                                    <a class="button is-info navbar-item" href="@Url.Action("Register","Home")">sign up</a>
-
-                                }
-                            </div>
-                        </div>
-                        @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
-                             Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+        <header id="header-container" class="navbar">
+            <section class="navbar-section">
+                <a class="brand" href="/Home/Index">
+                    <img src="~/Content/img/reddit.png" alt="logo">
+                </a>
+                <select class="subreddit-dropdown form-select">
+                    <option disabled>Reddit feeds</option>
+                    <option value="@Url.Action("Index", "Home")">Home</option>
+                    <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
+                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                    {
+                        <option disabled>Subreddits</option>
+                        foreach(SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
                         {
-                            <a class="navbar-item" style="text-decoration: none;" href="/Users/Index">Users Panel</a>
+                            <option value="@Url.Action("")">@subreddit.Name</option>
                         }
-                    </div>
-                </div>
-            </nav>
+                    }
+                </select>
+            </section>
+            <section class="navbar-center">
+                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.SubReddit.IndexVM());}
+            </section>
+            <section class="navbar-section user-section">
+                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                {
+                    <a href="/Home/Login" class="btn btn-block">log in</a>
+
+                }
+                else
+                {
+                    if (Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                    {
+                        <a class="btn btn-success btn-block" href="/Users/Index">Users Panel</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-block" href="/Profile/Index">profile</a>
+                    }
+                    <a href="/Home/Logout" class="btn btn-block">log out</a>
+                }
+                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                {
+                    <a href="/Home/Register" class="btn btn-block btn-primary">sign up</a>
+                }
+            </section>
         </header>
 
         <main id="content-container">
             @RenderBody()
-            <div>
-                @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-                {
-                    <a href="/Posts/Edit">Create Post</a>
-                    <a href="/SubReddit/Edit"> Create SubReddit</a>
-                }
-            </div>
+
+            @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+            {
+                <a href="/Posts/Edit">Create Post</a>
+                <a href="/SubReddit/Edit"> Create SubReddit</a>
+            }
         </main>
 
-        <footer class="footer">
-            <div class="content has-text-centered">
-                <p>
-                    <strong>&copy; 2019 mvccrew OOD</strong>
-                </p>
-            </div>
+        <footer class="footer text-center">
+            <p>
+                <small>&copy; 2019 mvccrew OOD</small>
+            </p>
         </footer>
     </div>
-    <script src="~/Scripts/nav-toggle.js"></script>
 </body>
 </html>
