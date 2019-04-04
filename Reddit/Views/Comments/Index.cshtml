@@ -27,7 +27,7 @@
                                 if (item.ParentCommentId == null)
                                 {
                         <tr>
-                            <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Comment"));}</td>
+                            <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Comment", contentId2:Model.PostId));}</td>
                             <td>@item.Rating</td>
                             <td><fieldset>@item.UserId</fieldset></td>
                             <td><fieldset>@item.Text</fieldset></td>
@@ -42,7 +42,7 @@
                                     if (subComment.ParentCommentId == item.Id)
                                     {
                                 <tr>
-                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: subComment.Id, type: "Comment"));}</td>
+                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: subComment.Id, type: "Comment",contentId2:Model.PostId));}</td>
                                     <td>@subComment.Rating</td>
                                     <td><fieldset style="margin-left: 30px">@subComment.UserId</fieldset></td>
                                     <td><fieldset style="margin-left: 30px">@subComment.Text</fieldset></td>

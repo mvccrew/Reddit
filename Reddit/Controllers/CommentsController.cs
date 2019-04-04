@@ -14,8 +14,12 @@ namespace Reddit.Controllers
     public class CommentsController : Controller
     {
         // GET: Comments
-        public ActionResult Index(IndexVM model)
+        public ActionResult Index(IndexVM model, int? PostId)
         {
+            if(PostId!=null)
+            {
+                model.PostId = (int)PostId;
+            }
             CommentsRepository repo = new CommentsRepository();
             model.Items = repo.GetAll(m => m.PostId == model.PostId);
 

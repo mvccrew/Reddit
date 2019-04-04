@@ -20,16 +20,16 @@
                 <a class="brand" href="/Home/Index">
                     <img src="~/Content/img/reddit.png" alt="logo">
                 </a>
-                <select class="subreddit-dropdown form-select">
+                <select class="subreddit-dropdown form-select" onchange="location = this.value;">
                     <option disabled>Reddit feeds</option>
-                    <option  value="@Url.Action("Index", "Home")">Home</option>
+                    <option value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
                     @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
                     {
                         <option disabled>Subreddits</option>
-                        foreach(SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
+                        foreach (SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
                         {
-                        <option value="@Url.Action("")">@subreddit.Name</option>
+                            <option value="/Posts?SubRedditId=@subreddit.Id">@subreddit.Name</option>
                         }
                     }
                 </select>

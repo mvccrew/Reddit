@@ -5,5 +5,5 @@
 @Html.HiddenFor(m => m.Id)
 @Html.HiddenFor(m => m.ContentId)
 @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
-<a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId, Value = 1, Type = Model.Type })"><i class='fas fa-arrow-up' style='font-size:24px'></i></a>
-<a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId , Value = -1, Type = Model.Type})"><i class='fas fa-arrow-down' style='font-size:24px'></i></a>
+<a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId, Value = 1, Type = Model.Type,ContentId2=Model.ContentId2 })"><i class='fas fa-arrow-up' style='font-size:24px'></i></a>
+<a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId , Value = -1, Type = Model.Type, ContentId2=Model.ContentId2})"><i class='fas fa-arrow-down' style='font-size:24px'></i></a>

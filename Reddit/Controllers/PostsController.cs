@@ -16,8 +16,12 @@ namespace Reddit.Controllers
     [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class PostsController : Controller
     {
-        public ActionResult Index(IndexVM model)
+        public ActionResult Index(IndexVM model, int? SubRedditId)
         {
+            if(SubRedditId!=null)
+            {
+                model.SubRedditId = (int)SubRedditId;
+            }
             PostsRepository repo = new PostsRepository();
             model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId);
 

@@ -18,9 +18,9 @@ namespace DataAccess.Repositories
             UsersRepository usersRepo = new UsersRepository();
 
             RedditDb context = new RedditDb();
-
             //ако не съществува такъв запис в таблица Votes, се създава, а рейтингът на поста се увеличава със стойността на вота
-            if (!context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
+            if (context.Votes.Where(a => a.UserId == userId && a.ContentId == contentId).Count() == 0)
+            //if (!context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
             {
                 if (type == "Post")
                 {
@@ -51,7 +51,7 @@ namespace DataAccess.Repositories
             }
 
             //ако обаче съществува такъв, проверява дали стойността на вота е същата. Ако е - изтрива записа, ако не е - го променя
-            else if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
+            else 
             {
                 if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Value == value))
                 {

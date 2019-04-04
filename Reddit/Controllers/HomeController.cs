@@ -112,7 +112,7 @@ namespace Reddit.Controllers
             if (AuthenticationManager.LoggedUser != null)
             {
                 model.SubReddits = subRedditsRepository.GetAll(null)
-                .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthenticationManager.LoggedUser.Id)).ToList();
+                .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthenticationManager.LoggedUser.Id)).OrderByDescending(c => c.Id).ToList();
             }
 
             return PartialView("~/Views/Partials/_IndexAllPosts.cshtml", model);
