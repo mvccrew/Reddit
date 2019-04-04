@@ -1,0 +1,35 @@
+﻿@model Reddit.ViewModels.Home.LoginVM
+
+<div class="modal" id="loginModal">
+    <a href="#close" class="modal-overlay" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#close" class="btn btn-clear float-right" aria-label="Close"></a>
+            <div class="modal-title h5">Login</div>
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id="login-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <p class="text-center">@Html.ValidationMessage("authenticationFailed", new { @class = "text-error" })</p>
+                    <div class="form-group clearfix">
+                        @Html.LabelFor(model => model.Username, new { @class= "d-inline-block form-label" })
+                        @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-error float-right" })
+                        @Html.TextBoxFor(model => model.Username, new { @class = "form-input", placeholder = "Username" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, new { @class = "d-inline-block form-label" })
+                        @Html.ValidationMessageFor(model => model.Password, null, new { @class = "text-error float-right" })
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-input", placeholder = "Password" })
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="float-left">We're happy to have you as a member!</p>
+            <button class="btn btn-primary" form="login-form" type="submit">login</button>
+        </div>
+    </div>
+</div>
