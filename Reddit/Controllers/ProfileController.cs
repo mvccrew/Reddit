@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter]
+    [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class ProfileController : Controller
     {
         
@@ -20,8 +20,12 @@ namespace Reddit.Controllers
         public ActionResult Index(IndexVM model)
         {
             UsersRepository repo = new UsersRepository();
+            PostsRepository postsRepo = new PostsRepository();
+            CommentsRepository commentsRepo = new CommentsRepository();
             
             model.User = repo.GetById(model.UserId);
+            model.Posts = postsRepo.GetAll(p => p.UserId == model.UserId);
+            model.Comments = commentsRepo.GetAll(c => c.UserId == model.UserId);
 
             return View(model);
         }

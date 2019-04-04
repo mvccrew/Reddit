@@ -11,12 +11,18 @@ namespace Reddit.Filters
     {
         public bool AdminArea { get; set; }
 
+        public int RequiredKarma { get; set; }
+
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (AuthenticationManager.LoggedUser == null ||
-                (AdminArea && AuthenticationManager.LoggedUser.IsAdmin == false))
+            if (AuthenticationManager.LoggedUser == null)
             {
                 filterContext.Result = new RedirectResult("/Home/Login");
+            }
+            else if ((AdminArea && AuthenticationManager.LoggedUser.IsAdmin == false) ||
+                    (AuthenticationManager.LoggedUser.Karma < RequiredKarma))
+            {
+                filterContext.Result = new RedirectResult("/Home/Index");
             }
         }
     }

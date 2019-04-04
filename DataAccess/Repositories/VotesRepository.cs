@@ -10,55 +10,109 @@ namespace DataAccess.Repositories
 {
     public class VotesRepository : BaseRepository<Vote>
     {
-        public void Vote(int userId, int postId, int value)
+        public void Vote(int userId, int contentId, int value, string type)
         {
             PostsRepository postsRepo = new PostsRepository();
+            CommentsRepository commentsRepo = new CommentsRepository();
             VotesRepository votesRepo = new VotesRepository();
             UsersRepository usersRepo = new UsersRepository();
 
             RedditDb context = new RedditDb();
 
             //ако не съществува такъв запис в таблица Votes, се създава, а рейтингът на поста се увеличава със стойността на вота
-            if (!context.Votes.Any(v => v.UserId == userId && v.PostId == postId))
+            if (!context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
             {
-                Post post = postsRepo.GetById(postId);
-                post.Rating += value;
-                postsRepo.Save(post);
-
-                usersRepo.ChangeKarma(post.UserId, value);
-
-                votesRepo.Insert(new Vote() { UserId = userId, PostId = postId, CreationDate = DateTime.Now, Value = value });
-                context.SaveChanges();
-            }
-
-            //ако обаче съществува такъв, проверява дали стойността на вота е същата. Ако е - изтрива записа, ако не е - го променя
-            else if (context.Votes.Any(v => v.UserId == userId && v.PostId == postId))
-            {
-                if (context.Votes.Any(v => v.UserId == userId && v.PostId == postId && v.Value == value))
+                if (type == "Post")
                 {
-                    Post post = postsRepo.GetById(postId);
-                    post.Rating -= value;
+                    Post post = postsRepo.GetById(contentId);
+                    post.Rating += value;
                     postsRepo.Save(post);
 
                     usersRepo.ChangeKarma(post.UserId, value);
 
-                    Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.PostId == postId && v.Value == value).FirstOrDefault();
-                    votesRepo.Delete(vote);
+                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value });
                     context.SaveChanges();
+                }
+                else if (type == "Comment")
+                {
+                    Comment comment = commentsRepo.GetById(contentId);
+                    comment.Rating += value;
+                    commentsRepo.Save(comment);
+
+                    usersRepo.ChangeKarma(comment.UserId, value);
+
+                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value });
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception(message: "Something went wrong :(");
+                }
+            }
+
+            //ако обаче съществува такъв, проверява дали стойността на вота е същата. Ако е - изтрива записа, ако не е - го променя
+            else if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
+            {
+                if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Value == value))
+                {
+                    if (type == "Post")
+                    {
+                        Post post = postsRepo.GetById(contentId);
+                        post.Rating -= value;
+                        postsRepo.Save(post);
+
+                        usersRepo.ChangeKarma(post.UserId, value);
+
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
+                        votesRepo.Delete(vote);
+                        context.SaveChanges();
+                    }
+                    else if (type == "Comment")
+                    {
+                        Comment comment = commentsRepo.GetById(contentId);
+                        comment.Rating -= value;
+                        commentsRepo.Save(comment);
+
+                        usersRepo.ChangeKarma(comment.UserId, value);
+
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
+                        votesRepo.Delete(vote);
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        throw new Exception(message: "Something went wrong :(");
+                    }
                 }
 
                 else
                 {
-                    Post post = postsRepo.GetById(postId);
-                    post.Rating += 2*value;
-                    postsRepo.Save(post);
+                    if (type == "Post")
+                    {
+                        Post post = postsRepo.GetById(contentId);
+                        post.Rating += 2*value;
+                        postsRepo.Save(post);
 
-                    usersRepo.ChangeKarma(post.UserId, 2*value);
+                        usersRepo.ChangeKarma(post.UserId, 2*value);
 
-                    Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.PostId == postId && v.Value != value).FirstOrDefault();
-                    vote.Value += 2*value;
-                    votesRepo.Update(vote);
-                    context.SaveChanges();
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value).FirstOrDefault();
+                        vote.Value += 2*value;
+                        votesRepo.Update(vote);
+                        context.SaveChanges();
+                    }
+                    else if (type == "Comment")
+                    {
+                        Comment comment = commentsRepo.GetById(contentId);
+                        comment.Rating += 2 * value;
+                        commentsRepo.Save(comment);
+
+                        usersRepo.ChangeKarma(comment.UserId, 2 * value);
+
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value).FirstOrDefault();
+                        vote.Value += 2 * value;
+                        votesRepo.Update(vote);
+                        context.SaveChanges();
+                    }
                 }
             }
         }

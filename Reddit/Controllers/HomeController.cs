@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
@@ -101,6 +102,7 @@ namespace Reddit.Controllers
                 model.SubRedditsList = repo.GetAll(null).Where(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
             return View(model);
         }
+
         public ActionResult GetPostsForIndex(PostIndexVM model)
         {
             PostsRepository repo = new PostsRepository();
@@ -111,7 +113,6 @@ namespace Reddit.Controllers
             {
                 model.SubReddits = subRedditsRepository.GetAll(null)
                 .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthenticationManager.LoggedUser.Id)).ToList();
-
             }
 
             return PartialView("~/Views/Partials/_IndexAllPosts.cshtml", model);

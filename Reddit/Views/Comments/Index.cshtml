@@ -26,10 +26,12 @@
                         {
                                 if (item.ParentCommentId == null)
                                 {
-                                <tr>
-                                    <td><fieldse>@item.UserId</fieldse></td>
-                                    <td><fieldset>@item.Text</fieldset></td>
-                                </tr>
+                        <tr>
+                            <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Comment"));}</td>
+                            <td>@item.Rating</td>
+                            <td><fieldset>@item.UserId</fieldset></td>
+                            <td><fieldset>@item.Text</fieldset></td>
+                        </tr>
                                 <tr>
                                     <td><a style="text-decoration: none" href="@Url.Action("Edit", "Comments", new { Id = item.Id })">Edit</a></td>
                                     <td><a style="text-decoration: none" href="@Url.Action("Edit", "Comments",  new { PostId = item.PostId, ParentCommentId = item.Id })">Reply</a></td>
@@ -39,10 +41,12 @@
                                 {
                                     if (subComment.ParentCommentId == item.Id)
                                     {
-                                        <tr>
-                                            <td><fieldset style="margin-left: 30px">@subComment.UserId</fieldset></td>
-                                            <td><fieldset  style="margin-left: 30px">@subComment.Text</fieldset></td>
-                                        </tr>
+                                <tr>
+                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: subComment.Id, type: "Comment"));}</td>
+                                    <td>@subComment.Rating</td>
+                                    <td><fieldset style="margin-left: 30px">@subComment.UserId</fieldset></td>
+                                    <td><fieldset style="margin-left: 30px">@subComment.Text</fieldset></td>
+                                </tr>
                                         <tr>
                                             <td><a style="text-decoration: none; margin-left:30px" href="@Url.Action("Edit", "Comments", new { Id = subComment.Id })">Edit</a></td>
                                             <td><a style="text-decoration: none; margin-left:15px" href="@Url.Action("Edit", "Comments",  new { PostId = item.PostId, ParentCommentId = subComment.Id })">Reply</a></td>

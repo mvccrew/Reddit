@@ -15,17 +15,19 @@ namespace Reddit.ViewModels.Votes
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public int PostId { get; set; }
-        public Post Post { get; set; }
+        public int ContentId { get; set; }
+
+        public string Type { get; set; }
 
         public VoteVM()
         {
 
         }
 
-        public VoteVM(int postId)
+        public VoteVM(int contentId, string type)
         {
-            this.PostId = postId;
+            this.ContentId = contentId;
+            this.Type = type;
         }
 
     }

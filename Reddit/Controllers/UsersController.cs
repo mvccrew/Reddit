@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter(AdminArea = true)]
+    [AuthenticationFilter(AdminArea = true, RequiredKarma = int.MinValue)]
     public class UsersController : BaseController<User, UsersRepository, FilterVM, IndexVM, EditVM>
     {
     }

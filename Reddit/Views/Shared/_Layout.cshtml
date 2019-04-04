@@ -50,7 +50,7 @@
                         <a class="btn btn-success btn-block" href="/Users/Index">Users Panel</a>
                     }
                     
-                        <a class="btn btn-block" href="/Profile/Index">profile &nbsp; @Reddit.Models.AuthenticationManager.LoggedUser.Karma Karma</a>
+                        <a class="btn btn-block" href="@Url.Action("Index", "Profile", new { UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id })">profile &nbsp; @Reddit.Models.AuthenticationManager.LoggedUser.Karma Karma</a>
                     <a href="/Home/Logout" class="btn btn-block">log out</a>
                 }
                 @if (Reddit.Models.AuthenticationManager.LoggedUser == null)

@@ -12,5 +12,9 @@ namespace Reddit.ViewModels.Profile
         public int UserId { get; set; }
 
         public User User { get; set; }
+
+        public List<Post> Posts { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

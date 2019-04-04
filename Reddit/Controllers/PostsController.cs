@@ -13,7 +13,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter]
+    [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class PostsController : Controller
     {
         public ActionResult Index(IndexVM model)
