@@ -25,6 +25,9 @@ namespace Reddit.Controllers
             PostsRepository repo = new PostsRepository();
             model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId);
 
+            UsersRepository usersRepo = new UsersRepository();
+            model.User = usersRepo.GetById(model.UserId);
+
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
             model.SubReddit = subRedditsRepo.GetById(model.SubRedditId);
 
@@ -93,6 +96,16 @@ namespace Reddit.Controllers
             repo.Delete(item);
 
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
+        }
+
+        public ActionResult Approve(int id)
+        {
+            PostsRepository repo = new PostsRepository();
+            Post post = repo.GetById(id);
+
+            repo.ApprovePost(id, AuthenticationManager.LoggedUser.Id);
+
+            return RedirectToAction("Index", "Posts", new { SubRedditId = post.SubRedditId });
         }
     }
 }

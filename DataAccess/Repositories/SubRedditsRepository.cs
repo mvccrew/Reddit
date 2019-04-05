@@ -23,6 +23,19 @@ namespace DataAccess.Repositories
             context.SaveChanges();
         }
 
+        public void AddAdminToSubReddit(int subRedditId, int userId)
+        {
+            RedditDb context = new RedditDb();
+
+            User user = context.Users.Find(userId);
+
+            SubReddit subReddit = context.SubReddits.Find(subRedditId);
+
+            user.AdminToSubReddits.Add(subReddit);
+            subReddit.Admins.Add(user);
+            context.SaveChanges();
+        }
+
         public IQueryable<SubReddit> GetMySubscribes(int userId)
         {
             RedditDb context = new RedditDb();

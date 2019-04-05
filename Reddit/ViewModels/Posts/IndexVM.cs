@@ -9,6 +9,9 @@ namespace Reddit.ViewModels.Posts
 {
     public class IndexVM 
     {
+        public int UserId { get; set; }
+        public User User { get; set; }
+
         public PagerVM Pager { get; set; }
 
         public FilterVM Filter { get; set; }

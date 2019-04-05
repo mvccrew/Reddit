@@ -59,6 +59,7 @@ namespace Reddit.ViewModels.Posts
             item.Title = Title;
             item.Content = Content;
             item.CreationDate = DateTime.Now;
+            item.IsApproved = false;
         }
     }
 }

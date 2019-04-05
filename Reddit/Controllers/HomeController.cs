@@ -47,7 +47,7 @@ namespace Reddit.Controllers
         {
             AuthenticationManager.Logout();
 
-            return RedirectToAction("Login", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]

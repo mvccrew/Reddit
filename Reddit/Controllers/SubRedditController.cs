@@ -46,6 +46,12 @@ namespace Reddit.Controllers
 
             repo.Save(item);
 
+            model.Id = item.Id;
+
+            // като създадеш събреддит, автоматично ставаш мод и се събскрайбваш за него
+            repo.AddAdminToSubReddit(model.Id, model.UserId);
+            repo.Subscribe(model.Id, model.UserId);
+
             return RedirectToAction("Index", "SubReddit");
         }
 

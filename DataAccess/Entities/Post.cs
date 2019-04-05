@@ -31,6 +31,8 @@ namespace DataAccess.Entities
 
         public int SubRedditId { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }
