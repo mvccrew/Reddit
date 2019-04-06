@@ -8,7 +8,7 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
     <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="~/Content/css/site.css" />
     @RenderSection("styles", required: false)
     <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
@@ -63,20 +63,22 @@
             </section>
         </header>
 
-        <main id="content-container">
+        <main id="content-container" class="container grid-lg">
             @RenderBody()
 
-            @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-            {
-                <a href="/Posts/Edit">Create Post</a>
-                <a href="/SubReddit/Edit"> Create SubReddit</a>
-            }
+            <aside>
+                @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                {
+                    <a href="/Posts/Edit">Create Post</a>
+                    <a href="/SubReddit/Edit"> Create SubReddit</a>
+                }
+            </aside>
             @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
         </main>
 
-        <footer class="footer text-center">
+        <footer class="footer">
             <p>
-                <small>&copy; 2019 mvccrew OOD</small>
+                &copy; 2019 mvccrew OOD
             </p>
         </footer>
     </div>

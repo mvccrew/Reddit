@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Content\css\debug.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\img\reddit-blue.jpg" />
     <Content Include="Content\img\reddit.png" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

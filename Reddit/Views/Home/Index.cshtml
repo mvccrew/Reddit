@@ -1,4 +1,74 @@
-﻿@{
+﻿@model Reddit.ViewModels.Home.PostIndexVM
+
+@{
     ViewBag.Title = "reddit";
 }
-@Html.Action("GetPostsForIndex", "Home")
+
+<section class="columns" id="frontpage">
+    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+    {
+
+        foreach (var item in Model.SubReddits)
+        {
+            foreach (var item2 in Model.Posts.Where(a => a.SubRedditId == item.Id))
+            {
+                <article class="card post">
+                    <div class="card-image">
+                        <img src="~/Content/img/reddit-blue.jpg" class="img-responsive">
+                    </div>
+                    <div class="card-header">
+                        <a class="card-title h4 text-dark" href="/Comments?PostId=@item2.Id">
+                            @item2.Title
+                        </a>
+                        <div class="card-subtitle h5 text-gray">
+                            /r/@item.Name
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <span>by /u/@item2.User.Username</span>
+                        <span style="position: relative; top: 5px;" class="h3">&#183;</span>
+                        <span>@(Math.Round((DateTime.Now - item2.CreationDate).TotalHours))h ago</span>
+                        <p></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="post-info d-inline-block">
+                            <a href="#"><i class="fas fa-arrow-up"></i></a>
+                            <span>@item2.Rating</span>
+                            <a href="#"><i class="fas fa-arrow-down"></i></a>
+                            &nbsp;
+                            &nbsp;
+                            <span><i class="fas fa-comment-alt"></i>&nbsp;@item2.Comments.Count()</span>
+                        </div>
+                        <div class="post-vote float-right d-inline-block">
+                            <button class="btn btn-success btn-block">share</button>
+                        </div>
+                    </div>
+                </article>
+
+            }
+        }
+    }
+    else
+    {
+        foreach (var item in Model.Posts)
+        {
+            <article class="card">
+                <div class="card-image">
+                    <img src="~/Content/img/reddit-blue.jpg" class="img-responsive">
+                </div>
+                <div class="card-header">
+                    <div class="card-title h4">@item.Title</div>
+                    <div class="card-subtitle text-gray">@item.Rating</div>
+                </div>
+                <div class="card-body">
+                    <p>by @item.User.Username &nbsp; @(Math.Round((DateTime.Now - item.CreationDate).TotalHours))h ago</p>
+                    <p><a href="/Comments?PostId=@item.Id">@item.Comments.Count() Comments</a></p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary">check it out</button>
+                </div>
+            </article>
+
+        }
+    }
+</section>
