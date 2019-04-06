@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\debug.css" />
+    <Content Include="Content\css\home.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\img\reddit-blue.jpg" />
     <Content Include="Content\img\reddit.png" />
@@ -106,6 +107,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login-modal.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

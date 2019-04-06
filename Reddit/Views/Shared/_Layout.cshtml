@@ -72,6 +72,15 @@
                     <a href="/Posts/Edit">Create Post</a>
                     <a href="/SubReddit/Edit"> Create SubReddit</a>
                 }
+                else
+                {
+                    <a href="#">
+                        Lorem ipsum
+                    </a>
+                    <a href="#">
+                        Ipsum Lorem
+                    </a>
+                }
             </aside>
             @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
         </main>
@@ -82,6 +91,16 @@
             </p>
         </footer>
     </div>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            if (window.location.hash == '#notloggedin') {
+                const loginModal = document.getElementById("loginModal");
+                loginModal.classList.add('active');
+            }
+        };
+
+    </script>
     <script src="~/Scripts/login-modal.js"></script>
 </body>
 </html>

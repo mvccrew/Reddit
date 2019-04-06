@@ -2,7 +2,7 @@
 
     const login = document.getElementById("login");
     const closeLinks = document.querySelectorAll("[href='#close']");
-
+    
     login.addEventListener('click', () => {
         const loginModal = document.getElementById("loginModal");
         loginModal.classList.add('active');

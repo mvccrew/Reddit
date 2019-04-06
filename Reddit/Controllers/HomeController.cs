@@ -32,7 +32,7 @@ namespace Reddit.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View(new LoginVM());
+            return Redirect((Request.UrlReferrer == null) ? "/Home/Index#notloggedin" : Request.UrlReferrer.ToString() + "#notloggedin");
         }
 
         [HttpPost]
