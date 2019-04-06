@@ -4,64 +4,54 @@
     ViewBag.Title = "PostsEdit";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Posts</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <h1 style="font-size:26px;">Posts</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-                        { Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
-                        @Html.HiddenFor(model => model.Id)
-                        @Html.HiddenFor(model => model.SubRedditId)
-                        <fieldset>
-                            <table>
-                                <tr>
-                                    @if (Model.Id == 0)
+<div>
+    <table>
+        <tr>
+            <td>
+                <h1 style="font-size:26px;">Posts</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    { Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.SubRedditId)
+                    <fieldset>
+                        <table>
+                            <tr>
+                                @if (Model.Id == 0)
+                                {
+                                    <td>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SubReddit.Id)</td>
+                                    <td>@Html.EnumDropDownListFor(model => model.PostType) @Html.ValidationMessageFor(model => model.PostType)</td>
+                                }
+                                <td>@Html.LabelFor(model => model.Title)</td>
+                                <td>@Html.TextBoxFor(model => model.Title) @Html.ValidationMessageFor(model => model.Title)</td>
+                                <td>@Html.LabelFor(model => model.Content)</td>
+                                <td>@Html.TextBoxFor(model => model.Content) @Html.ValidationMessageFor(model => model.Content)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" value="Save" />&nbsp;
+                                    @if (Model.SubRedditId != 0)
                                     {
-                                        <td>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SubReddit.Id)</td>
-                                        <td>@Html.EnumDropDownListFor(model => model.PostType) @Html.ValidationMessageFor(model => model.PostType)</td>
+                                        <a style="text-decoration: none;" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a>
                                     }
-                                    <td>@Html.LabelFor(model => model.Title)</td>
-                                    <td>@Html.TextBoxFor(model => model.Title) @Html.ValidationMessageFor(model => model.Title)</td>
-                                    <td>@Html.LabelFor(model => model.Content)</td>
-                                    <td>@Html.TextBoxFor(model => model.Content) @Html.ValidationMessageFor(model => model.Content)</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="submit" value="Save" />&nbsp;
-                                        @if (Model.SubRedditId != 0)
-                                        {
-                                            <a style="text-decoration: none;" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a>
-                                        }
-                                        else
-                                        {
-                                            <a style="text-decoration: none;" href="@Url.Action("Index", "Home")">Cancel</a>
-                                        }
-                                    </td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    }
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
+                                    else
+                                    {
+                                        <a style="text-decoration: none;" href="@Url.Action("Index", "Home")">Cancel</a>
+                                    }
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
 
 

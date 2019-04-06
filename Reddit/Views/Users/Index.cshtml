@@ -3,83 +3,74 @@
     ViewBag.Title = "UsersIndex";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <title>Login</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <h1 style="font-size:26px;">Users</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form style="float:right" action="/Users/Index" method="get">
-                        @Html.LabelFor(model => model.Filter.Username)
-                        @Html.TextBoxFor(model => model.Filter.Username)
-                        @Html.LabelFor(model => model.Filter.FirstName)
-                        @Html.TextBoxFor(model => model.Filter.FirstName)
-                        @Html.LabelFor(model => model.Filter.LastName)
-                        @Html.TextBoxFor(model => model.Filter.LastName)
-                        <input type="submit" value="Search" />
-                    </form>
-                    <br /><hr />
-                    <a style="text-decoration: none; float:right" href="@Url.Action("Edit", "Users")"><b>Create new</b></a>
-                    <table>
+<div>
+    <table>
+        <tr>
+            <td>
+                <h1 style="font-size:26px;">Users</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form style="float:right" action="/Users/Index" method="get">
+                    @Html.LabelFor(model => model.Filter.Username)
+                    @Html.TextBoxFor(model => model.Filter.Username)
+                    @Html.LabelFor(model => model.Filter.FirstName)
+                    @Html.TextBoxFor(model => model.Filter.FirstName)
+                    @Html.LabelFor(model => model.Filter.LastName)
+                    @Html.TextBoxFor(model => model.Filter.LastName)
+                    <input type="submit" value="Search" />
+                </form>
+                <br /><hr />
+                <a style="text-decoration: none; float:right" href="@Url.Action("Edit", "Users")"><b>Create new</b></a>
+                <table>
+                    <tr>
+                        <td><i>Id</i></td>
+                        <td style="float:left; margin:0 6px;">|</td>
+                        <td><i>Username</i></td>
+                        <td style="float:left; margin:0 6px;">|</td>
+                        <td><i>First Name</i></td>
+                        <td style="float:left; margin:0 6px;">|</td>
+                        <td><i>Last Name</i></td>
+                        <td style="float:left; margin:0 6px;">|</td>
+                        <td><i>Adminsitrator</i></td>
+                    </tr>
+                    @foreach (var item in Model.Items)
+                    {
                         <tr>
-                            <td><i>Id</i></td>
+                            <td>@item.Id</td>
                             <td style="float:left; margin:0 6px;">|</td>
-                            <td><i>Username</i></td>
+                            <td>@item.Username</td>
                             <td style="float:left; margin:0 6px;">|</td>
-                            <td><i>First Name</i></td>
+                            <td>@item.FirstName</td>
                             <td style="float:left; margin:0 6px;">|</td>
-                            <td><i>Last Name</i></td>
+                            <td>@item.LastName</td>
                             <td style="float:left; margin:0 6px;">|</td>
-                            <td><i>Adminsitrator</i></td>
+                            <td>@item.IsAdmin</td>
+                            <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Users", new { Id = item.Id})">edit</a></td>
+                            <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Users", new { Id = item.Id})">delete</a></td>
                         </tr>
-                        @foreach (var item in Model.Items)
+                    }
+                </table>
+                @{
+                    string pageLink = "?";
+                    for (int i = 0; i < this.Request.QueryString.Count; i++)
+                    {
+                        if (this.Request.QueryString.GetKey(i) != "Pager.Page")
                         {
-                            <tr>
-                                <td>@item.Id</td>
-                                <td style="float:left; margin:0 6px;">|</td>
-                                <td>@item.Username</td>
-                                <td style="float:left; margin:0 6px;">|</td>
-                                <td>@item.FirstName</td>
-                                <td style="float:left; margin:0 6px;">|</td>
-                                <td>@item.LastName</td>
-                                <td style="float:left; margin:0 6px;">|</td>
-                                <td>@item.IsAdmin</td>
-                                <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Users", new { Id = item.Id})">edit</a></td>
-                                <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Users", new { Id = item.Id})">delete</a></td>
-                            </tr>
-                        }
-                    </table>
-                    @{
-                        string pageLink = "?";
-                        for (int i = 0; i < this.Request.QueryString.Count; i++)
-                        {
-                            if (this.Request.QueryString.GetKey(i) != "Pager.Page")
-                            {
-                                pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
-                            }
+                            pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
                         }
                     }
-                    <ul style="list-style-type:none;">
-                        @for (int i = 0; i < Model.Pager.PagesCount; i++)
-                        {
-                            <li style="float:left; margin:0 5px;">
-                                <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i+1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i+1) ? "bold" : "normal")">@(i + 1)</a>
-                            </li>
-                        }
-                    </ul>
-                    <script>
+                }
+                <ul style="list-style-type:none;">
+                    @for (int i = 0; i < Model.Pager.PagesCount; i++)
+                    {
+                        <li style="float:left; margin:0 5px;">
+                            <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i+1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i+1) ? "bold" : "normal")">@(i + 1)</a>
+                        </li>
+                    }
+                </ul>
+                <script>
                         function ddlItemsPerpage_OnChange() {
                             @{
                                 string itemsPerPageLink = "?";
@@ -96,16 +87,14 @@
 
                             window.location.href = link;
                         }
-                    </script>
-                    <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
-                        <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
-                        <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
-                        <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
+                </script>
+                <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
+                    <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
+                    <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
+                    <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
 

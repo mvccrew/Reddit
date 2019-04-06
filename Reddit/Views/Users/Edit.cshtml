@@ -3,63 +3,52 @@
     ViewBag.Title = "UserEdit";
 }
 
-<!DOCTYPE html>
+<div>
+    <table>
+        <tr>
+            <td>
+                <h1 style="font-size:26px;">PlayLists</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @using (Html.BeginForm("Edit", "Users", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <h1 style="font-size:26px;">PlayLists</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    @using (Html.BeginForm("Edit", "Users", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary(true)
-
-                        @Html.HiddenFor(model => model.Id)
-                        <fieldset>
-                            <legend>@(Model.Id > 0 ? "Edit" : "New") User</legend>
-                            <table>
-                                <tr>
-                                    <td>@Html.LabelFor(model => model.FirstName)</td>
-                                    <td>@Html.TextBoxFor(model => model.FirstName) @Html.ValidationMessageFor(model => model.FirstName)</td>
-                                </tr>
-                                <tr>
-                                    <td>@Html.LabelFor(model => model.LastName)</td>
-                                    <td>@Html.TextBoxFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName)</td>
-                                </tr>
-                                <tr>
-                                    <td>@Html.LabelFor(model => model.Username)</td>
-                                    <td>@Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)</td>
-                                </tr>
-                                <tr>
-                                    <td>@Html.LabelFor(model => model.Password)</td>
-                                    <td>@Html.PasswordFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password)</td>
-                                </tr>
-                                <tr>
-                                    <td>@Html.LabelFor(model => model.IsAdmin)</td>
-                                    <td>@Html.CheckBoxFor(model => model.IsAdmin) @Html.ValidationMessageFor(model => model.Password)</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><input type="submit" value="Save" />&nbsp;<a style="text-decoration: none;" href="@Url.Action("Index", "Users")">Cancel</a></td>
-                                </tr>
-                            </table>
-                        </fieldset>
-                    }
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
-
+                    @Html.HiddenFor(model => model.Id)
+                    <fieldset>
+                        <legend>@(Model.Id > 0 ? "Edit" : "New") User</legend>
+                        <table>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.FirstName)</td>
+                                <td>@Html.TextBoxFor(model => model.FirstName) @Html.ValidationMessageFor(model => model.FirstName)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.LastName)</td>
+                                <td>@Html.TextBoxFor(model => model.LastName) @Html.ValidationMessageFor(model => model.LastName)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.Username)</td>
+                                <td>@Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.Password)</td>
+                                <td>@Html.PasswordFor(model => model.Password) @Html.ValidationMessageFor(model => model.Password)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(model => model.IsAdmin)</td>
+                                <td>@Html.CheckBoxFor(model => model.IsAdmin) @Html.ValidationMessageFor(model => model.Password)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><input type="submit" value="Save" />&nbsp;<a style="text-decoration: none;" href="@Url.Action("Index", "Users")">Cancel</a></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
 

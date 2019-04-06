@@ -169,8 +169,8 @@
     <Content Include="Views\Comments\Edit.cshtml" />
     <Content Include="Views\Partials\_SearchBar.cshtml" />
     <Content Include="Views\Partials\_Vote.cshtml" />
-    <Content Include="Views\Partials\_IndexAllPosts.cshtml" />
     <Content Include="Views\Partials\_Login.cshtml" />
+    <Content Include="Views\Partials\_Post.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -5,32 +5,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<div>
+    <table>
+        <tr>
+            <td>
+                <h1 style="font-size:26px;">SubReddit</h1>
+            </td>
+        </tr>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <title>SubReddit</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <td>
-                    <h1 style="font-size:26px;">SubReddit</h1>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    @Html.HiddenFor(model => model.UserId)
-                    <table>
-                        <tr>
-                            <td><i>Name</i></td>
-                        </tr>
-                        @foreach (var item in Model.Items)
-                        {
+        <tr>
+            <td>
+                @Html.HiddenFor(model => model.UserId)
+                <table>
+                    <tr>
+                        <td><i>Name</i></td>
+                    </tr>
+                    @foreach (var item in Model.Items)
+                    {
                         <tr>
                             <td>@item.Name</td>
                             <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
@@ -44,27 +35,27 @@
                                 <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a></td>
                             }
                         </tr>
-                        }
-                    </table>
-                    @{
-                        string pageLink = "?";
-                        for (int i = 0; i < this.Request.QueryString.Count; i++)
+                    }
+                </table>
+                @{
+                    string pageLink = "?";
+                    for (int i = 0; i < this.Request.QueryString.Count; i++)
+                    {
+                        if (this.Request.QueryString.GetKey(i) != "Pager.Page")
                         {
-                            if (this.Request.QueryString.GetKey(i) != "Pager.Page")
-                            {
-                                pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
-                            }
+                            pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
                         }
                     }
-                    <ul style="list-style-type:none;">
-                        @for (int i = 0; i < Model.Pager.PagesCount; i++)
-                        {
-                            <li style="float:left;">
-                                <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i+1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i+1) ? "bold" : "normal")">@(i + 1)</a>
-                            </li>
-                        }
-                    </ul>
-                    <script>
+                }
+                <ul style="list-style-type:none;">
+                    @for (int i = 0; i < Model.Pager.PagesCount; i++)
+                    {
+                        <li style="float:left;">
+                            <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i+1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i+1) ? "bold" : "normal")">@(i + 1)</a>
+                        </li>
+                    }
+                </ul>
+                <script>
                         function ddlItemsPerpage_OnChange() {
                             @{
                                 string itemsPerPageLink = "?";
@@ -81,17 +72,15 @@
 
                             window.location.href = link;
                         }
-                    </script>
-                    <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
-                        <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
-                        <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
-                        <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-    </div>
-</body>
-</html>
+                </script>
+                <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
+                    <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
+                    <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
+                    <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+</div>
 
 
