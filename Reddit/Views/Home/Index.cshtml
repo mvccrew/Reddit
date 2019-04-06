@@ -4,7 +4,12 @@
     ViewBag.Title = "reddit";
 }
 
-<section class="columns" id="frontpage">
+@section styles
+{
+    <link href="~/Content/css/home.css" rel="stylesheet" />
+}
+
+<section class="columns post-group" id="frontpage">
     @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
     {
 
