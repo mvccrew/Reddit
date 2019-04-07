@@ -43,20 +43,12 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-
-            if (id == null)
-            {
-                return View("Create");
-            }
-            Post item = null;
-
             PostsRepository repo = new PostsRepository();
+            Post item = repo.GetById(id);
 
-            item = id == null ? new Post() : repo.GetById(id.Value);
-
-            EditVM model = item == null ? new EditVM() : new EditVM(item);
+            EditVM model = new EditVM(item);
 
             model.SubRedditsList = new List<SelectListItem>();
 
