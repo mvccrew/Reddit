@@ -19,13 +19,7 @@ namespace Reddit.Controllers
 
             votesRepo.Vote(Models.AuthenticationManager.LoggedUser.Id, voteModel.ContentId, voteModel.Value, voteModel.Type);
 
-            //тва някой да го опрай майка му стара да връща същата страница че полудях
-            if(voteModel.Type.ToString()=="Post")
-            { 
-            return RedirectToAction("Index", voteModel.Type.ToString() + "s", new { SubRedditId = voteModel.ContentId2});
-            }
-            else
-                return RedirectToAction("Index", voteModel.Type.ToString() + "s", new { PostId = voteModel.ContentId2 });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
     }

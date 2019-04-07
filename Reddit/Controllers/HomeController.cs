@@ -19,7 +19,7 @@ namespace Reddit.Controllers
             PostsRepository repo = new PostsRepository();
             SubRedditsRepository subRedditsRepository = new SubRedditsRepository();
 
-            model.Posts = repo.GetAll(null).OrderByDescending(a => a.Rating).ToList();
+            model.Posts = repo.GetAll(p => p.IsApproved == true).OrderByDescending(a => a.Rating).ToList();
             if (AuthenticationManager.LoggedUser != null)
             {
                 model.SubReddits = subRedditsRepository.GetAll(null)
@@ -64,7 +64,10 @@ namespace Reddit.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            return View(new RegisterVM());
+            if (AuthenticationManager.LoggedUser == null)
+                return View(new RegisterVM());
+            else
+                return Redirect("Index");
         }
 
 

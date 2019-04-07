@@ -10,7 +10,6 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class CommentsController : Controller
     {
         // GET: Comments
@@ -32,6 +31,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [HttpGet]
         public ActionResult Edit(int? id, int? PostId, int? parentCommentId)
         {
@@ -50,6 +50,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [HttpPost]
         public ActionResult Edit(EditVM model)
         {

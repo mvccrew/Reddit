@@ -19,11 +19,21 @@
     </div>
     <div class="card-footer">
         <div class="post-info float-left d-inline-block">
-            <div class="post-info__votes">
-                <a href="#"><i class="fas fa-arrow-up"></i></a>
-                <span>@Model.Rating</span>
-                <a href="#"><i class="fas fa-arrow-down"></i></a>
-            </div>
+            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+            {
+                <div class="post-info__votes">
+                    <a href="#notloggedin"><i class="fas fa-arrow-up"></i></a>
+                    <a href="#notloggedin"><i class="fas fa-arrow-down"></i></a>
+                    <span>@Model.Rating</span>
+                </div>
+            }
+            else
+            {
+                <div class="post-info__votes">
+                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post", contentId2: Model.SubRedditId)); }
+                        <span>@Model.Rating</span>
+                    </div>
+            }
             <div class="post-info__comments">
                 <span><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</span>
             </div>
