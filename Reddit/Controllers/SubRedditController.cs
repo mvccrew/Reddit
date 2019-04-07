@@ -12,7 +12,6 @@ using Reddit.ViewModels.SubReddit;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter]
     public class SubRedditController : BaseController<SubReddit, SubRedditsRepository, FilterVM, IndexVM, EditVM >
     {
         [AuthenticationFilter(RequiredKarma = 0)]
@@ -55,6 +54,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "SubReddit");
         }
 
+        [AuthenticationFilter]
         public ActionResult Subscribe(int id)
         {
             SubRedditsRepository repo = new SubRedditsRepository();

@@ -16,7 +16,7 @@ namespace Reddit.ViewModels.Votes
         public User User { get; set; }
 
         public int ContentId { get; set; }
-        public int ContentId2 { get; set; }
+        //public int ContentId2 { get; set; }
         public string Type { get; set; }
 
         public VoteVM()
@@ -24,11 +24,11 @@ namespace Reddit.ViewModels.Votes
 
         }
 
-        public VoteVM(int contentId, string type,int contentId2)
+        public VoteVM(int contentId, string type)
         {
             this.ContentId = contentId;
             this.Type = type;
-            ContentId2 = contentId2;
+            //ContentId2 = contentId2;
         }
 
     }

@@ -32,7 +32,7 @@
                             {
                                 <tr style="border: 1px solid black;">
                                     <td>@item.Rating</td>
-                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post", contentId2: Model.SubRedditId));}</td>
+                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post"));}</td>
                                     <td>@item.User.Username</td>
                                     <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
                                     <td>@item.Content</td>
@@ -52,7 +52,7 @@
                             {
                                 <tr>
                                     <td>@item.Rating</td>
-                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post", contentId2: Model.SubRedditId));}</td>
+                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post"));}</td>
                                     <td>@item.User.Username</td>
                                     <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
                                     <td>@item.Content</td>

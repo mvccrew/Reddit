@@ -22,15 +22,15 @@
             @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
             {
                 <div class="post-info__votes">
-                    <a href="#notloggedin"><i class="fas fa-arrow-up"></i></a>
-                    <a href="#notloggedin"><i class="fas fa-arrow-down"></i></a>
+                    <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
+                    <a href="/Home/Login"><i class="fas fa-arrow-down"></i></a>
                     <span>@Model.Rating</span>
                 </div>
             }
             else
             {
                 <div class="post-info__votes">
-                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post", contentId2: Model.SubRedditId)); }
+                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
                         <span>@Model.Rating</span>
                     </div>
             }

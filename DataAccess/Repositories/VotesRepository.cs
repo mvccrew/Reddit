@@ -61,7 +61,7 @@ namespace DataAccess.Repositories
                         post.Rating -= value;
                         postsRepo.Save(post);
 
-                        usersRepo.ChangeKarma(post.UserId, value);
+                        usersRepo.ChangeKarma(post.UserId, -1*value);
 
                         Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
                         votesRepo.Delete(vote);
@@ -73,7 +73,7 @@ namespace DataAccess.Repositories
                         comment.Rating -= value;
                         commentsRepo.Save(comment);
 
-                        usersRepo.ChangeKarma(comment.UserId, value);
+                        usersRepo.ChangeKarma(comment.UserId, -1*value);
 
                         Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
                         votesRepo.Delete(vote);
