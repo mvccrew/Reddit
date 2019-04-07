@@ -30,7 +30,7 @@
             else
             {
                 <div class="post-info__votes">
-                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post", contentId2: Model.SubRedditId)); }
+                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
                         <span>@Model.Rating</span>
                     </div>
             }
