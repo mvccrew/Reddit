@@ -22,8 +22,8 @@
             @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
             {
                 <div class="post-info__votes">
-                    <a href="#notloggedin"><i class="fas fa-arrow-up"></i></a>
-                    <a href="#notloggedin"><i class="fas fa-arrow-down"></i></a>
+                    <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
+                    <a href="/Home/Login"><i class="fas fa-arrow-down"></i></a>
                     <span>@Model.Rating</span>
                 </div>
             }

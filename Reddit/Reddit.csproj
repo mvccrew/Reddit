@@ -173,6 +173,7 @@
     <Content Include="Views\Partials\_Vote.cshtml" />
     <Content Include="Views\Partials\_Login.cshtml" />
     <Content Include="Views\Partials\_Post.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

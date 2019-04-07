@@ -35,8 +35,21 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
+        public ActionResult Create()
+        {
+            EditVM model = new EditVM();
+
+            return View(model);
+        }
+
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
+
+            if (id == null)
+            {
+                return View("Create");
+            }
             Post item = null;
 
             PostsRepository repo = new PostsRepository();
