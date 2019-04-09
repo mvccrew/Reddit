@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="~/Content/css/site.css" />
     @RenderSection("styles", required: false)
     <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
 </head>
 <body>
     <div id="main-container">
@@ -66,7 +67,7 @@
         <main id="content-container" class="container grid-lg">
             @RenderBody()
 
-            <aside class="text-center">
+            <aside id="aside" class="text-center">
                 @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
                 {
                     <a href="/Posts/Create">Create Post</a>
@@ -82,7 +83,6 @@
                     </a>
                 }
             </aside>
-            @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
         </main>
 
         <footer class="footer">
@@ -94,8 +94,13 @@
     <script type="text/javascript">
         window.onload = function () {
             if (window.location.hash == '#notloggedin') {
-                const loginModal = document.getElementById("loginModal");
-                loginModal.classList.add('active');
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("Login", "Home")',
+                    success: function (result) {
+                        $('#content-container').append(result);
+                    }
+                });
             }
         };
     </script>
