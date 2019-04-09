@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repositories
 {
+    // не работи коректно, когато воутна коментар с ид=2, и в същото време има пост с ид=2!!!!
     public class VotesRepository : BaseRepository<Vote>
     {
         public void Vote(int userId, int contentId, int value, string type)
@@ -18,6 +19,7 @@ namespace DataAccess.Repositories
             UsersRepository usersRepo = new UsersRepository();
 
             RedditDb context = new RedditDb();
+
             //ако не съществува такъв запис в таблица Votes, се създава, а рейтингът на поста се увеличава със стойността на вота
             if (context.Votes.Where(a => a.UserId == userId && a.ContentId == contentId).Count() == 0)
             //if (!context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))

@@ -39,6 +39,20 @@ namespace Reddit.Controllers
         {
             EditVM model = new EditVM();
 
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
+            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthenticationManager.LoggedUser.Id).ToList();
+
+            /*foreach (SubReddit subReddit in subscribedSubReddits)
+            {
+                model.SubRedditsList.Add(
+                    new SelectListItem()
+                    {
+                        Value = subReddit.Id.ToString(),
+                        Text = subReddit.Name,
+                        Selected = subReddit.Id == model.SelectedSubReddit
+                    });
+            }*/
+
             return View(model);
         }
 
