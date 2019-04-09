@@ -26,6 +26,8 @@ namespace Reddit.ViewModels.Posts
 
         public PostType PostType { get; set; }
 
+        public int PostTypeId { get; set; }
+
         [Required(ErrorMessage = "This field is required!")]
         [DisplayName("Post Title: ")]
         public string Title { get; set; }
@@ -45,7 +47,14 @@ namespace Reddit.ViewModels.Posts
             SelectedSubReddit = item.SubRedditId;
             SubRedditId = item.SubRedditId;
             UserId = item.UserId;
-            PostType = item.PostType;
+            //PostType = item.PostType;
+            switch(item.PostType.ToString())
+            {
+                case "TextPost": PostTypeId = 1;break;
+                case "VideoPost": PostTypeId = 2; break;
+                case "ImagePost": PostTypeId = 3; break;
+                default: PostTypeId = 0;break;
+            }
             Title = item.Title;
             Content = item.Content;
         }
@@ -55,7 +64,13 @@ namespace Reddit.ViewModels.Posts
             item.Id = Id;
             item.SubRedditId = SubRedditId;
             item.UserId = AuthenticationManager.LoggedUser.Id;
-            item.PostType = PostType;
+            switch(PostTypeId)
+            {
+                case 1: item.PostType = PostType.TextPost;break;
+                case 2: item.PostType = PostType.VideoPost;break;
+                case 3: item.PostType = PostType.ImagePost;break;
+                default: item.PostType = PostType.Undefined;break;
+            }
             item.Title = Title;
             item.Content = Content;
             item.CreationDate = DateTime.Now;

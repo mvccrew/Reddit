@@ -16,7 +16,6 @@ namespace Reddit.ViewModels.Votes
         public User User { get; set; }
 
         public int ContentId { get; set; }
-        //public int ContentId2 { get; set; }
         public string Type { get; set; }
 
         public VoteVM()
@@ -27,8 +26,12 @@ namespace Reddit.ViewModels.Votes
         public VoteVM(int contentId, string type)
         {
             this.ContentId = contentId;
-            this.Type = type;
-            //ContentId2 = contentId2;
+            switch(type)
+            {
+                case "Post":Type = "Post"; break;
+                case "Comment":Type = "Comment"; break;
+                default: Type = "Undefined";break;
+            }
         }
 
     }

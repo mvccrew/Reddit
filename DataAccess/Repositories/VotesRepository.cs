@@ -21,8 +21,7 @@ namespace DataAccess.Repositories
             RedditDb context = new RedditDb();
 
             //ако не съществува такъв запис в таблица Votes, се създава, а рейтингът на поста се увеличава със стойността на вота
-            if (context.Votes.Where(a => a.UserId == userId && a.ContentId == contentId).Count() == 0)
-            //if (!context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Type.ToString() == type))
+            if (context.Votes.Where(a => a.UserId == userId && a.ContentId == contentId && a.Type.ToString() == type).Count() == 0)
             {
                 if (type == "Post")
                 {
@@ -32,7 +31,7 @@ namespace DataAccess.Repositories
 
                     usersRepo.ChangeKarma(post.UserId, value);
 
-                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value });
+                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value,Type= Entities.Type.Post });
                     context.SaveChanges();
                 }
                 else if (type == "Comment")
@@ -43,7 +42,7 @@ namespace DataAccess.Repositories
 
                     usersRepo.ChangeKarma(comment.UserId, value);
 
-                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value });
+                    votesRepo.Insert(new Vote() { UserId = userId, ContentId = contentId, CreationDate = DateTime.Now, Value = value, Type=Entities.Type.Comment });
                     context.SaveChanges();
                 }
                 else
@@ -55,7 +54,7 @@ namespace DataAccess.Repositories
             //ако обаче съществува такъв, проверява дали стойността на вота е същата. Ако е - изтрива записа, ако не е - го променя
             else 
             {
-                if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Value == value))
+                if (context.Votes.Any(v => v.UserId == userId && v.ContentId == contentId && v.Value == value && v.Type.ToString() == type))
                 {
                     if (type == "Post")
                     {

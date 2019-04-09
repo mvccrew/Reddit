@@ -96,7 +96,7 @@ namespace Reddit.Controllers
             }
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
             PostsRepository repo = new PostsRepository();
-
+            
             Post item = new Post();
             if(model.SubRedditId == 0)
                 model.SubRedditId = model.SelectedSubReddit;

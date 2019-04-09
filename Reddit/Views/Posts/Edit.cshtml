@@ -20,6 +20,7 @@
                     { Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
                     @Html.HiddenFor(model => model.Id)
                     @Html.HiddenFor(model => model.SubRedditId)
+                    @Html.HiddenFor(Model => Model.PostTypeId)
                     <fieldset>
                         <table>
                             <tr>
