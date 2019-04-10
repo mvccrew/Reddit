@@ -17,7 +17,7 @@ namespace Reddit.Filters
         {
             if (AuthenticationManager.LoggedUser == null)
             {
-                filterContext.Result = new RedirectResult("/Home/Index#notloggedin");
+                filterContext.Result = new RedirectResult("/Home/Login");
             }
             else if ((AdminArea && AuthenticationManager.LoggedUser.IsAdmin == false) ||
                     (AuthenticationManager.LoggedUser.Karma < RequiredKarma))

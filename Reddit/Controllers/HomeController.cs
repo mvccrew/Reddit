@@ -30,10 +30,9 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult Login()
+        public ActionResult Login()
         {
-            //return Redirect((Request.UrlReferrer == null) ? "/Home/Index#notloggedin" : Request.UrlReferrer.ToString() + "#notloggedin");
-            return PartialView("~/Views/Partials/_Login.cshtml", new LoginVM());
+            return Redirect((Request.UrlReferrer == null) ? "/Home/Index#notloggedin" : Request.UrlReferrer.ToString() + "#notloggedin");
         }
 
         [HttpPost]
@@ -52,9 +51,7 @@ namespace Reddit.Controllers
                 return PartialView("~/Views/Partials/_Login.cshtml", model);
             }
 
-            ViewBag.loginModel = null;
-
-            return RedirectToAction("Index", "Home");
+            return Content("");
         }
 
         public ActionResult Logout()

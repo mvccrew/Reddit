@@ -1,11 +1,6 @@
 ﻿@model Reddit.ViewModels.Home.LoginVM
 
-@if (Layout.IsEmpty())
-{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<div class="modal active" id="loginModal">
+<div class="modal" id="loginModal">
     <a href="#close" class="modal-overlay" aria-label="Close"></a>
     <div class="modal-container">
         <div class="modal-header">
@@ -14,7 +9,9 @@
         </div>
         <div class="modal-body">
             <div class="content">
-                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login-form" }))
+                @using (Ajax.BeginForm("Login", "Home", new AjaxOptions {
+                    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "login-container", OnSuccess="checkForErrors"
+                }, new { id = "login-form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
