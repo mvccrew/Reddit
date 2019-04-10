@@ -1,5 +1,10 @@
 ﻿@model Reddit.ViewModels.Home.LoginVM
 
+@if (Layout.IsEmpty())
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 <div class="modal active" id="loginModal">
     <a href="#close" class="modal-overlay" aria-label="Close"></a>
     <div class="modal-container">
@@ -9,13 +14,13 @@
         </div>
         <div class="modal-body">
             <div class="content">
-                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id="login-form" }))
+                @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "login-form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <p class="text-center">@Html.ValidationMessage("authenticationFailed", new { @class = "text-error" })</p>
                     <div class="form-group clearfix">
-                        @Html.LabelFor(model => model.Username, new { @class= "d-inline-block form-label" })
+                        @Html.LabelFor(model => model.Username, new { @class = "d-inline-block form-label" })
                         @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-error float-right" })
                         @Html.TextBoxFor(model => model.Username, new { @class = "form-input", placeholder = "Username" })
                     </div>

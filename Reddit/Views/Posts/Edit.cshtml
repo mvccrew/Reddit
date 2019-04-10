@@ -26,7 +26,7 @@
                             <tr>
                                 @if (Model.Id == 0)
                                 {
-                                    <td>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SubReddit.Id)</td>
+                                    <td>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList) @Html.ValidationMessageFor(model => model.SelectedSubReddit)</td>
                                     <td>@Html.EnumDropDownListFor(model => model.PostType) @Html.ValidationMessageFor(model => model.PostType)</td>
                                 }
                                 <td>@Html.LabelFor(model => model.Title)</td>

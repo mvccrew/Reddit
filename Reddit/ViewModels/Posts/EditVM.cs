@@ -14,7 +14,7 @@ namespace Reddit.ViewModels.Posts
     {
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         [DisplayName("SubReddit: ")]
         public int SelectedSubReddit { get; set; }
         public List<SelectListItem> SubRedditsList { get; set; }
@@ -28,11 +28,11 @@ namespace Reddit.ViewModels.Posts
 
         public int PostTypeId { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        //[Required(ErrorMessage = "This field is required!")]
         [DisplayName("Post Title: ")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "This field is required!")]
+        //[Required(ErrorMessage = "This field is required!")]
         [DisplayName("Content: ")]
         public string Content { get; set; }
 

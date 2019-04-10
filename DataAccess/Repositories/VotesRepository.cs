@@ -64,7 +64,7 @@ namespace DataAccess.Repositories
 
                         usersRepo.ChangeKarma(post.UserId, -1*value);
 
-                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value && v.Type.ToString() == type).FirstOrDefault();
                         votesRepo.Delete(vote);
                         context.SaveChanges();
                     }
@@ -76,7 +76,7 @@ namespace DataAccess.Repositories
 
                         usersRepo.ChangeKarma(comment.UserId, -1*value);
 
-                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value).FirstOrDefault();
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value == value && v.Type.ToString() == type).FirstOrDefault();
                         votesRepo.Delete(vote);
                         context.SaveChanges();
                     }
@@ -96,7 +96,7 @@ namespace DataAccess.Repositories
 
                         usersRepo.ChangeKarma(post.UserId, 2*value);
 
-                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value).FirstOrDefault();
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value && v.Type.ToString() == type).FirstOrDefault();
                         vote.Value += 2*value;
                         votesRepo.Update(vote);
                         context.SaveChanges();
@@ -109,7 +109,7 @@ namespace DataAccess.Repositories
 
                         usersRepo.ChangeKarma(comment.UserId, 2 * value);
 
-                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value).FirstOrDefault();
+                        Vote vote = votesRepo.GetAll(v => v.UserId == userId && v.ContentId == contentId && v.Value != value && v.Type.ToString() == type).FirstOrDefault();
                         vote.Value += 2 * value;
                         votesRepo.Update(vote);
                         context.SaveChanges();

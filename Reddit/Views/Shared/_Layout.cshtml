@@ -92,6 +92,17 @@
         </footer>
     </div>
     <script type="text/javascript">
+        $(document).ready(function () {
+            $("#login").click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("Login", "Home")',
+                    success: function (result) {
+                        $('#content-container').append(result);
+                    }
+                });
+            });
+        });
         window.onload = function () {
             if (window.location.hash == '#notloggedin') {
                 $.ajax({

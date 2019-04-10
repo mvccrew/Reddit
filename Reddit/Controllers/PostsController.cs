@@ -90,8 +90,9 @@ namespace Reddit.Controllers
         [HttpPost]
         public ActionResult Edit(EditVM model)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || model.SelectedSubReddit == 0)
             {
+                ModelState.AddModelError(String.Empty, "DAGsdg");
                 return View(model);
             }
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
