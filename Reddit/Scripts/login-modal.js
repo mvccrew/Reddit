@@ -1,8 +1,13 @@
 ﻿function checkForErrors() {
 
     const loginModal = document.getElementById("loginModal");
-    const errorElem = document.querySelector("[data-valmsg-for='authenticationFailed']");
-    if (errorElem && errorElem.innerHTML != '') {
+
+    if (loginModal) {
+        var form = $('#loginModal');
+        form.removeData('validator');
+        form.removeData('unobtrusiveValidation');
+        $.validator.unobtrusive.parse(form);
+
         loginModal.classList.add('active');
     }
     else {
