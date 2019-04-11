@@ -33,17 +33,18 @@
                                 </div>
                             </div>
                             <div class="tile float-right" style="width:13%">
-                                @if (!item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id)
+                                @if (Reddit.Models.AuthenticationManager.LoggedUser!=null&&item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id)
                             && Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == item.Id))
                                 {
-                                    <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
-                                        <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
-                                    </div>
+                                <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                    <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
+                                </div>
                                 }
                                 else
                                 {
+                                    
                                     <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
-                                        <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
+                                        <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
                                     </div>
                                 }
                             </div>
