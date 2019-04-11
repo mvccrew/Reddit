@@ -31,7 +31,7 @@
                     @Html.LabelFor(m => m.Description)
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description)
                 </td>
                 <td>
                     @Html.ValidationMessageFor(m => m.Description, null, new { style = "color:red" })
@@ -53,7 +53,7 @@
                     @Html.LabelFor(m => m.Rules)
                 </td>
                 <td>
-                    @Html.TextBoxFor(m => m.Rules)
+                    @Html.TextAreaFor(m => m.Rules)
                 </td>
                 <td>
                     @Html.ValidationMessageFor(m => m.Rules)

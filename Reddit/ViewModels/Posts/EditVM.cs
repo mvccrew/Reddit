@@ -51,8 +51,8 @@ namespace Reddit.ViewModels.Posts
             switch(item.PostType.ToString())
             {
                 case "TextPost": PostTypeId = 1;break;
-                case "VideoPost": PostTypeId = 2; break;
-                case "ImagePost": PostTypeId = 3; break;
+                case "VideoPost": PostTypeId = 3; break;
+                case "ImagePost": PostTypeId = 2; break;
                 default: PostTypeId = 0;break;
             }
             Title = item.Title;
@@ -67,8 +67,8 @@ namespace Reddit.ViewModels.Posts
             switch(PostTypeId)
             {
                 case 1: item.PostType = PostType.TextPost;break;
-                case 2: item.PostType = PostType.VideoPost;break;
-                case 3: item.PostType = PostType.ImagePost;break;
+                case 2: item.PostType = PostType.ImagePost;break;
+                case 3: item.PostType = PostType.VideoPost;break;
                 default: item.PostType = PostType.Undefined;break;
             }
             item.Title = Title;

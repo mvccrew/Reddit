@@ -2,7 +2,14 @@
 
 <article class="card post">
     <div class="card-image">
-        <img src="~/Content/img/reddit-blue.jpg" class="img-responsive">
+        @if (Model.PostType == DataAccess.Entities.PostType.ImagePost)
+        {
+            <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive" alt="img">
+        }
+        else
+        {
+            
+        }
     </div>
     <div class="card-header">
         <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">

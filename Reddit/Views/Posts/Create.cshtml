@@ -33,12 +33,12 @@
 <div class="tab-content">
     @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
     {
-        <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.SubRedditId)
         <div class="tab-pane active" id="home">
+            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
             <input id="PostTypeId" name="PostTypeId" type="hidden" value="1" />
             <div class="form-group">
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
@@ -49,32 +49,33 @@
             <p>    <input formaction="Edit" type="submit" value="Save" /></p>
         </div>
     }
-    @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
+    @using (Html.BeginForm("Edit2", "Posts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-        <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.SubRedditId)
         <div class="tab-pane" id="profile">
+            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
             <input id="PostTypeId" name="PostTypeId" type="hidden" value="2" />
             <div class="form-group">
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
             </div>
             <div class="form-group">
-                <input class="form-input" id="input-example-16" type="file">
+                <input type="file" name="image" style="width:150px;" /><br /><br />
             </div>
-            <p>    <input formaction="Edit" type="submit" value="Save" /></p>
+            <p>    <input formaction="Edit2" type="submit" value="Save" /></p>
         </div>
+        @ViewBag.Message
     }
     @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
     {
-        <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.SubRedditId)
         <div class="tab-pane" id="messages">
+            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
             <input id="PostTypeId" name="PostTypeId" type="hidden" value="3" />
             <div class="form-group">
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
@@ -84,7 +85,6 @@
             </div>
             <p>    <input formaction="Edit" type="submit" value="Save" /></p>
         </div>
-
     }
 </div>
 @section scripts {

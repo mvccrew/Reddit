@@ -6,6 +6,7 @@ using Reddit.ViewModels.Posts;
 using Reddit.ViewModels.Share;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
@@ -92,7 +93,7 @@ namespace Reddit.Controllers
         {
             if (!ModelState.IsValid || model.SelectedSubReddit == 0)
             {
-                ModelState.AddModelError(String.Empty, "DAGsdg");
+                ModelState.AddModelError(String.Empty, "Something went wrong ;(");
                 return View(model);
             }
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
@@ -104,6 +105,77 @@ namespace Reddit.Controllers
             model.PopulateEntity(item);
 
             repo.Save(item);
+
+            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
+        }
+
+        /*[HttpPost]
+        public ActionResult Edit2(EditVM model, HttpPostedFile file)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Create");
+            //}
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
+            PostsRepository postsRepo = new PostsRepository();
+
+            Post item = new Post();
+            if (model.SubRedditId == 0)
+                model.SubRedditId = model.SelectedSubReddit;
+            model.PopulateEntity(item);
+
+            if (file != null && file.ContentLength > 0)
+                try
+                {
+                    model.Content = Path.Combine(Server.MapPath("~/Content"),
+                                               Path.GetFileName(file.FileName));
+                    file.SaveAs(model.Content);
+                    ViewBag.Message = "File uploaded successfully";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                }
+            else
+            {
+                ViewBag.Message = "You have not specified a file.";
+            }
+
+            postsRepo.Save(item);
+
+
+            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
+        }*/
+
+        [HttpPost]
+        public ActionResult Edit2(EditVM model, FormCollection form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Create");
+            }
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
+            PostsRepository postsRepo = new PostsRepository();
+
+            Post item = new Post();
+            if (model.SubRedditId == 0)
+                model.SubRedditId = model.SelectedSubReddit;
+
+            if ((Request.Files["image"] != null) && (!String.IsNullOrEmpty(Request.Files["image"].FileName)) && (Request.Files["image"].ContentLength > 0))
+            {
+                string file_path = Server.MapPath("~/Content/img/post_images/");
+                //file_path = file_path.Replace("\", "/");
+                Request.Files["image"].SaveAs(file_path + Request.Files["image"].FileName);
+                model.Content = file_path + Request.Files["image"].FileName;
+            }
+            else
+            {
+                ViewData["file_path"] = "Upload failed!";
+            }
+
+            model.PopulateEntity(item);
+            postsRepo.Save(item);
+
 
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }

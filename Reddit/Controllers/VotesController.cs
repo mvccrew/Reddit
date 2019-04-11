@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Reddit.Controllers
 {
-    [AuthenticationFilter]
+    [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class VotesController : Controller
     {
         public ActionResult Vote(VoteVM voteModel)

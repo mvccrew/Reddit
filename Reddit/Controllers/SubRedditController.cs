@@ -54,7 +54,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "SubReddit");
         }
 
-        [AuthenticationFilter]
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         public ActionResult Subscribe(int id)
         {
             SubRedditsRepository repo = new SubRedditsRepository();
