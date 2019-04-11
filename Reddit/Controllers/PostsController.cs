@@ -108,44 +108,7 @@ namespace Reddit.Controllers
 
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
-
-        /*[HttpPost]
-        public ActionResult Edit2(EditVM model, HttpPostedFile file)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("Create");
-            //}
-            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
-            PostsRepository postsRepo = new PostsRepository();
-
-            Post item = new Post();
-            if (model.SubRedditId == 0)
-                model.SubRedditId = model.SelectedSubReddit;
-            model.PopulateEntity(item);
-
-            if (file != null && file.ContentLength > 0)
-                try
-                {
-                    model.Content = Path.Combine(Server.MapPath("~/Content"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(model.Content);
-                    ViewBag.Message = "File uploaded successfully";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "ERROR:" + ex.Message.ToString();
-                }
-            else
-            {
-                ViewBag.Message = "You have not specified a file.";
-            }
-
-            postsRepo.Save(item);
-
-
-            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
-        }*/
+        
 
         [HttpPost]
         public ActionResult Edit2(EditVM model, FormCollection form)
@@ -164,7 +127,6 @@ namespace Reddit.Controllers
             if ((Request.Files["image"] != null) && (!String.IsNullOrEmpty(Request.Files["image"].FileName)) && (Request.Files["image"].ContentLength > 0))
             {
                 string file_path = Server.MapPath("~/Content/img/post_images/");
-                //file_path = file_path.Replace("\", "/");
                 Request.Files["image"].SaveAs(file_path + Request.Files["image"].FileName);
                 model.Content = file_path + Request.Files["image"].FileName;
             }

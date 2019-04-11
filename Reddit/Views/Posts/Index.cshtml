@@ -31,11 +31,7 @@
                             if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Model.UserId))).Count() > 0)
                             {
                                 <tr style="border: 1px solid black;">
-                                    <td>@item.Rating</td>
-                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post"));}</td>
-                                    <td>@item.User.Username</td>
-                                    <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
-                                    <td>@item.Content</td>
+                                    @{ Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
                                     <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = item.Id, SubRedditId = Model.SubRedditId })">Edit</a></td>
                                     <td><a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Posts", new { Id = item.Id })">Delete</a></td>
                                     @if (!item.IsApproved)
@@ -51,11 +47,7 @@
                             else if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Model.UserId))).Count() == 0 && item.IsApproved)
                             {
                                 <tr>
-                                    <td>@item.Rating</td>
-                                    <td>@{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post"));}</td>
-                                    <td>@item.User.Username</td>
-                                    <td><a href="/Comments?PostId=@item.Id">@item.Title</a></td>
-                                    <td>@item.Content</td>
+                                    @{ Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
                                 </tr>
                             }
                         }

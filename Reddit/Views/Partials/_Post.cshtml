@@ -6,21 +6,23 @@
         {
             <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive" alt="img">
         }
-        else
-        {
-            
-        }
     </div>
     <div class="card-header">
         <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">
             @Model.Title
         </a>
         <div class="card-subtitle h5">
-            /r/@Model.SubReddit.Name
+            <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
         </div>
     </div>
+    @if (Model.PostType != DataAccess.Entities.PostType.ImagePost)
+    {
+        <div class="card-body">
+            <span>@Model.Content</span>
+        </div>
+    }
     <div class="card-body">
-        <span>by /u/@Model.User.Username</span>
+        <span>by <a href="">/u/@Model.User.Username</a></span>
         <span class="dot">&#183;</span>
         <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
     </div>
@@ -38,8 +40,8 @@
             {
                 <div class="post-info__votes">
                     @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
-                        <span>@Model.Rating</span>
-                    </div>
+                    <span>@Model.Rating</span>
+                </div>
             }
             <div class="post-info__comments">
                 <span><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</span>
