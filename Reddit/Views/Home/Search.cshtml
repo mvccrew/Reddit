@@ -1,0 +1,136 @@
+﻿@model Reddit.ViewModels.Home.SearchVM
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<section class="columns post-group" id="frontpage" style="display:block">
+    <article class="card"style="margin-bottom:30px;">
+        <div class="card-image">
+        </div>
+        <div class="card-header">
+            <div class="card-title h5">Communities and users</div>
+            <div class="card-subtitle text-gray" style="border-bottom-width:thin; border-bottom-color:rgba(0, 0, 0, 0.1); border-bottom-style:solid">...</div>
+        </div>
+        <div class="card-body">
+            @if (Model.SubReddits.Count() > 0)
+            {
+                foreach (var item in Model.SubReddits)
+                {
+                    <div class="panel" id="div-panel">
+                        <div class="panel-body" style="background-color:white" id="details">
+                            <div class="tile float-left" style="width:27%">
+                                <div class="tile-content ">
+                                    <div class="tile-title text-bold"> /r/@item.Name</div>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="tile-title text-normal text-gray">@item.SubscribedUsers.Count() Members</div>
+                                </div>
+                            </div>
+                            <div class="tile tile-centered " style="width:55%">
+                                <div class="tile-content">
+                                    <div class="tile-title text-normal ">@item.Description </div>
+                                </div>
+                            </div>
+                            <div class="tile float-right" style="width:13%">
+                                @if (!item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id)
+                            && Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == item.Id))
+                                {
+                                    <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                        <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                        <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div>Sorry, there were no community results for “ailqk”</div>
+            }
+        </div>
+    </article>
+
+    @foreach (var item in Model.Posts)
+    {
+        <article class="card post">
+            <div class="card-image">
+                @if (item.PostType == DataAccess.Entities.PostType.ImagePost)
+                {
+                    <img src="~/Content/img/post_images/@item.Content.Split('\\').Last()" class="img-responsive" alt="img">
+                }
+            </div>
+            <div class="card-header">
+                <a class="card-title h4 text-dark" href="/Comments?PostId=@item.Id">
+                    @item.Title
+                </a>
+                <div class="card-subtitle h5">
+                    <a href="@Url.Action("Index", "Posts", new { SubRedditId = item.SubRedditId})">/r/@item.SubReddit.Name</a>
+                </div>
+            </div>
+            @if (item.PostType != DataAccess.Entities.PostType.ImagePost)
+            {
+                <div class="card-body">
+                    <span>@item.Content</span>
+                </div>
+            }
+            <div class="card-body">
+                <span>by <a href="">/u/@item.User.Username</a></span>
+                <span class="dot">&#183;</span>
+                <span>@(Math.Round((DateTime.Now - item.CreationDate).TotalHours))h ago</span>
+            </div>
+            <div class="card-footer">
+                <div class="post-info float-left d-inline-block">
+                    @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                    {
+                        <div class="post-info__votes">
+                            <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
+                            <a href="/Home/Login"><i class="fas fa-arrow-down"></i></a>
+                            <span>@item.Rating</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="post-info__votes">
+                            @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post")); }
+                            <span>@item.Rating</span>
+                        </div>
+                    }
+                    <div class="post-info__comments">
+                        <span><a href="/Comments?PostId=@item.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@item.Comments.Count()</a></span>
+                    </div>
+                </div>
+                <div class="post-share float-right d-inline-block">
+                    <button class="btn btn-success btn-block">share</button>
+                </div>
+                <div class="post-info d-inline-block">
+                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                    {
+                        if (item.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
+                        {
+                            { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", item); }
+                        }
+                    }
+                </div>
+            </div>
+        </article>
+    }
+</section>
+<style>
+    #details > *
+    {
+        display:inline-block;
+
+    }
+    #div-panel 
+    {
+        margin-top:10px;
+    }
+</style>

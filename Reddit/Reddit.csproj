@@ -140,6 +140,7 @@
     <Compile Include="ViewModels\Home\LoginVM.cs" />
     <Compile Include="ViewModels\Home\PostIndexVM.cs" />
     <Compile Include="ViewModels\Home\RegisterVM.cs" />
+    <Compile Include="ViewModels\Home\SearchVM.cs" />
     <Compile Include="ViewModels\Home\SubRedditsVM.cs" />
     <Compile Include="ViewModels\Posts\EditVM.cs" />
     <Compile Include="ViewModels\Posts\FilterVM.cs" />
@@ -183,6 +184,7 @@
     <Content Include="Views\Partials\_Post.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Partials\_ModTools.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

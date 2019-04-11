@@ -1,6 +1,9 @@
-﻿@model Reddit.ViewModels.SubReddit.IndexVM
+﻿@model Reddit.ViewModels.Home.SearchVM
 
-<div class="input-group input-inline">
-    @Html.TextBoxFor(m => m.Filter.Name, new { @class = "form-input", @placeholder = "search" })
-    <button class="btn btn-primary input-group-btn">search</button>
-</div>
+@using (Html.BeginForm("Search", "Home", FormMethod.Get, new { @class = "input-group input-inline" }))
+{
+    <div class="input-group input-inline">
+        @Html.TextBoxFor(m => m.Filter, new { @class = "form-input", @placeholder = "search" })
+        <button class="btn btn-primary input-group-btn" type="submit">search</button>
+    </div>
+}

@@ -39,7 +39,7 @@
                 </select>
             </section>
             <section class="navbar-center">
-                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.SubReddit.IndexVM());}
+                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.Home.SearchVM());}
             </section>
             <section class="navbar-section user-section">
                 @if (Reddit.Models.AuthenticationManager.LoggedUser == null)

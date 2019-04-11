@@ -25,7 +25,7 @@
     {
         foreach (var post in Model.Posts)
         {
-            <span>@{ Html.RenderPartial("~/Views/Partials/_Post.cshtml", post); }</span>
+             Html.RenderPartial("~/Views/Partials/_Post.cshtml", post); 
         }
     }
 </section>

@@ -116,6 +116,22 @@ namespace Reddit.Controllers
                 model.SubRedditsList = repo.GetAll(null).Where(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
             return View(model);
         }
+        public ActionResult Search(SearchVM model,int? postId,int?subredditId)
+        {
+            SubRedditsRepository subRepo = new SubRedditsRepository();
+            PostsRepository postRepo = new PostsRepository();
+            model.SubReddits = subRepo.GetAll(null).Where(a => a.Name.Contains(model.Filter)).ToList();
 
+            model.Posts = postRepo.GetAll(null).Where(a => a.Title.ToLower().Contains(model.Filter.ToLower()) ||
+            a.SubReddit.Name.ToLower().Contains(model.Filter.ToLower()) ||
+            a.Comments.Any(b => b.Text.ToLower().Contains(model.Filter.ToLower())) ||
+            a.Content.ToLower().Contains(model.Filter.ToLower())).OrderByDescending(b=>b.Rating).ToList();
+            return View(model);
+        }
+        /*
+         * a => a.Title.Contains(model.Filter) ||
+            a.SubReddit.Name.Contains(model.Filter) ||
+            a.Comments.Any( b => b.Text.Contains(model.Filter))
+         */
     }
 }
