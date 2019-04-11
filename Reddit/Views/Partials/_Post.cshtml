@@ -1,3 +1,68 @@
+<<<<<<< Updated upstream
+@model DataAccess.Entities.Post
+
+<article class="card post">
+    <div class="card-image">
+        @if (Model.PostType == DataAccess.Entities.PostType.ImagePost)
+        {
+            <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive" alt="img">
+        }
+    </div>
+    <div class="card-header">
+        <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">
+            @Model.Title
+        </a>
+        <div class="card-subtitle h5">
+            <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
+        </div>
+    </div>
+    @if (Model.PostType != DataAccess.Entities.PostType.ImagePost)
+    {
+        <div class="card-body">
+            <span>@Model.Content</span>
+        </div>
+    }
+    <div class="card-body">
+        <span>by <a href="">/u/@Model.User.Username</a></span>
+        <span class="dot">&#183;</span>
+        <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
+    </div>
+    <div class="card-footer">
+        <div class="post-info float-left d-inline-block">
+            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+            {
+                <div class="post-info__votes">
+                    <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
+                    <a href="/Home/Login"><i class="fas fa-arrow-down"></i></a>
+                    <span>@Model.Rating</span>
+                </div>
+            }
+            else
+            {
+                <div class="post-info__votes">
+                    @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
+                    <span>@Model.Rating</span>
+                </div>
+            }
+            <div class="post-info__comments">
+                <span><a href="/Comments?PostId=@Model.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</a></span>
+            </div>
+        </div>
+        <div class="post-share float-right d-inline-block">
+            <button class="btn btn-success btn-block">share</button>
+        </div>
+        <div class="post-info d-inline-block">
+        @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+        {
+            if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
+            {
+                { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
+            }
+        }
+        </div>
+    </div>
+</article>
+=======
 ﻿@model DataAccess.Entities.Post
 
 <article class="card post">
@@ -44,7 +109,7 @@
                 </div>
             }
             <div class="post-info__comments">
-                <span><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</span>
+                <span><a href="/Comments?PostId=@Model.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</a></span>
             </div>
         </div>
         <div class="post-share float-right d-inline-block">
@@ -61,3 +126,4 @@
         </div>
     </div>
 </article>
+>>>>>>> Stashed changes

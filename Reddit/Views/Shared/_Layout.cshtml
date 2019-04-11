@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ﻿@using DataAccess.Entities
 <!DOCTYPE html>
 <html lang="en">
@@ -69,23 +70,6 @@
 
         <main id="content-container" class="container grid-lg">
             @RenderBody()
-
-            <aside id="aside" class="text-center">
-                @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-                {
-                    <a href="/Posts/Create">Create Post</a>
-                    <a href="/SubReddit/Edit"> Create SubReddit</a>
-                }
-                else
-                {
-                    <a href="#">
-                        Lorem ipsum
-                    </a>
-                    <a href="#">
-                        Ipsum Lorem
-                    </a>
-                }
-            </aside>
             <div id="login-container">
                 @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
             </div>
@@ -100,4 +84,91 @@
     <script src="~/Scripts/login-modal.js"></script>
     @RenderSection("scripts", required: false)
 </body>
+=======
+﻿@using DataAccess.Entities
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/css/site.css" />
+    @RenderSection("styles", required: false)
+    <!--<link href="~/Content/css/debug.css" rel="stylesheet" />-->
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+</head>
+<body>
+    <div id="main-container">
+        <header id="header-container" class="navbar">
+            <section class="navbar-section">
+                <a class="brand" href="/Home/Index">
+                    <img src="~/Content/img/reddit.png" alt="logo">
+                </a>
+                <select class="subreddit-dropdown form-select" onchange="location = this.value;">
+                    <option disabled>Reddit feeds</option>
+                    <option value="@Url.Action("Index", "Home")">Home</option>
+                    <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
+                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                    {
+                        <option disabled>Subreddits</option>
+                        foreach (SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
+                        {
+                            <option value="/Posts?SubRedditId=@subreddit.Id">@subreddit.Name</option>
+                        }
+                    }
+                </select>
+            </section>
+            <section class="navbar-center">
+                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.SubReddit.IndexVM());}
+            </section>
+            <section class="navbar-section user-section">
+                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                {
+                    <button id="login" class="btn btn-block">log in</button>
+
+                }
+                else
+                {
+                    if (Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                    {
+                        <a class="btn btn-success btn-block" href="/Users/Index">Users Panel</a>
+                    }
+
+                    <a class="btn btn-block" href="@Url.Action("Index", "Profile", new { UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id })">
+                        @Reddit.Models.AuthenticationManager.LoggedUser.Username
+                        <span class="label label-secondary">@Reddit.Models.AuthenticationManager.LoggedUser.Karma</span>
+                    </a>
+                    <a href="/Home/Logout" class="btn btn-block">log out</a>
+                }
+                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                {
+                    <a id="register" href="/Home/Register" class="btn btn-block btn-primary">sign up</a>
+                }
+            </section>
+        </header>
+
+        <main id="content-container" class="container grid-lg">
+            @RenderBody()
+            <div id="login-container">
+                @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>
+                &copy; 2019 mvccrew OOD
+            </p>
+        </footer>
+    </div>
+    <script src="~/Scripts/login-modal.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+>>>>>>> Stashed changes
 </html>

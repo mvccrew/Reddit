@@ -1,4 +1,4 @@
-﻿@model Reddit.ViewModels.Home.PostIndexVM
+@model Reddit.ViewModels.Home.PostIndexVM
 
 @{
     ViewBag.Title = "reddit";
@@ -29,3 +29,20 @@
         }
     }
 </section>
+
+<aside id="aside" class="text-center">
+    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+    {
+        <a href="/Posts/Create">Create Post</a>
+        <a href="/SubReddit/Edit"> Create SubReddit</a>
+    }
+    else
+    {
+        <a href="/Home/Login">
+            Create Post
+        </a>
+        <a href="/Home/Login">
+            Create SubReddit
+        </a>
+    }
+</aside>

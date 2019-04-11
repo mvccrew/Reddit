@@ -1,4 +1,4 @@
-﻿using DataAccess.Entities;
+using DataAccess.Entities;
 using DataAccess.Repositories;
 using Reddit.Filters;
 using Reddit.Models;
@@ -24,7 +24,14 @@ namespace Reddit.Controllers
                 model.SubRedditId = (int)SubRedditId;
             }
             PostsRepository repo = new PostsRepository();
-            model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId);
+            if(AuthenticationManager.LoggedUser.AdminToSubReddits.Any(m => m.Admins.Any(a => a.Id==AuthenticationManager.LoggedUser.Id)))
+            {
+                model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId).OrderByDescending(a => a.Rating).ToList();
+            }
+            else
+            {
+                model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId && m.IsApproved == true).OrderByDescending(a => a.Rating).ToList();
+            }
 
             UsersRepository usersRepo = new UsersRepository();
             model.User = usersRepo.GetById(model.UserId);
@@ -34,6 +41,8 @@ namespace Reddit.Controllers
 
             return View(model);
         }
+
+
 
         [HttpGet]
         public ActionResult Create()
