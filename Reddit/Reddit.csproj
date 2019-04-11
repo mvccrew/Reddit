@@ -182,6 +182,7 @@
     <Content Include="Views\Partials\_Login.cshtml" />
     <Content Include="Views\Partials\_Post.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
+    <Content Include="Views\Partials\_ModTools.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

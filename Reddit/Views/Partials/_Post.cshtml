@@ -39,7 +39,7 @@
             else
             {
                 <div class="post-info__votes">
-                    @{Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
+                    @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
                     <span>@Model.Rating</span>
                 </div>
             }
@@ -49,6 +49,15 @@
         </div>
         <div class="post-share float-right d-inline-block">
             <button class="btn btn-success btn-block">share</button>
+        </div>
+        <div class="post-info d-inline-block">
+        @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+        {
+            if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
+            {
+                { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
+            }
+        }
         </div>
     </div>
 </article>

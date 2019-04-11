@@ -1,0 +1,12 @@
+﻿@model DataAccess.Entities.Post
+
+    <a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Posts", new { Id = Model.Id, SubRedditId = Model.SubRedditId })">Edit</a>
+    <a style="text-decoration: none; margin:0 6px; color:red" href="@Url.Action("Delete", "Posts", new { Id = Model.Id })">Delete</a>
+    @if (!Model.IsApproved)
+    {
+        <a style="text-decoration: none; margin:0 6px; color:dimgrey" href="@Url.Action("Approve", "Posts", new { Id = Model.Id })">Approve</a>
+    }
+    else
+    {
+        <i style="color:green">Approved</i>
+    }

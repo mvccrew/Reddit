@@ -91,7 +91,7 @@ namespace Reddit.Controllers
         [HttpPost]
         public ActionResult Edit(EditVM model)
         {
-            if (!ModelState.IsValid || model.SelectedSubReddit == 0)
+            if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(String.Empty, "Something went wrong ;(");
                 return View(model);
