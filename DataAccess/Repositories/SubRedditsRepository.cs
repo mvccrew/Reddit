@@ -22,6 +22,18 @@ namespace DataAccess.Repositories
             subReddit.SubscribedUsers.Add(user);
             context.SaveChanges();
         }
+        public void UnSubscribe(int subRedditId, int userId)
+        {
+            RedditDb context = new RedditDb();
+
+            User user = context.Users.Find(userId);
+
+            SubReddit subReddit = context.SubReddits.Find(subRedditId);
+
+            user.SubscribedToSubReddits.Remove(subReddit);
+            subReddit.SubscribedUsers.Remove(user);
+            context.SaveChanges();
+        }
 
         public void AddAdminToSubReddit(int subRedditId, int userId)
         {

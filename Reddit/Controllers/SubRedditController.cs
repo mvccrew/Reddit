@@ -57,11 +57,31 @@ namespace Reddit.Controllers
         [AuthenticationFilter(RequiredKarma = int.MinValue)]
         public ActionResult Subscribe(int id)
         {
+            
+            SubRedditsRepository repo = new SubRedditsRepository();
+            SubReddit sub = repo.GetById(id);
+            if (AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==id)
+                && sub.SubscribedUsers.Any(m => m.Id==AuthenticationManager.LoggedUser.Id))
+            {
+                repo.UnSubscribe(id, AuthenticationManager.LoggedUser.Id);
+            }
+            else
+            {
+                
+                repo.Subscribe(id, AuthenticationManager.LoggedUser.Id);
+            }
+            
+
+            return RedirectToAction("Index", "Posts", new { SubRedditId = id });
+        }
+
+        public ActionResult UnSubscribe(int id)
+        {
             SubRedditsRepository repo = new SubRedditsRepository();
 
-            repo.Subscribe(id, AuthenticationManager.LoggedUser.Id);
+            repo.UnSubscribe(id,AuthenticationManager.LoggedUser.Id);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Posts", new { SubRedditId = id });
         }
 
     }

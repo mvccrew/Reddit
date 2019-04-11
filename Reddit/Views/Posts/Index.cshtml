@@ -51,7 +51,8 @@
                 </div>
             </div>
             <div class="panel-footer" style="background-color:white">
-                @if (!Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))
+                @if (!Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id)
+                    && Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==Model.SubReddit.Id))
                 {
                     <div class="tile-content" style="padding-bottom:10px;">
                         <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>
@@ -106,14 +107,6 @@
             </div>
         </div>
     </aside>
-        <!--<div style="float:right;margin-left:20px;">
-            <p>Community Details</p>
-            <p>/r/@Model.SubReddit.Name</p>
-            <p>Subscribers:@Model.SubReddit.SubscribedUsers.Count()</p>
-            <p>Theme:@Model.SubReddit.Theme</p>
-            <p>Description:@Model.SubReddit.Description</p>
-            <p>@Model.SubReddit.Rules</p>
-        </div>-->
 
 <style>
     #details > * {
