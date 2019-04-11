@@ -1,11 +1,14 @@
 ﻿.post-group {
     float: left;
-    max-width: 28rem;
+    width: 100%;
+    max-width: 32rem;
     margin: 0;
 }
 
 .post {
+    width: 100%;
     margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
 }
 
     .post .card-subtitle {
