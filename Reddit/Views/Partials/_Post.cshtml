@@ -17,6 +17,9 @@
                 <div class="popover-container">
                     <div class="card">
                         <div class="card-header text-center">
+                            <figure class="avatar avatar-xl">
+                                <img src="~/Content/img/community-avatar.jpg" alt="...">
+                            </figure>
                             <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
                         </div>
                         <div class="card-body text-center text-dark">
@@ -44,6 +47,10 @@
                 <div class="popover-container">
                     <div class="card">
                         <div class="card-header text-center">
+                            <figure class="avatar avatar-xl">
+                                <img src="~/Content/img/reddit-avatar.png" alt="...">
+                                <i class="avatar-presence busy"></i>
+                            </figure>
                             /u/@Model.User.Username
                             @(Math.Round((DateTime.Now - Model.User.CreationDate).TotalDays))d ago
                         </div>
@@ -51,12 +58,15 @@
                             @Model.User.Karma Karma
                         </div>
                         <div class="card-footer text-center">
-                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null && 
-                                Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
+                                Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
                             {
                                 <button class="btn btn-primary btn-block">
                                     Ban user
                                 </button>
+                                <a href="@Url.Action("MakeAdmin", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                    Make Admin
+                                </a>
                             }
                         </div>
                     </div>

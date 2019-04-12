@@ -55,6 +55,15 @@ namespace Reddit.Controllers
         }
 
         [AuthenticationFilter(RequiredKarma = int.MinValue)]
+        public ActionResult MakeAdmin(int subRedditId, int userId)
+        {
+            SubRedditsRepository repo = new SubRedditsRepository();
+            repo.AddAdminToSubReddit(subRedditId, userId);
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         public ActionResult Subscribe(int id)
         {
             
