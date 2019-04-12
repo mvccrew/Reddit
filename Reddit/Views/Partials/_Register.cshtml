@@ -14,7 +14,7 @@
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "register-container",
-                    OnSuccess = "checkRegisterForErrors"
+                    OnSuccess = "checkForErrors('registerModal')"
                 }, new { id = "register-form" }))
                 {
                     @Html.AntiForgeryToken()

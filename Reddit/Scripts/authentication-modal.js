@@ -1,32 +1,14 @@
-﻿function checkLoginForErrors() {
+﻿function checkForErrors(modalId) {
 
-    const loginModal = document.getElementById("loginModal");
+    const modal = document.getElementById(modalId);
 
-    if (loginModal) {
-        var form = $('#loginModal');
+    if (modal) {
+        var form = $('#' + modalId);
         form.removeData('validator');
         form.removeData('unobtrusiveValidation');
         $.validator.unobtrusive.parse(form);
 
-        loginModal.classList.add('active');
-    }
-    else {
-        window.location.reload();
-    }
-
-}
-
-function checkRegisterForErrors() {
-
-    const registerModal = document.getElementById("registerModal");
-
-    if (registerModal) {
-        var form = $('#registerModal');
-        form.removeData('validator');
-        form.removeData('unobtrusiveValidation');
-        $.validator.unobtrusive.parse(form);
-
-        registerModal.classList.add('active');
+        modal.classList.add('active');
     }
     else {
         window.location.reload();

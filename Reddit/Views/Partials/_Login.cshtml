@@ -10,7 +10,7 @@
         <div class="modal-body">
             <div class="content">
                 @using (Ajax.BeginForm("Login", "Home", new AjaxOptions {
-                    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "login-container", OnSuccess="checkLoginForErrors"
+                    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "login-container", OnSuccess="checkForErrors('loginModal')"
                 }, new { id = "login-form" }))
                 {
                     @Html.AntiForgeryToken()
