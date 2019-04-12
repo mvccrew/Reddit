@@ -10,7 +10,7 @@
 }
 
 <section class="columns post-group" id="frontpage">
-    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+    @if (Reddit.Models.AuthManager.LoggedUser != null)
     {
 
         foreach (var subscribedSubreddit in Model.SubReddits)
@@ -31,7 +31,7 @@
 </section>
 
 <aside id="aside" class="text-center">
-    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+    @if (Reddit.Models.AuthManager.LoggedUser != null)
     {
         <a href="/Posts/Create">Create Post</a>
         <a href="/SubReddit/Edit"> Create SubReddit</a>

@@ -17,7 +17,7 @@ namespace Reddit.Controllers
         {
             VotesRepository votesRepo = new VotesRepository();
 
-            votesRepo.Vote(Models.AuthenticationManager.LoggedUser.Id, voteModel.ContentId, voteModel.Value, voteModel.Type);
+            votesRepo.Vote(Models.AuthManager.LoggedUser.Id, voteModel.ContentId, voteModel.Value, voteModel.Type);
 
             return Redirect(Request.UrlReferrer.ToString());
         }

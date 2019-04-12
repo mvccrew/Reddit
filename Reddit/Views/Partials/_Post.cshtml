@@ -58,8 +58,8 @@
                             @Model.User.Karma Karma
                         </div>
                         <div class="card-footer text-center">
-                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null &&
-                                Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
+                            @if (Reddit.Models.AuthManager.LoggedUser != null &&
+                                Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
                             {
                                 <button class="btn btn-primary btn-block">
                                     Ban user
@@ -77,7 +77,7 @@
         </div>
     <div class="card-footer">
         <div class="post-info float-left d-inline-block">
-            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+            @if (Reddit.Models.AuthManager.LoggedUser == null)
             {
                 <div class="post-info__votes">
                     <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
@@ -100,9 +100,9 @@
             <button class="btn btn-success btn-block">share</button>
         </div>
         <div class="post-info d-inline-block">
-        @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+        @if (Reddit.Models.AuthManager.LoggedUser != null)
         {
-            if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
+            if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
             {
                 { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
             }

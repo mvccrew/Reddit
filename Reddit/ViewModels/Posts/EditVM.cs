@@ -63,7 +63,7 @@ namespace Reddit.ViewModels.Posts
         {
             item.Id = Id;
             item.SubRedditId = SubRedditId;
-            item.UserId = AuthenticationManager.LoggedUser.Id;
+            item.UserId = AuthManager.LoggedUser.Id;
             switch(PostTypeId)
             {
                 case 1: item.PostType = PostType.TextPost;break;

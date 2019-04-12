@@ -15,12 +15,12 @@ namespace Reddit.Filters
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (AuthenticationManager.LoggedUser == null)
+            if (AuthManager.LoggedUser == null)
             {
                 filterContext.Result = new RedirectResult("/Home/Login");
             }
-            else if ((AdminArea && AuthenticationManager.LoggedUser.IsAdmin == false) ||
-                    (AuthenticationManager.LoggedUser.Karma < RequiredKarma))
+            else if ((AdminArea && AuthManager.LoggedUser.IsAdmin == false) ||
+                    (AuthManager.LoggedUser.Karma < RequiredKarma))
             {
                 filterContext.Result = new RedirectResult("/Home/Index");
             }

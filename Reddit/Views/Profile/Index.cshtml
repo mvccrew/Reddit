@@ -5,7 +5,7 @@
 }
 <div>
     <table>
-        @{ Model.User = Reddit.Models.AuthenticationManager.LoggedUser; }
+        @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
         <tr>
             <td>
                 <h1 style="font-size:26px;">@(Model.User == null ? "Nobody" : Model.User.FirstName)'s info</h1>

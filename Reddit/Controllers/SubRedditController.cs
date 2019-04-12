@@ -69,15 +69,15 @@ namespace Reddit.Controllers
             
             SubRedditsRepository repo = new SubRedditsRepository();
             SubReddit sub = repo.GetById(id);
-            if (AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==id)
-                && sub.SubscribedUsers.Any(m => m.Id==AuthenticationManager.LoggedUser.Id))
+            if (AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==id)
+                && sub.SubscribedUsers.Any(m => m.Id==AuthManager.LoggedUser.Id))
             {
-                repo.UnSubscribe(id, AuthenticationManager.LoggedUser.Id);
+                repo.UnSubscribe(id, AuthManager.LoggedUser.Id);
             }
             else
             {
                 
-                repo.Subscribe(id, AuthenticationManager.LoggedUser.Id);
+                repo.Subscribe(id, AuthManager.LoggedUser.Id);
             }
             
 
@@ -88,7 +88,7 @@ namespace Reddit.Controllers
         {
             SubRedditsRepository repo = new SubRedditsRepository();
 
-            repo.UnSubscribe(id,AuthenticationManager.LoggedUser.Id);
+            repo.UnSubscribe(id,AuthManager.LoggedUser.Id);
 
             return RedirectToAction("Index", "Posts", new { SubRedditId = id });
         }

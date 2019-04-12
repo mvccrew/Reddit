@@ -11,7 +11,7 @@
                 <h1 style="font-size:26px;">Comments</h1>
             </td>
         </tr>
-        @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+        @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
         <tr>
             <td>
                 @using (Html.BeginForm("Edit", "Comments", FormMethod.Post))

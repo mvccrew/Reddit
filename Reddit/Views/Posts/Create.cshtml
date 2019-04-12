@@ -28,7 +28,7 @@
         <a href="#messages">Link</a>
     </li>
 </ul>       
- @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+ @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
 
 <div class="tab-content">
     @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))

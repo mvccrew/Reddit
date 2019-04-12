@@ -2,6 +2,6 @@
 
 @Html.HiddenFor(m => m.Id)
 @Html.HiddenFor(m => m.ContentId)
-@{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+@{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
 <a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId, Value = 1, Type = Model.Type })"><i class='fas fa-arrow-up'></i></a>
 <a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId , Value = -1, Type = Model.Type })"><i class='fas fa-arrow-down'></i></a>

@@ -10,8 +10,8 @@
 }
 
     @Html.HiddenFor(m => m.UserId)
-    @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
-    @{ Model.User = Reddit.Models.AuthenticationManager.LoggedUser; }
+    @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+    @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
     <section class="columns post-group" id="posts">
         <!-- <br /><hr />@Model.SubReddit.Name <br /><hr />-->
         @foreach (var item in Model.Posts)
@@ -51,8 +51,8 @@
                 </div>
             </div>
             <div class="panel-footer" style="background-color:white">
-                @if (!Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id)
-                    && Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==Model.SubReddit.Id))
+                @if (!Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
+                    && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id==Model.SubReddit.Id))
                 {
                     <div class="tile-content" style="padding-bottom:10px;">
                         <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>

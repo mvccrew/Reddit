@@ -20,10 +20,10 @@ namespace Reddit.Controllers
             SubRedditsRepository subRedditsRepository = new SubRedditsRepository();
 
             model.Posts = repo.GetAll(p => p.IsApproved == true).OrderByDescending(a => a.Rating).ToList();
-            if (AuthenticationManager.LoggedUser != null)
+            if (AuthManager.LoggedUser != null)
             {
                 model.SubReddits = subRedditsRepository.GetAll(null)
-                .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthenticationManager.LoggedUser.Id)).OrderByDescending(c => c.Id).ToList();
+                .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthManager.LoggedUser.Id)).OrderByDescending(c => c.Id).ToList();
             }
 
             return View(model);
@@ -40,9 +40,9 @@ namespace Reddit.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                AuthenticationManager.Authenticate(model.Username, model.Password);
+                AuthManager.Authenticate(model.Username, model.Password);
 
-                if (AuthenticationManager.LoggedUser == null)
+                if (AuthManager.LoggedUser == null)
                     ModelState.AddModelError("authenticationFailed", "Wrong username or password!");
             }
 
@@ -56,7 +56,7 @@ namespace Reddit.Controllers
 
         public ActionResult Logout()
         {
-            AuthenticationManager.Logout();
+            AuthManager.Logout();
 
             return RedirectToAction("Index", "Home");
         }
@@ -64,7 +64,7 @@ namespace Reddit.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            if (AuthenticationManager.LoggedUser == null)
+            if (AuthManager.LoggedUser == null)
                 return View(new RegisterVM());
             else
                 return Redirect("Index");
@@ -76,15 +76,15 @@ namespace Reddit.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("~/Views/Partials/_Register.cshtml", model);
             }
 
             UsersRepository repo = new UsersRepository();
 
             if (repo.GetAll(null).FirstOrDefault(m => m.Username == model.Username) != null)
             {
-                ModelState.AddModelError("RegistrationFailed", "This username already exists !");
-                return View(model);
+                ModelState.AddModelError("RegistrationFailed", "This username already exists!");
+                return PartialView("~/Views/Partials/_Register.cshtml", model);
             }
 
             User item = new User
@@ -101,9 +101,9 @@ namespace Reddit.Controllers
             repo.Insert(item);
 
             // automatic login after registration
-            AuthenticationManager.Authenticate(item.Username, item.Password);
+            AuthManager.Authenticate(item.Username, item.Password);
 
-            return RedirectToAction("Index", "Home");
+            return Content("");
             
         }
 

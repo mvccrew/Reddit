@@ -17,7 +17,7 @@
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
-                    { Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+                    { Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
                     @Html.HiddenFor(model => model.Id)
                     @Html.HiddenFor(model => model.SubRedditId)
                     @Html.HiddenFor(Model => Model.PostTypeId)

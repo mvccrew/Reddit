@@ -24,7 +24,7 @@ namespace Reddit.Controllers
                 model.SubRedditId = (int)SubRedditId;
             }
             PostsRepository repo = new PostsRepository();
-            if(AuthenticationManager.LoggedUser.AdminToSubReddits.Any(m => m.Admins.Any(a => a.Id==AuthenticationManager.LoggedUser.Id)))
+            if(AuthManager.LoggedUser.AdminToSubReddits.Any(m => m.Admins.Any(a => a.Id==AuthManager.LoggedUser.Id)))
             {
                 model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId).OrderByDescending(a => a.Rating).ToList();
             }
@@ -52,7 +52,7 @@ namespace Reddit.Controllers
             model.SubRedditsList = new List<SelectListItem>();
 
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
-            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthenticationManager.LoggedUser.Id).ToList();
+            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthManager.LoggedUser.Id).ToList();
 
             foreach (SubReddit subReddit in subscribedSubReddits)
             {
@@ -79,7 +79,7 @@ namespace Reddit.Controllers
             model.SubRedditsList = new List<SelectListItem>();
 
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
-            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthenticationManager.LoggedUser.Id).ToList();
+            List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthManager.LoggedUser.Id).ToList();
 
             foreach (SubReddit subReddit in subscribedSubReddits)
             {
@@ -146,7 +146,7 @@ namespace Reddit.Controllers
             PostsRepository repo = new PostsRepository();
             Post post = repo.GetById(id);
 
-            repo.ApprovePost(id, AuthenticationManager.LoggedUser.Id);
+            repo.ApprovePost(id, AuthManager.LoggedUser.Id);
 
             return RedirectToAction("Index", "Posts", new { SubRedditId = post.SubRedditId });
         }

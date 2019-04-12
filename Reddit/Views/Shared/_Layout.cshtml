@@ -1,4 +1,6 @@
 ﻿@using DataAccess.Entities
+@using Reddit.ViewModels.Home
+@using Reddit.Models
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,10 +30,10 @@
                     <option disabled>Reddit feeds</option>
                     <option value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
+                    @if (AuthManager.LoggedUser != null)
                     {
                         <option disabled>Subreddits</option>
-                        foreach (SubReddit subreddit in Reddit.Models.AuthenticationManager.LoggedUser.SubscribedToSubReddits)
+                        foreach (SubReddit subreddit in AuthManager.LoggedUser.SubscribedToSubReddits)
                         {
                             <option value="/Posts?SubRedditId=@subreddit.Id">@subreddit.Name</option>
                         }
@@ -39,48 +41,51 @@
                 </select>
             </section>
             <section class="navbar-center">
-                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new Reddit.ViewModels.Home.SearchVM());}
+                @{Html.RenderPartial("~/Views/Partials/_SearchBar.cshtml", new SearchVM());}
             </section>
             <section class="navbar-section user-section">
-                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                @if (AuthManager.LoggedUser == null)
                 {
                     <button id="login" class="btn btn-block">log in</button>
-
+                    <button id="register" class="btn btn-block btn-primary">sign up</button>
                 }
                 else
                 {
-                    if (Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                    if (AuthManager.LoggedUser.IsAdmin)
                     {
                         <a class="btn btn-success btn-block" href="/Users/Index">Users Panel</a>
                     }
 
-                    <a class="btn btn-block" href="@Url.Action("Index", "Profile", new { UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id })">
-                        @Reddit.Models.AuthenticationManager.LoggedUser.Username
-                        <span class="label label-secondary">@Reddit.Models.AuthenticationManager.LoggedUser.Karma</span>
+                    <a class="btn btn-block" href="@Url.Action("Index", "Profile", new { UserId = AuthManager.LoggedUser.Id })">
+                        @AuthManager.LoggedUser.Username
+                        <span class="label label-secondary">@AuthManager.LoggedUser.Karma</span>
                     </a>
                     <a href="/Home/Logout" class="btn btn-block">log out</a>
                 }
-                @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                {
-                    <a id="register" href="/Home/Register" class="btn btn-block btn-primary">sign up</a>
-                }
             </section>
         </header>
-
         <main id="content-container" class="container grid-lg">
+            @if (AuthManager.LoggedUser == null)
+            {
+                <div id="login-container">
+                    @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new LoginVM());}
+                </div>
+                <div id="register-container">
+                    @{Html.RenderPartial("~/Views/Partials/_Register.cshtml", new RegisterVM());}
+                </div>
+            }
             @RenderBody()
-            <div id="login-container">
-                @{Html.RenderPartial("~/Views/Partials/_Login.cshtml", new Reddit.ViewModels.Home.LoginVM());}
-            </div>
         </main>
-
         <footer class="footer">
             <p>
                 &copy; 2019 mvccrew OOD
             </p>
         </footer>
     </div>
-    <script src="~/Scripts/login-modal.js"></script>
+    @if (AuthManager.LoggedUser == null)
+    {
+        <script src="~/Scripts/authentication-modal.js"></script>
+    }
     @RenderSection("scripts", required: false)
 </body>
 </html>

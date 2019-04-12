@@ -10,7 +10,7 @@
 
     <form action="/SubReddit/Edit" method="post">
         @if (Model.Id == 0)
-        {Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+        {Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.UserId)
         <table>

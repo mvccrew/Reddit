@@ -7,7 +7,7 @@ using DataAccess.Services;
 
 namespace Reddit.Models
 {
-    public abstract class AuthenticationManager
+    public abstract class AuthManager
     {
         public static User LoggedUser
         {

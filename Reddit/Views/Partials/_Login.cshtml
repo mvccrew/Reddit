@@ -10,13 +10,13 @@
         <div class="modal-body">
             <div class="content">
                 @using (Ajax.BeginForm("Login", "Home", new AjaxOptions {
-                    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "login-container", OnSuccess="checkForErrors"
+                    HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "login-container", OnSuccess="checkLoginForErrors"
                 }, new { id = "login-form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
                     <p class="text-center">@Html.ValidationMessage("authenticationFailed", new { @class = "text-error" })</p>
-                    <div class="form-group clearfix">
+                    <div class="form-group">
                         @Html.LabelFor(model => model.Username, new { @class = "d-inline-block form-label" })
                         @Html.ValidationMessageFor(model => model.Username, null, new { @class = "text-error float-right" })
                         @Html.TextBoxFor(model => model.Username, new { @class = "form-input", placeholder = "Username" })

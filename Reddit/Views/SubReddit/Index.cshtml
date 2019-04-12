@@ -26,7 +26,7 @@
                             <td>@item.Name</td>
                             <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
                             <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
-                            @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
+                            @if (Reddit.Models.AuthManager.LoggedUser == null)
                             {
                                 <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Login", "Home")">Login to Subscribe</a></td>
                             }

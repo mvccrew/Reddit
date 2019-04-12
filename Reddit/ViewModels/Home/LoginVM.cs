@@ -10,10 +10,10 @@ namespace Reddit.ViewModels.Home
     public class LoginVM
     {
         [DisplayName("Username:")]
-        [Required(ErrorMessage = "This field is Required!")]
+        [Required(ErrorMessage = "This field is required!")]
         public string Username { get; set; }
         [DisplayName("Password:")]
-        [Required(ErrorMessage = "This field is Required!")]
+        [Required(ErrorMessage = "This field is required!")]
         public string Password { get; set; }
     }
 }
