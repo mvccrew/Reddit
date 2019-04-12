@@ -12,7 +12,24 @@
             @Model.Title
         </a>
         <div class="card-subtitle h5">
-            <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
+            <div class="popover popover-bottom">
+                <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
+                <div class="popover-container">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
+                        </div>
+                        <div class="card-body text-center text-dark">
+                            @Model.SubReddit.SubscribedUsers.Count() Members
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})" class="btn btn-primary btn-block">
+                                View Community
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     @if (Model.PostType != DataAccess.Entities.PostType.ImagePost)
@@ -21,11 +38,33 @@
             <span>@Model.Content</span>
         </div>
     }
-    <div class="card-body">
-        <span>by <a href="">/u/@Model.User.Username</a></span>
-        <span class="dot">&#183;</span>
-        <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
-    </div>
+        <div class="card-body">
+            <div class="popover popover-bottom">
+                by<a href=""> /u/@Model.User.Username</a>
+                <div class="popover-container">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            /u/@Model.User.Username
+                            @(Math.Round((DateTime.Now - Model.User.CreationDate).TotalDays))d ago
+                        </div>
+                        <div class="card-body text-center">
+                            @Model.User.Karma Karma
+                        </div>
+                        <div class="card-footer text-center">
+                            @if (Reddit.Models.AuthenticationManager.LoggedUser != null && 
+                                Reddit.Models.AuthenticationManager.LoggedUser.IsAdmin)
+                            {
+                                <button class="btn btn-primary btn-block">
+                                    Ban user
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <span class="dot">&#183;</span>
+            <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
+        </div>
     <div class="card-footer">
         <div class="post-info float-left d-inline-block">
             @if (Reddit.Models.AuthenticationManager.LoggedUser == null)

@@ -98,29 +98,7 @@ namespace Reddit.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EditVM model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError(String.Empty, "Something went wrong ;(");
-                return View(model);
-            }
-            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
-            PostsRepository repo = new PostsRepository();
-            
-            Post item = new Post();
-            if(model.SubRedditId == 0)
-                model.SubRedditId = model.SelectedSubReddit;
-            model.PopulateEntity(item);
-
-            repo.Save(item);
-
-            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
-        }
-        
-
-        [HttpPost]
-        public ActionResult Edit2(EditVM model, FormCollection form)
+        public ActionResult Edit(EditVM model, FormCollection form)
         {
             if (!ModelState.IsValid)
             {

@@ -49,7 +49,7 @@
             <p>    <input formaction="Edit" type="submit" value="Save" /></p>
         </div>
     }
-    @using (Html.BeginForm("Edit2", "Posts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Posts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)

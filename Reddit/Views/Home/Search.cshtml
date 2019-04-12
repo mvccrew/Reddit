@@ -54,74 +54,14 @@
             }
             else
             {
-                <div>Sorry, there were no community results for “ailqk”</div>
+                <div>Sorry, there were no community results for “@Model.Filter”</div>
             }
         </div>
     </article>
 
     @foreach (var item in Model.Posts)
     {
-        <article class="card post">
-            <div class="card-image">
-                @if (item.PostType == DataAccess.Entities.PostType.ImagePost)
-                {
-                    <img src="~/Content/img/post_images/@item.Content.Split('\\').Last()" class="img-responsive" alt="img">
-                }
-            </div>
-            <div class="card-header">
-                <a class="card-title h4 text-dark" href="/Comments?PostId=@item.Id">
-                    @item.Title
-                </a>
-                <div class="card-subtitle h5">
-                    <a href="@Url.Action("Index", "Posts", new { SubRedditId = item.SubRedditId})">/r/@item.SubReddit.Name</a>
-                </div>
-            </div>
-            @if (item.PostType != DataAccess.Entities.PostType.ImagePost)
-            {
-                <div class="card-body">
-                    <span>@item.Content</span>
-                </div>
-            }
-            <div class="card-body">
-                <span>by <a href="">/u/@item.User.Username</a></span>
-                <span class="dot">&#183;</span>
-                <span>@(Math.Round((DateTime.Now - item.CreationDate).TotalHours))h ago</span>
-            </div>
-            <div class="card-footer">
-                <div class="post-info float-left d-inline-block">
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser == null)
-                    {
-                        <div class="post-info__votes">
-                            <a href="/Home/Login"><i class="fas fa-arrow-up"></i></a>
-                            <a href="/Home/Login"><i class="fas fa-arrow-down"></i></a>
-                            <span>@item.Rating</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="post-info__votes">
-                            @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Post")); }
-                            <span>@item.Rating</span>
-                        </div>
-                    }
-                    <div class="post-info__comments">
-                        <span><a href="/Comments?PostId=@item.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@item.Comments.Count()</a></span>
-                    </div>
-                </div>
-                <div class="post-share float-right d-inline-block">
-                    <button class="btn btn-success btn-block">share</button>
-                </div>
-                <div class="post-info d-inline-block">
-                    @if (Reddit.Models.AuthenticationManager.LoggedUser != null)
-                    {
-                        if (item.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthenticationManager.LoggedUser.Id))).Count() > 0)
-                        {
-                            { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", item); }
-                        }
-                    }
-                </div>
-            </div>
-        </article>
+        Html.RenderPartial("~/Views/Partials/_Post.cshtml", item);
     }
 </section>
 <style>

@@ -9,9 +9,9 @@
     <link href="~/Content/css/home.css" rel="stylesheet" />
 }
 
-                @Html.HiddenFor(m => m.UserId)
-                @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
-                @{ Model.User = Reddit.Models.AuthenticationManager.LoggedUser; }
+    @Html.HiddenFor(m => m.UserId)
+    @{ Model.UserId = Reddit.Models.AuthenticationManager.LoggedUser.Id; }
+    @{ Model.User = Reddit.Models.AuthenticationManager.LoggedUser; }
     <section class="columns post-group" id="posts">
         <!-- <br /><hr />@Model.SubReddit.Name <br /><hr />-->
         @foreach (var item in Model.Posts)
@@ -65,7 +65,7 @@
                     </div>
                 }
                 <div class="tile-content">
-                    <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts")">Create Post</a>
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts", new { SelectedSubReddit = Model.SubRedditId })">Create Post</a>
                 </div>
             </div>
         </div>

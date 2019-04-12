@@ -107,25 +107,28 @@ namespace Reddit.Controllers
             
         }
 
+        [HttpGet]
         public ActionResult GetAllSubreddits(SubRedditsVM model,int? userId)
         {
             SubRedditsRepository repo = new SubRedditsRepository();
             if (userId == null)
                 model.SubRedditsList = repo.GetAll(null);
             else
-                model.SubRedditsList = repo.GetAll(null).Where(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
+                model.SubRedditsList = repo.GetAll(x => x.SubscribedUsers.Any(b => b.Id == userId)).ToList();
             return View(model);
         }
+
+        [HttpGet]
         public ActionResult Search(SearchVM model,int? postId,int?subredditId)
         {
             SubRedditsRepository subRepo = new SubRedditsRepository();
             PostsRepository postRepo = new PostsRepository();
-            model.SubReddits = subRepo.GetAll(null).Where(a => a.Name.Contains(model.Filter)).ToList();
+            model.SubReddits = subRepo.GetAll(a => a.Name.Contains(model.Filter)).ToList();
 
-            model.Posts = postRepo.GetAll(null).Where(a => a.Title.ToLower().Contains(model.Filter.ToLower()) ||
+            model.Posts = postRepo.GetAll(a => a.Title.ToLower().Contains(model.Filter.ToLower()) ||
             a.SubReddit.Name.ToLower().Contains(model.Filter.ToLower()) ||
             a.Comments.Any(b => b.Text.ToLower().Contains(model.Filter.ToLower())) ||
-            a.Content.ToLower().Contains(model.Filter.ToLower())).OrderByDescending(b=>b.Rating).ToList();
+            a.Content.ToLower().Contains(model.Filter.ToLower())).OrderByDescending(b => b.Rating).ToList();
             return View(model);
         }
         /*
