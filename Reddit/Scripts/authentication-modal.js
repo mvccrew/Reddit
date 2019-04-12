@@ -21,6 +21,7 @@ var triggerModal = (event) => {
     const register = document.getElementById("register");
     const loginModal = document.getElementById("loginModal");
     const registerModal = document.getElementById("registerModal");
+    const redirectToRegister = document.getElementById("redirectToRegister");
     const closeLinks = document.querySelectorAll("[href='#close']");
 
     login.addEventListener('click', () => {
@@ -28,6 +29,11 @@ var triggerModal = (event) => {
     });
 
     register.addEventListener('click', () => {
+        registerModal.classList.add('active');
+    });
+
+    redirectToRegister.addEventListener('click', () => {
+        loginModal.classList.remove('active');
         registerModal.classList.add('active');
     });
 
