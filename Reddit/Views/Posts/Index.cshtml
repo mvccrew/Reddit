@@ -25,7 +25,11 @@
     <aside id="aside" class="text-center">
         <div class="panel" style="width:150%">
             <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
-                <div class="panel-title text-bold">Community Details</div>
+                <div class="panel-title text-bold float-left">Community Details</div>
+                @if (Reddit.Models.AuthManager.LoggedUser.AdminToSubReddits.Where(a => a.Admins.Any(b => b.Id==Reddit.Models.AuthManager.LoggedUser.Id)).Count()>0)
+                {
+                <div class="panel-title float-righ">Mod Tools</div>
+                }
             </div>
             <div class="panel-nav">
                 <!-- navigation components: tabs, breadcrumbs or pagination -->
@@ -33,7 +37,7 @@
             <div class="panel-body" style="background-color:white" id="details">
                 <div class="tile">
                     <div class="tile-content">
-                        <div class="tile-title text-bold"> /r/@Model.SubReddit.Name</div>
+                        <div class="tile-title text-bold "> /r/@Model.SubReddit.Name</div>
                     </div>
                 </div>
                 <div class="tile">
