@@ -20,6 +20,7 @@ namespace Reddit.ViewModels.Profile
         public string Password { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
+        [DisplayName("Retype password: ")]
         [Compare("Password")]
         public string RetypePassword { get; set; }
 
@@ -35,10 +36,6 @@ namespace Reddit.ViewModels.Profile
         [Required(ErrorMessage = "This field is required!")]
         [DisplayName("Email: ")]
         public string Email { get; set; }
-        
-        [Required(ErrorMessage = "This field is required!")]
-        [Compare("Email")]
-        public string RetypeEmail { get; set; }
 
         public override void PopulateEntity(User item)
         {

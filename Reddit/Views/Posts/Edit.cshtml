@@ -4,55 +4,38 @@
     ViewBag.Title = "PostsEdit";
 }
 
-<div>
-    <table>
-        <tr>
-            <td>
-                <h1 style="font-size:26px;">Posts</h1>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true)
-                    { Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-                    @Html.HiddenFor(model => model.Id)
-                    @Html.HiddenFor(model => model.SubRedditId)
-                    @Html.HiddenFor(Model => Model.PostTypeId)
-                    <fieldset>
-                        <table>
-                            <tr>
-                                @if (Model.Id == 0)
-                                {
-                                    <td>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList) @Html.ValidationMessageFor(model => model.SelectedSubReddit)</td>
-                                    <td>@Html.EnumDropDownListFor(model => model.PostType) @Html.ValidationMessageFor(model => model.PostType)</td>
-                                }
-                                <td>@Html.LabelFor(model => model.Title)</td>
-                                <td>@Html.TextBoxFor(model => model.Title) @Html.ValidationMessageFor(model => model.Title)</td>
-                                <td>@Html.LabelFor(model => model.Content)</td>
-                                <td>@Html.TextBoxFor(model => model.Content) @Html.ValidationMessageFor(model => model.Content)</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <input type="submit" value="Save" />&nbsp;
-                                    @if (Model.SubRedditId != 0)
-                                    {
-                                        <a style="text-decoration: none;" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a>
-                                    }
-                                    else
-                                    {
-                                        <a style="text-decoration: none;" href="@Url.Action("Index", "Home")">Cancel</a>
-                                    }
-                                </td>
-                            </tr>
-                        </table>
-                    </fieldset>
-                }
-            </td>
-        </tr>
-    </table>
-</div>
+<h1>Edit post</h1>
 
 
+@using (Html.BeginForm("Edit", "Posts", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    { Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.SubRedditId)
+    @Html.HiddenFor(Model => Model.PostTypeId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title, new { @class = "d-inline-block form-label" })
+        @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-error float-right" })
+        @Html.TextBoxFor(model => model.Title, new { @class = "form-input", placeholder = "Title" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Content, new { @class = "d-inline-block form-label" })
+        @Html.ValidationMessageFor(model => model.Content, null, new { @class = "text-error float-right" })
+        @Html.TextBoxFor(model => model.Content, new { @class = "form-input", placeholder = "Content" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @if (Model.SubRedditId != 0)
+        {
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId })">Cancel</a>
+        }
+        else
+        {
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Home")">Cancel</a>
+        }
+    </div>
+}
