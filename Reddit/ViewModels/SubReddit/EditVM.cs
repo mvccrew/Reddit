@@ -17,7 +17,7 @@ namespace Reddit.ViewModels.SubReddit
 
         public int UserId { get; set; }
 
-        [DisplayName("SubReddit Name:")]
+        [DisplayName("Name:")]
         [Required(ErrorMessage = "This field is required")]
         public string Name { get; set; }
 
