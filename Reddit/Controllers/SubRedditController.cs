@@ -63,6 +63,22 @@ namespace Reddit.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
+        public ActionResult BanUser(int subRedditId, int userId)
+        {
+            SubRedditsRepository repo = new SubRedditsRepository();
+            repo.BanUser(subRedditId, userId);
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
+        public ActionResult MuteUser(int subRedditId, int userId)
+        {
+            SubRedditsRepository repo = new SubRedditsRepository();
+            repo.MuteUser(subRedditId, userId);
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+
         [AuthenticationFilter(RequiredKarma = int.MinValue)]
         public ActionResult Subscribe(int id)
         {
@@ -76,7 +92,6 @@ namespace Reddit.Controllers
             }
             else
             {
-                
                 repo.Subscribe(id, AuthManager.LoggedUser.Id);
             }
             

@@ -8,17 +8,13 @@
         @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
         <tr>
             <td>
-                <h1 style="font-size:26px;">@(Model.User == null ? "Nobody" : Model.User.FirstName)'s info</h1>
-            </td>
-        </tr>
-        <tr>
-            <td>
+                @if (Model.UserId == Reddit.Models.AuthManager.LoggedUser.Id)
+                {
                 <table>
                     <tr>
-                        <td><i>Username</i></td>
-                        <td><i>First Name</i></td>
-                        <td><i>Last Name</i></td>
-                        <td><i>Email</i></td>
+                        <td>
+                            <h1 style="font-size:26px;">@(Model.User == null ? "Nobody" : Model.User.FirstName)'s info</h1>
+                        </td>
                     </tr>
                     <tr>
                         <td>@Model.User.Username</td>
@@ -28,14 +24,13 @@
                         <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Profile", new { Id = Model.User.Id})">edit</a></td>
                     </tr>
                 </table>
-                <h2 style="font-size:16px;"><i>@(Model.User.FirstName)'s Posts</i></h2>
+                }
                 <table style="border: 1px solid black;">
                     @foreach (var post in Model.Posts)
                     {
                         Html.RenderPartial("~/Views/Partials/_Post.cshtml", post);
                     }
                 </table>
-                <h2 style="font-size:16px;"><i>@(Model.User.FirstName)'s Comments</i></h2>
                 <table style="border: 1px solid black;">
                     @foreach (var item in Model.Comments)
                     {

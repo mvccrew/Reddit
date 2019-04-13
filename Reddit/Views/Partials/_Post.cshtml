@@ -43,7 +43,7 @@
     }
         <div class="card-body">
             <div class="popover popover-bottom">
-                by<a href=""> /u/@Model.User.Username</a>
+                by<a href="@Url.Action("Index", "Profile", new { UserId = Model.UserId })"> /u/@Model.User.Username</a>
                 <div class="popover-container">
                     <div class="card">
                         <div class="card-header text-center">
@@ -61,11 +61,14 @@
                             @if (Reddit.Models.AuthManager.LoggedUser != null &&
                                 Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
                             {
-                                <button class="btn btn-primary btn-block">
-                                    Ban user
-                                </button>
+                                <a href="@Url.Action("BanUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                    Ban 
+                                </a>
                                 <a href="@Url.Action("MakeAdmin", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
                                     Make Admin
+                                </a>
+                                <a href="@Url.Action("MuteUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                    Mute
                                 </a>
                             }
                         </div>

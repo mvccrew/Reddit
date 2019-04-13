@@ -34,5 +34,9 @@ namespace DataAccess.Entities
 
         public virtual ICollection<User> Friends { get; set; }
 
+        public virtual ICollection<SubReddit> BannedInSubReddits { get; set; }
+
+        public virtual ICollection<SubReddit> MutedInSubReddits { get; set; }
+
     }
 }

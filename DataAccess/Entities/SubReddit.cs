@@ -28,5 +28,9 @@ namespace DataAccess.Entities
 
         public virtual ICollection<User> SubscribedUsers { get; set; }
 
+        public virtual ICollection<User> BannedUsers { get; set; }
+
+        public virtual ICollection<User> MutedUsers { get; set; }
+
     }
 }

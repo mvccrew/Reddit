@@ -24,7 +24,7 @@ namespace Reddit.ViewModels.Home
 
         [DisplayName("Retype password:")]
         [Required(ErrorMessage = "This field is required!")]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Both passwords must match :)")]
         public string RetypePassword { get; set; }
 
         [DisplayName("First name:")]

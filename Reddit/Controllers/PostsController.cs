@@ -13,10 +13,11 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Reddit.Controllers
-{
+{   [BanFilter]
     [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class PostsController : Controller
     {
+
         public ActionResult Index(IndexVM model, int? SubRedditId)
         {
             if(SubRedditId!=null)
@@ -42,8 +43,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
-
-
+        [MuteFilter]
         [HttpGet]
         public ActionResult Create()
         {
@@ -68,6 +68,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [MuteFilter]
         [HttpGet]
         public ActionResult Edit(int id)
         {
@@ -97,6 +98,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [MuteFilter]
         [HttpPost]
         public ActionResult Edit(EditVM model, FormCollection form)
         {
@@ -129,6 +131,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
+        [MuteFilter]
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -141,6 +144,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
+        [MuteFilter]
         public ActionResult Approve(int id)
         {
             PostsRepository repo = new PostsRepository();

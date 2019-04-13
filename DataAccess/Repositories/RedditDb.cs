@@ -67,6 +67,28 @@ namespace DataAccess.Repositories
                 }
                 );
 
+            modelBuilder.Entity<User>()
+                .HasMany<SubReddit>(u => u.BannedInSubReddits)
+                .WithMany(sr => sr.BannedUsers)
+                .Map(us =>
+                {
+                    us.MapLeftKey("UserId");
+                    us.MapRightKey("SubRedditId");
+                    us.ToTable("BannedUsers");
+                }
+                );
+
+            modelBuilder.Entity<User>()
+                .HasMany<SubReddit>(u => u.MutedInSubReddits)
+                .WithMany(sr => sr.MutedUsers)
+                .Map(us =>
+                {
+                    us.MapLeftKey("UserId");
+                    us.MapRightKey("SubRedditId");
+                    us.ToTable("MutedUsers");
+                }
+                );
+
             modelBuilder.Entity<Post>()
                 .HasRequired(u => u.User)
                 .WithMany()

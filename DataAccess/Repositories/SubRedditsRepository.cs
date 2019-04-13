@@ -48,6 +48,30 @@ namespace DataAccess.Repositories
             context.SaveChanges();
         }
 
+        public void BanUser(int subRedditId, int userId)
+        {
+            RedditDb context = new RedditDb();
+
+            User user = context.Users.Find(userId);
+
+            SubReddit subReddit = context.SubReddits.Find(subRedditId);
+
+            subReddit.BannedUsers.Add(user);
+            context.SaveChanges();
+        }
+
+        public void MuteUser(int subRedditId, int userId)
+        {
+            RedditDb context = new RedditDb();
+
+            User user = context.Users.Find(userId);
+
+            SubReddit subReddit = context.SubReddits.Find(subRedditId);
+
+            subReddit.MutedUsers.Add(user);
+            context.SaveChanges();
+        }
+
         public IQueryable<SubReddit> GetMySubscribes(int userId)
         {
             RedditDb context = new RedditDb();

@@ -16,7 +16,9 @@ namespace Reddit.Models
                 AuthenticationService authenticationService = null;
 
                 if (HttpContext.Current != null && HttpContext.Current.Session["LoggedUser"] == null)
+                {
                     HttpContext.Current.Session["LoggedUser"] = new AuthenticationService();
+                }
 
                 authenticationService = (AuthenticationService)HttpContext.Current.Session["LoggedUser"];
                 return authenticationService.LoggedUser;
@@ -28,7 +30,9 @@ namespace Reddit.Models
             AuthenticationService authenticationService = null;
 
             if (HttpContext.Current != null && HttpContext.Current.Session["LoggedUser"] == null)
+            {
                 HttpContext.Current.Session["LoggedUser"] = new AuthenticationService();
+            }
 
             authenticationService = (AuthenticationService)HttpContext.Current.Session["LoggedUser"];
             authenticationService.AuthenticateUser(username, password);
