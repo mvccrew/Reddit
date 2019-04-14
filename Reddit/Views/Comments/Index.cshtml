@@ -20,7 +20,7 @@
     {
         <div class="tile">
             <div class="tile-icon">
-                @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Comment")); }
+                @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: item.Id, type: "Comment", rating: item.Rating)); }
             </div>
             <div class="tile-content">
                 <p class="tile-title">

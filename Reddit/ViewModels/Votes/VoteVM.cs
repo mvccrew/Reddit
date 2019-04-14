@@ -11,6 +11,7 @@ namespace Reddit.ViewModels.Votes
         public int Id { get; set; }
 
         public int Value { get; set; }
+        public int Rating { get; set; }
 
         public int UserId { get; set; }
         public User User { get; set; }
@@ -23,9 +24,10 @@ namespace Reddit.ViewModels.Votes
 
         }
 
-        public VoteVM(int contentId, string type)
+        public VoteVM(int contentId, string type, int rating)
         {
-            this.ContentId = contentId;
+            Rating = rating;
+            ContentId = contentId;
             switch(type)
             {
                 case "Post":Type = "Post"; break;

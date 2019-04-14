@@ -89,8 +89,7 @@
             else
             {
                 <div class="post-info__votes">
-                    @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post")); }
-                    <span>@Model.Rating</span>
+                    @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post", rating: Model.Rating)); }
                 </div>
             }
             <div class="post-info__comments">

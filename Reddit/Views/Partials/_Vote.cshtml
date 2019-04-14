@@ -4,4 +4,5 @@
 @Html.HiddenFor(m => m.ContentId)
 @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
 <a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId, Value = 1, Type = Model.Type })"><i class='fas fa-arrow-up'></i></a>
+<span>@Model.Rating</span>
 <a href="@Url.Action("Vote", "Votes", new { ContentId = Model.ContentId, UserId = Model.UserId , Value = -1, Type = Model.Type })"><i class='fas fa-arrow-down'></i></a>
