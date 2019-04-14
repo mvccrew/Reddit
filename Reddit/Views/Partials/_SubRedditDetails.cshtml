@@ -1,0 +1,98 @@
+﻿@model Reddit.ViewModels.Posts.IndexVM
+
+<aside id="aside" class="text-center">
+    <div class="panel" style="width:150%">
+        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
+            <div class="panel-title text-bold float-left">Community Details</div>
+            @if (Reddit.Models.AuthManager.LoggedUser.AdminToSubReddits.Where(a => a.Admins.Any(b => b.Id == Reddit.Models.AuthManager.LoggedUser.Id)).Count() > 0)
+            {
+                <div style="float:right" class="panel-title float-righ">Mod Tools</div>
+            }
+        </div>
+        <div class="panel-nav">
+            <!-- navigation components: tabs, breadcrumbs or pagination -->
+        </div>
+        <div class="panel-body" style="background-color:white" id="details">
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title text-bold "> /r/@Model.SubReddit.Name</div>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title text-bold">Members </div>
+                </div>
+                <div class="tile-content">
+                    <div class="tile-title text-bold text-right">@Model.SubReddit.SubscribedUsers.Count()</div>
+                </div>
+            </div>
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title">@Model.SubReddit.Description</div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer" style="background-color:white">
+            @if (!(Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
+                && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == Model.SubReddit.Id)))
+            {
+                <div class="tile-content" style="padding-bottom:10px;">
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>
+                </div>
+            }
+            else
+            {
+                <div class="tile-content" style="padding-bottom:10px;">
+                    <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Unsubscribe</a>
+                </div>
+            }
+            <div class="tile-content">
+                <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts")">Create Post</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="width:150%; margin-top:100px;">
+        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
+            <div class="panel-title text-bold">/R/@Model.SubReddit.Name Rules</div>
+        </div>
+        <div class="panel-body" style="background-color:white" id="details">
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title text-bold">@Model.SubReddit.Rules</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel" style="width:150%; margin-top:100px;">
+        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
+            <div class="panel-title text-bold">Moderators of /R/@Model.SubReddit.Name</div>
+        </div>
+        <div class="panel-body" style="background-color:white" id="details">
+            @foreach (var item in Model.SubReddit.Admins)
+            {
+                <div class="tile">
+                    <div class="tile-content">
+                        <div class="tile-title text-bold">/u/@item.Username</div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="panel-footer" style="background-color:white">
+            <div class="tile-content">
+                <a class="tile-title text-right" href="@Url.Action("Create","Posts")">View All Moderators</a>
+            </div>
+        </div>
+    </div>
+</aside>
+<style>
+
+    #details > * {
+        margin: 15px 0;
+    }
+
+    #aside {
+        text-align: unset;
+    }
+</style>

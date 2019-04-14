@@ -20,5 +20,18 @@ namespace Reddit.ViewModels.Posts
 
         public int SubRedditId { get; set; }
         public DataAccess.Entities.SubReddit SubReddit { get; set; }
+
+        public IndexVM()
+        {
+
+        }
+
+        public IndexVM(int subRedditId)
+        {
+            this.SubRedditId = subRedditId;
+
+            DataAccess.Repositories.SubRedditsRepository repo = new DataAccess.Repositories.SubRedditsRepository();
+            this.SubReddit = repo.GetById(SubRedditId);
+        }
     }
 }

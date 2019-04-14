@@ -6,7 +6,7 @@
 
 
 @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-@using (Html.BeginForm("Edit", "Comments", FormMethod.Post))
+@using (Html.BeginForm("Edit", "Comments", FormMethod.Post, new { @style = "min-width: 100%"}))
 {
 
     @Html.AntiForgeryToken()

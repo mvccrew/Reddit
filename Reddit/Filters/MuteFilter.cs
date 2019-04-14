@@ -19,7 +19,7 @@ namespace Reddit.Filters
 
             if (AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.Id == (int)SubRedditId && sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)))
             {
-                filterContext.Result = new RedirectResult("/Home/Index/#banned");
+                filterContext.Result = new RedirectResult("/Home/Index/#muted");
             }
         }
     }

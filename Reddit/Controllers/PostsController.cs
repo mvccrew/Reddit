@@ -13,11 +13,11 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Reddit.Controllers
-{   [BanFilter]
+{   
     [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class PostsController : Controller
     {
-
+        [BanFilter]
         public ActionResult Index(IndexVM model, int? SubRedditId)
         {
             if(SubRedditId!=null)
@@ -43,6 +43,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [BanFilter]
         [MuteFilter]
         [HttpGet]
         public ActionResult Create()
@@ -56,6 +57,8 @@ namespace Reddit.Controllers
 
             foreach (SubReddit subReddit in subscribedSubReddits)
             {
+                if (!(AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)) ||
+                    AuthManager.LoggedUser.MutedInSubReddits.Any(sr => sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id))))
                 model.SubRedditsList.Add(
                     new SelectListItem()
                     {
@@ -68,6 +71,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [BanFilter]
         [MuteFilter]
         [HttpGet]
         public ActionResult Edit(int id)
@@ -84,7 +88,9 @@ namespace Reddit.Controllers
 
             foreach (SubReddit subReddit in subscribedSubReddits)
             {
-                model.SubRedditsList.Add(
+                if (!(AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)) ||
+                    AuthManager.LoggedUser.MutedInSubReddits.Any(sr => sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id))))
+                    model.SubRedditsList.Add(
                     new SelectListItem()
                     {
                         Value = subReddit.Id.ToString(),
@@ -98,6 +104,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [BanFilter]
         [MuteFilter]
         [HttpPost]
         public ActionResult Edit(EditVM model, FormCollection form)
@@ -131,6 +138,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
+        [BanFilter]
         [MuteFilter]
         [HttpGet]
         public ActionResult Delete(int id)
@@ -144,6 +152,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
+        [BanFilter]
         [MuteFilter]
         public ActionResult Approve(int id)
         {

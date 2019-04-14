@@ -189,6 +189,7 @@
     <Content Include="Views\Partials\_ModTools.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Partials\_Register.cshtml" />
+    <Content Include="Views\Partials\_SubRedditDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
