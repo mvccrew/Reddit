@@ -11,13 +11,13 @@ namespace Reddit.ViewModels.Users
 {
     public class FilterVM : BaseFilterVM<User>
     {
-        [DisplayName("Username: ")]
+        [DisplayName("Username")]
         public string Username { get; set; }
 
-        [DisplayName("First name: ")]
+        [DisplayName("First name")]
         public string FirstName { get; set; }
 
-        [DisplayName("Last name: ")]
+        [DisplayName("Last name")]
         public string LastName { get; set; }
 
         public override Expression<Func<User, bool>> GenerateFilter()
