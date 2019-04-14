@@ -1,24 +1,18 @@
 @model DataAccess.Entities.Post
 
 <article class="card post">
-    <div class="card-image">
-        @if (Model.PostType == DataAccess.Entities.PostType.ImagePost)
-        {
-            <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive" alt="img">
-        }
-    </div>
     <div class="card-header">
         <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">
             @Model.Title
         </a>
         <div class="card-subtitle h5">
             <div class="popover popover-bottom">
-                <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
+                <a class="text-gray" href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
                 <div class="popover-container">
                     <div class="card">
                         <div class="card-header text-center">
-                            <figure class="avatar avatar-xl">
-                                <img src="~/Content/img/community-avatar.jpg" alt="...">
+                            <figure class="avatar">
+                                <img src="~/Content/img/community-avatar.jpg" alt="avatar">
                             </figure>
                             <a href="@Url.Action("Index", "Posts", new { SubRedditId = Model.SubRedditId})">/r/@Model.SubReddit.Name</a>
                         </div>
@@ -35,49 +29,53 @@
             </div>
         </div>
     </div>
-    @if (Model.PostType != DataAccess.Entities.PostType.ImagePost)
-    {
-        <div class="card-body">
-            <span>@Model.Content</span>
-        </div>
-    }
-        <div class="card-body">
-            <div class="popover popover-bottom">
-                by<a href="@Url.Action("Index", "Profile", new { UserId = Model.UserId })"> /u/@Model.User.Username</a>
-                <div class="popover-container">
-                    <div class="card">
-                        <div class="card-header text-center">
-                            <figure class="avatar avatar-xl">
-                                <img src="~/Content/img/reddit-avatar.png" alt="...">
-                                <i class="avatar-presence busy"></i>
-                            </figure>
-                            /u/@Model.User.Username
-                            @(Math.Round((DateTime.Now - Model.User.CreationDate).TotalDays))d ago
-                        </div>
-                        <div class="card-body text-center">
-                            @Model.User.Karma Karma
-                        </div>
-                        <div class="card-footer text-center">
-                            @if (Reddit.Models.AuthManager.LoggedUser != null &&
-                                Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
-                            {
-                                <a href="@Url.Action("BanUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
-                                    Ban 
-                                </a>
-                                <a href="@Url.Action("MakeAdmin", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
-                                    Make Admin
-                                </a>
-                                <a href="@Url.Action("MuteUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
-                                    Mute
-                                </a>
-                            }
-                        </div>
+    <div class="card-body">
+        @if (Model.PostType == DataAccess.Entities.PostType.ImagePost)
+        {
+            <div class="card-image">
+                <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" alt="img">
+            </div>
+        }
+        else
+        {
+            <p class="content-text">@Model.Content</p>
+        }
+        <div class="popover popover-bottom">
+            by<a href="@Url.Action("Index", "Profile", new { UserId = Model.UserId })"> /u/@Model.User.Username</a>
+            <div class="popover-container">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <figure class="avatar">
+                            <img src="~/Content/img/reddit-avatar.png" alt="avatar">
+                            <i class="avatar-presence busy"></i>
+                        </figure>
+                        /u/@Model.User.Username
+                        @(Math.Round((DateTime.Now - Model.User.CreationDate).TotalDays))d ago
+                    </div>
+                    <div class="card-body text-center">
+                        @Model.User.Karma Karma
+                    </div>
+                    <div class="card-footer text-center">
+                        @if (Reddit.Models.AuthManager.LoggedUser != null &&
+                            Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
+                        {
+                            <a href="@Url.Action("BanUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                Ban
+                            </a>
+                            <a href="@Url.Action("MakeAdmin", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                Make Admin
+                            </a>
+                            <a href="@Url.Action("MuteUser", "SubReddit", new { SubRedditId = Model.SubRedditId, UserId = Model.UserId})" class="btn btn-primary btn-block">
+                                Mute
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
-            <span class="dot">&#183;</span>
-            <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
         </div>
+        <span class="dot">&#183;</span>
+        <span>@(Math.Round((DateTime.Now - Model.CreationDate).TotalHours))h ago</span>
+    </div>
     <div class="card-footer">
         <div class="post-info float-left d-inline-block">
             @if (Reddit.Models.AuthManager.LoggedUser == null)
@@ -98,18 +96,18 @@
             <div class="post-info__comments">
                 <span><a href="/Comments?PostId=@Model.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</a></span>
             </div>
+            @if (Reddit.Models.AuthManager.LoggedUser != null)
+            {
+                <div class="post-info__mod-tools">
+                    @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
+                    {
+                        { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
+                    }
+                </div>
+            }
         </div>
         <div class="post-share float-right d-inline-block">
             <button class="btn btn-success btn-block">share</button>
-        </div>
-        <div class="post-info d-inline-block">
-        @if (Reddit.Models.AuthManager.LoggedUser != null)
-        {
-            if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
-            {
-                { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
-            }
-        }
         </div>
     </div>
 </article>

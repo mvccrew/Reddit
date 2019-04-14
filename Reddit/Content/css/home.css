@@ -10,9 +10,17 @@
     margin-bottom: 1.5rem;
     overflow-wrap: break-word;
 }
+    .post .card-title {
+        font-weight: 600;
+    }
 
-    .post .card-subtitle {
-        color: #ebe6e6;
+    .post .content-text {
+        text-align: justify;
+    }
+
+    .post .content-img {
+        max-height: 25rem;
+        margin: 0 auto;
     }
 
     .post .dot {
@@ -28,7 +36,11 @@
     }
 
     .post-info__comments {
-        margin-left: 0.7rem;
+        margin: 0 0.7rem;
+    }
+    
+    .post-info__mod-tools > * {
+        margin-left: 0.4rem;
     }
 
 aside {
@@ -37,4 +49,18 @@ aside {
 
 aside a {
     display: block;
+}
+
+@media only screen and (min-width: 577px) and (max-width : 768px) {
+    .post-group {
+        float: none;
+        margin: 0 auto;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    .post-group {
+        float: none;
+        margin: 0 auto;
+    }
 }

@@ -75,6 +75,9 @@
                 </div>
             }
             @RenderBody()
+            <aside id="aside">
+                @RenderSection("aside", required: false)
+            </aside>
         </main>
         <footer class="footer">
             <p>
