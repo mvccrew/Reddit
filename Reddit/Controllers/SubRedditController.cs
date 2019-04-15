@@ -67,6 +67,7 @@ namespace Reddit.Controllers
         {
             SubRedditsRepository repo = new SubRedditsRepository();
             repo.BanUser(subRedditId, userId);
+            repo.UnSubscribe(subRedditId, userId);
 
             return Redirect(Request.UrlReferrer.ToString());
         }

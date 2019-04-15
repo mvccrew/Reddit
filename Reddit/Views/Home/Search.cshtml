@@ -15,7 +15,7 @@
         <div class="card-body">
             @if (Model.SubReddits.Count() > 0)
             {
-                foreach (var item in Model.SubReddits)
+                foreach (var item in Model.SubReddits.Take(3))
                 {
                     <div class="panel" id="div-panel">
                         <div class="panel-body" style="background-color:white" id="details">

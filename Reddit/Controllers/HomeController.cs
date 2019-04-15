@@ -25,7 +25,10 @@ namespace Reddit.Controllers
                 model.SubReddits = subRedditsRepository.GetAll(null)
                 .Where(x => x.SubscribedUsers.Any(b => b.Id == AuthManager.LoggedUser.Id)).OrderByDescending(c => c.Id).ToList();
             }
-
+            else
+            {
+                model.SubReddits = subRedditsRepository.GetAll(null);
+            }
             return View(model);
         }
 

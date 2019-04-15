@@ -1,6 +1,8 @@
 @model Reddit.ViewModels.Home.PostIndexVM
 @{
-    ViewBag.Title = "reddit";
+                /**/
+
+                ViewBag.Title = "reddit";
 }
 @section styles
 {
@@ -27,19 +29,110 @@
     }
 </section>
 
-@section aside {
-    @if (Reddit.Models.AuthManager.LoggedUser != null)
-    {
-        <a href="/Posts/Create">Create Post</a>
-        <a href="/SubReddit/Edit"> Create SubReddit</a>
+<aside id="aside" class="text-center" style="max-width:300px">
+        <div class="panel">
+            <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
+                <div class="panel-title text-bold float-left">Community Details</div>
+            </div>
+            <div class="panel-body" style="background-color:white" id="details">
+                @if (Reddit.Models.AuthManager.LoggedUser != null)
+                {
+                    <div class="tile">
+                        <div class="tile-content">
+                            <div class="tile-title text-bold "> Home</div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-content">
+                            <div class="tile-title">Your personal Reddit frontpage. Come here to check in with your favorite communities.</div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="tile">
+                        <div class="tile-content">
+                            <div class="tile-title text-bold "> /r/all</div>
+                        </div>
+                    </div>
+                    <div class="tile">
+                        <div class="tile-content">
+                            <div class="tile-title">The most active posts from all of Reddit. Come here to see new posts rising and be a part of the conversation.</div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="panel-footer" style="background-color:white">
+                <div class="tile-content" style="padding-bottom:10px;">
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Create", "Posts")">Create Post</a>
+                </div>
+
+                <div class="tile-content">
+                    <a class="btn btn-primary btn-block" href="@Url.Action("Edit","SubReddit")">Create community</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" style=" margin-top:100px;">
+            <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
+                <div class="panel-title text-bold">Most subscribed communities</div>
+            </div>
+            <div class="panel-body" style="background-color:white;" id="details">
+                @foreach (var item in Model.SubReddits.OrderByDescending(a => a.SubscribedUsers.Count()).Take(5))
+                {
+                    <div class="tile float-left" style="width:40%; display:inline-block;">
+                        <div class="tile-content">
+                            <div class="tile-title text-bold">/r/@item.Name </div>
+                        </div>
+                        <div class="tile-content ">
+                            <div class="tile-title text-normal text-grey">@item.SubscribedUsers.Count() Members</div>
+                        </div>
+                    </div>
+                    <div class="tile float-right" style="width:30%; margin-right:10px;">
+                        @if (Reddit.Models.AuthManager.LoggedUser != null)
+                        {
+                            if (item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
+                            && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == item.Id))
+                            {
+                                <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                    <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
+                                </div>
+
+                            }
+                            else
+                            {
+
+                                <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                    <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
+                            </div>
+                        }
+
+                    </div>
+                }
+            </div>
+            <div class="panel-footer" style="background-color:white">
+                <div class="tile-content">
+                    <a class="tile-title text-right" href="@Url.Action("Index","SubReddit")">View all</a>
+                </div>
+            </div>
+        </div>
+    
+</aside>
+<style>
+
+    #details > * {
+        margin: 15px 0;
     }
-    else
-    {
-        <a href="/Home/Login">
-            Create Post
-        </a>
-        <a href="/Home/Login">
-            Create SubReddit
-        </a>
+
+    #aside {
+        text-align: unset;
     }
-}
+</style>
