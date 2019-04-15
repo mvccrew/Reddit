@@ -13,9 +13,10 @@ namespace Reddit.Controllers
     public class CommentsController : Controller
     {
         // GET: Comments
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         public ActionResult Index(IndexVM model, int? PostId)
         {
-            if(PostId!=null)
+            if(PostId != null)
             {
                 model.PostId = (int)PostId;
             }

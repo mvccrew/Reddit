@@ -3,44 +3,69 @@
 @{
     ViewBag.Title = "ProfileIndex";
 }
-<div>
-    <table>
-        @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
-        <tr>
-            <td>
-                @if (Model.UserId == Reddit.Models.AuthManager.LoggedUser.Id)
-                {
-                <table>
-                    <tr>
-                        <td>
-                            <h1 style="font-size:26px;">@(Model.User == null ? "Nobody" : Model.User.FirstName)'s info</h1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>@Model.User.Username</td>
-                        <td>@Model.User.FirstName</td>
-                        <td>@Model.User.LastName</td>
-                        <td>@Model.User.Email</td>
-                        <td><a style="text-decoration: none; margin:0 6px" href="@Url.Action("Edit", "Profile", new { Id = Model.User.Id})">edit</a></td>
-                    </tr>
-                </table>
-                }
-                <table style="border: 1px solid black;">
-                    @foreach (var post in Model.Posts)
-                    {
-                        Html.RenderPartial("~/Views/Partials/_Post.cshtml", post);
-                    }
-                </table>
-                <table style="border: 1px solid black;">
-                    @foreach (var item in Model.Comments)
-                    {
-                        <tr>
-                            <td>@item.Rating</td>
-                            <td><a href="/Comments?PostId=@item.PostId">@item.Text</a></td>
-                        </tr>
-                    }
-                </table>
-            </td>
-        </tr>
-    </table>
-</div>
+
+@section styles
+{
+    <link href="~/Content/css/home.css" rel="stylesheet" />
+}
+
+@{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
+
+<section class="columns post-group" id="posts">
+    @foreach (var item in Model.Posts)
+    {
+        { Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
+    }
+    @foreach (var item in Model.Comments)
+    {
+        @item.Rating
+        <a href="/Comments?PostId=@item.PostId">@item.Text</a>
+    }
+</section>
+
+
+<aside id="aside" class="text-center">
+    <div class="panel" style="width:150%">
+        <div class="panel-header text-left" style="background-color: rgb(66, 176, 244)">
+            <div class="panel-title text-bold float-left">u/@Model.User.Username</div>
+        </div>
+        <div class="panel-nav">
+            <!-- navigation components: tabs, breadcrumbs or pagination -->
+        </div>
+        <div class="panel-body" style="background-color:white" id="details">
+            <div class="tile">
+                <div class="tile-content">
+                    <div class="tile-title text-bold ">Karma</div>
+                    <div class="tile-content">
+                        <div class="tile-title text-bold ">♦ @Model.User.Karma</div>
+                    </div>
+                </div>
+                <div class="tile-content">
+                    <div class="tile-title text-bold text-center ">Cake Day</div>
+                    <div class="tile-content">
+                        <div class="tile-title text-bold text-center">@Model.User.CreationDate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer" style="background-color:white">
+            <div class="tile-content">
+                <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts")">Create Post</a>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<style>
+
+    #details > * {
+        margin: 15px 0;
+    }
+
+    #aside {
+        text-align: unset;
+    }
+     .tile-icon a {
+        display: block;
+    }
+</style>

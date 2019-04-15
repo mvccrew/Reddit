@@ -15,13 +15,17 @@ namespace Reddit.ViewModels.Profile
 
         public string Username { get; set; }
 
+        public int Karma { get; set; }
+
+        public bool IsAdmin { get; set; }
+
         [Required(ErrorMessage = "This field is required!")]
         [DisplayName("Password: ")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
         [DisplayName("Retype password: ")]
-        [Compare("Password")]
+        [Compare("Password", ErrorMessage = "Both passwords must match!")]
         public string RetypePassword { get; set; }
 
         [Required(ErrorMessage = "This field is required!")]
@@ -45,6 +49,8 @@ namespace Reddit.ViewModels.Profile
             item.FirstName = FirstName;
             item.LastName = LastName;
             item.Email = Email;
+            item.Karma = Karma;
+            item.IsAdmin = IsAdmin;
         }
 
         public override void PopulateModel(User item)
@@ -55,6 +61,8 @@ namespace Reddit.ViewModels.Profile
             FirstName = item.FirstName;
             LastName = item.LastName;
             Email = item.Email;
+            Karma = item.Karma;
+            IsAdmin = item.IsAdmin;
         }
     }
 }

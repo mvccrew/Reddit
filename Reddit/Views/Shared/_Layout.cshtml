@@ -27,17 +27,28 @@
                     <img src="~/Content/img/reddit.png" alt="logo">
                 </a>
                 <select class="subreddit-dropdown form-select" onchange="location = this.value;">
-                    <option disabled>Reddit feeds</option>
+                    <option disabled>REDDIT FEEDS</option>
                     <option value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
                     @if (AuthManager.LoggedUser != null)
                     {
-                        <option disabled>Subreddits</option>
+                        <option disabled>SUBREDDITS</option>
                         foreach (SubReddit subreddit in AuthManager.LoggedUser.SubscribedToSubReddits)
                         {
-                            <option value="/Posts?SubRedditId=@subreddit.Id">@subreddit.Name</option>
+                            <option value="/Posts?SubRedditId=@subreddit.Id">/r/@subreddit.Name</option>
                         }
+                        if (AuthManager.LoggedUser.AdminToSubReddits.Count() > 0)
+                        {
+                            <option disabled>MODERATING SUBREDDITS</option>
+                            foreach (SubReddit sr in AuthManager.LoggedUser.AdminToSubReddits)
+                            {
+                                <option value="/Posts?SubRedditId=@sr.Id">/r/@sr.Name</option>
+                            }
+                        }
+                        <option disabled>OTHER</option>
+                        <option value="@Url.Action("Edit", "Profile", new { Id = AuthManager.LoggedUser.Id})">User Setting</option>
                     }
+
                 </select>
             </section>
             <section class="navbar-center">

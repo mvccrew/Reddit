@@ -108,7 +108,7 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAllSubreddits(SubRedditsVM model,int? userId)
+        public ActionResult GetAllSubreddits(SubRedditsVM model, int? userId)
         {
             SubRedditsRepository repo = new SubRedditsRepository();
             if (userId == null)
@@ -119,7 +119,7 @@ namespace Reddit.Controllers
         }
 
         [HttpGet]
-        public ActionResult Search(SearchVM model,int? postId,int?subredditId)
+        public ActionResult Search(SearchVM model, int? postId, int? subredditId)
         {
             SubRedditsRepository subRepo = new SubRedditsRepository();
             PostsRepository postRepo = new PostsRepository();
