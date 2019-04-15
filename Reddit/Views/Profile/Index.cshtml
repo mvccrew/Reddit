@@ -25,7 +25,7 @@
 
 
 <aside id="aside" class="text-center">
-    <div class="panel" style="width:150%">
+    <div class="panel">
         <div class="panel-header text-left" style="background-color: rgb(66, 176, 244)">
             <div class="panel-title text-bold float-left">u/@Model.User.Username</div>
         </div>
@@ -54,6 +54,47 @@
             </div>
         </div>
     </div>
+
+    <div class="panel">
+        <div class="panel-header text-left" style="background-color: rgb(255, 255, 255)">
+            <div class="panel-title text-bold float-left">YOU'RE A MODERATOR OF THESE COMMUNITIES</div>
+        </div>
+        <div class="panel-nav">
+            <!-- navigation components: tabs, breadcrumbs or pagination -->
+        </div>
+        <div class="panel-body" style="background-color:white" id="details">
+            <div class="tile">
+                @if (Model.User.AdminToSubReddits.Count() < 1)
+                {
+                    <div class="tile-content">
+                        <div class="tile-title text-bold ">none :(</div>
+                    </div>
+                }
+                @foreach (DataAccess.Entities.SubReddit sr in Model.User.AdminToSubReddits)
+                {
+                    <div class="tile-content">
+                        <div class="tile-title text-bold "><a href="@Url.Action("Index", "Posts", new { SubRedditId = sr.Id})">r/@sr.Name</a></div>
+                        <div class="tile-content">
+                            <div class="tile-title text-bold ">@sr.SubscribedUsers.Count() Members</div>
+                        </div>
+                    </div>
+                    if (!(sr.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id
+                                    && m.SubscribedToSubReddits.Any(srr => srr.Id == sr.Id))))
+                    {
+                        <div class="tile-content" style="padding-bottom:10px;">
+                            <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = sr.Id })">Subscribe</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="tile-content" style="padding-bottom:10px;">
+                            <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = sr.Id })">Unsubscribe</a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </aside>
 
 <style>
@@ -64,8 +105,12 @@
 
     #aside {
         text-align: unset;
+        max-width: 17rem;
     }
-     .tile-icon a {
+    #aside .panel:nth-child(2){
+        margin-top: 2rem;
+    }
+    .tile-icon a {
         display: block;
     }
 </style>

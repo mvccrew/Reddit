@@ -94,9 +94,8 @@ namespace Reddit.Controllers
             {
                 repo.Subscribe(id, AuthManager.LoggedUser.Id);
             }
-            
 
-            return RedirectToAction("Index", "Posts", new { SubRedditId = id });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ActionResult UnSubscribe(int id)
@@ -105,7 +104,7 @@ namespace Reddit.Controllers
 
             repo.UnSubscribe(id,AuthManager.LoggedUser.Id);
 
-            return RedirectToAction("Index", "Posts", new { SubRedditId = id });
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
     }

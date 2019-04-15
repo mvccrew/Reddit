@@ -69,29 +69,6 @@ namespace Reddit.Controllers
                                         && sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)))))
                                     ? true : false
                     });
-
-                /*if (!((AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.Id == subReddit.Id 
-                    && sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id))) ||
-                    (AuthManager.LoggedUser.MutedInSubReddits.Any(sr => sr.Id == subReddit.Id 
-                    && sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)))))
-                model.SubRedditsList.Add(
-                    new SelectListItem()
-                    {
-                        Value = subReddit.Id.ToString(),
-                        Text = "r/" + subReddit.Name,
-                        Selected = subReddit.Id == model.SelectedSubReddit
-                    });
-                else
-                {
-                    model.SubRedditsList.Add(
-                    new SelectListItem()
-                    {
-                        Value = subReddit.Id.ToString(),
-                        Text = "r/" + subReddit.Name + " MUTED",
-                        Selected = subReddit.Id == model.SelectedSubReddit,
-                        Disabled = true
-                    });
-                }*/
             }
 
             return View(model);
