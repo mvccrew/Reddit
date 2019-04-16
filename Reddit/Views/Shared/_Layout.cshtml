@@ -26,7 +26,7 @@
                 <a class="brand" href="/Home/Index">
                     <img src="~/Content/img/reddit.png" alt="logo">
                 </a>
-                <select class="subreddit-dropdown form-select" onchange="location = this.value;">
+                <select class="subreddit-dropdown form-select" onchange="javascript:location.href = this.value;" id="mySelect">
                     <option disabled>REDDIT FEEDS</option>
                     <option value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
@@ -91,6 +91,7 @@
             <p>
                 &copy; 2019 mvccrew OOD
             </p>
+            <p id="demo"></p>
         </footer>
     </div>
     @if (AuthManager.LoggedUser == null)

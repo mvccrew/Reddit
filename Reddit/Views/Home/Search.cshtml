@@ -15,7 +15,7 @@
         <div class="card-body">
             @if (Model.SubReddits.Count() > 0)
             {
-                foreach (var item in Model.SubReddits.Take(3))
+                foreach (var item in Model.SubReddits)
                 {
                     <div class="panel" id="div-panel">
                         <div class="panel-body" style="background-color:white" id="details">
@@ -33,20 +33,41 @@
                                 </div>
                             </div>
                             <div class="tile float-right" style="width:13%">
-                                @if (Reddit.Models.AuthManager.LoggedUser!=null&&item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
+                                @if (Reddit.Models.AuthManager.LoggedUser != null && item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
                             && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == item.Id))
                                 {
-                                <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
-                                    <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
-                                </div>
+                                    <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                        <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Unsubscribe</a>
+                                    </div>
                                 }
                                 else
                                 {
-                                    
+
                                     <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
                                         <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a>
                                     </div>
                                 }
+                            </div>
+                        </div>
+                    </div>
+                }
+                foreach (var item in Model.Users)
+                {
+                    <div class="panel" id="div-panel">
+                        <div class="panel-body" style="background-color:white" id="details">
+                            <div class="tile float-left" style="width:27%">
+                                <div class="tile-content ">
+                                    <div class="tile-title text-bold"> /u/@item.Username</div>
+                                </div>
+                                <div class="tile-content">
+                                    <div class="tile-title text-normal text-gray">@item.Karma Karma</div>
+                                </div>
+                            </div>
+                            <div class="tile float-right" style="width:13%">
+                                    <div class="tile-content" style="padding-bottom:10px;margin-top:10px;">
+                                        <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Follow</a>
+                                    </div>
+                                
                             </div>
                         </div>
                     </div>

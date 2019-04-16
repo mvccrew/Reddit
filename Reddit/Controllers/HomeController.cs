@@ -5,6 +5,7 @@ using Reddit.ViewModels.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -124,20 +125,53 @@ namespace Reddit.Controllers
         [HttpGet]
         public ActionResult Search(SearchVM model, int? postId, int? subredditId)
         {
+            model.SubReddits = new List<SubReddit>();
+            model.Users = new List<User>();
             SubRedditsRepository subRepo = new SubRedditsRepository();
             PostsRepository postRepo = new PostsRepository();
-            model.SubReddits = subRepo.GetAll(a => a.Name.Contains(model.Filter)).ToList();
+            UsersRepository userRepo = new UsersRepository();
+            List<SubReddit> subs = subRepo.GetAll(a => a.Name.Contains(model.Filter)).OrderByDescending(a => a.SubscribedUsers.Count()).ToList();
+            List<User> users = userRepo.GetAll(a => a.Username.Contains(model.Filter)).OrderByDescending(a => a.Karma).ToList();
 
+           // model.SubReddits = subRepo.GetAll(a => a.Name.Contains(model.Filter)).ToList();
+
+            var count = 0;
+                Thread ta = new Thread(new ThreadStart(UsersLoop));
+                Thread tb = new Thread(new ThreadStart(SubLoop));
+            ta.Start();
+            tb.Start();
+
+            ta.Join();
+            tb.Join();
+
+                void UsersLoop()
+                {
+                Thread.Sleep(400);
+                    foreach (var item in users)
+                    {
+                    
+                    if (count == 3) { break; }
+                        model.Users.Add(item);
+                        count++;
+                }
+                }
+
+                 void SubLoop()
+                    {
+                    Thread.Sleep(390);
+                        foreach(var item in subs)
+                        {
+
+                        if (count == 3) { break; }
+                            model.SubReddits.Add(item);
+                            count++;
+                }
+                    }
             model.Posts = postRepo.GetAll(a => a.Title.ToLower().Contains(model.Filter.ToLower()) ||
             a.SubReddit.Name.ToLower().Contains(model.Filter.ToLower()) ||
             a.Comments.Any(b => b.Text.ToLower().Contains(model.Filter.ToLower())) ||
             a.Content.ToLower().Contains(model.Filter.ToLower())).OrderByDescending(b => b.Rating).ToList();
             return View(model);
         }
-        /*
-         * a => a.Title.Contains(model.Filter) ||
-            a.SubReddit.Name.Contains(model.Filter) ||
-            a.Comments.Any( b => b.Text.Contains(model.Filter))
-         */
     }
 }
