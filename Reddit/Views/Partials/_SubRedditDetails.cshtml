@@ -1,98 +1,62 @@
 ﻿@model Reddit.ViewModels.Posts.IndexVM
 
-<aside id="aside" class="text-center" style="max-width:300px">
-    <div class="panel" style="width:150%">
-        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
-            <div class="panel-title text-bold float-left">Community Details</div>
-            @if (Reddit.Models.AuthManager.LoggedUser.AdminToSubReddits.Where(a => a.Admins.Any(b => b.Id == Reddit.Models.AuthManager.LoggedUser.Id)).Count() > 0)
-            {
-                <div style="float:right" class="panel-title float-righ">Mod Tools</div>
-            }
+<aside id="subreddit-aside">
+    <div class="panel main-panel">
+        <div class="panel-header bg-warning">
+            <div class="panel-title">community details</div>
         </div>
-        <div class="panel-nav">
-            <!-- navigation components: tabs, breadcrumbs or pagination -->
-        </div>
-        <div class="panel-body" style="background-color:white" id="details">
-            <div class="tile">
+        <div class="panel-body">
+            <div class="sub-name tile tile-centered">
+                <div class="tile-icon">
+                    <i class="fas fa-globe text-warning"></i>
+                </div>
                 <div class="tile-content">
-                    <div class="tile-title text-bold "> /r/@Model.SubReddit.Name</div>
+                    <h5>/r/@Model.SubReddit.Name</h5>
                 </div>
             </div>
-            <div class="tile">
+            <div class="members tile tile-centered">
                 <div class="tile-content">
-                    <div class="tile-title text-bold">Members </div>
-                </div>
-                <div class="tile-content">
-                    <div class="tile-title text-bold text-right">@Model.SubReddit.SubscribedUsers.Count()</div>
+                    <p>@Model.SubReddit.SubscribedUsers.Count()</p>
+                    <p style="margin-top: -0.25rem;" class="text-gray"><small>members</small></p>
                 </div>
             </div>
-            <div class="tile">
-                <div class="tile-content">
-                    <div class="tile-title">@Model.SubReddit.Description</div>
-                </div>
-            </div>
+            <p>@Model.SubReddit.Description</p>
         </div>
-        <div class="panel-footer" style="background-color:white">
+        <div class="panel-footer">
             @if (!(Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
                 && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == Model.SubReddit.Id)))
             {
-                <div class="tile-content" style="padding-bottom:10px;">
-                    <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Subscribe</a>
-                </div>
+                <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">subscribe</a>
             }
             else
             {
-                <div class="tile-content" style="padding-bottom:10px;">
-                    <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">Unsubscribe</a>
-                </div>
+                <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">unsubscribe</a>
             }
-            <div class="tile-content">
-                <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts")">Create Post</a>
-            </div>
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create","Posts")">create post</a>
         </div>
     </div>
 
-    <div class="panel" style="width:150%; margin-top:100px;">
-        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
-            <div class="panel-title text-bold">/R/@Model.SubReddit.Name Rules</div>
+    <div class="panel main-panel">
+        <div class="panel-header bg-warning">
+            <div class="panel-title">/r/@Model.SubReddit.Name rules</div>
         </div>
-        <div class="panel-body" style="background-color:white" id="details">
-            <div class="tile">
-                <div class="tile-content">
-                    <div class="tile-title text-bold">@Model.SubReddit.Rules</div>
-                </div>
-            </div>
+        <div class="panel-body">
+            <p style="margin: 0 0 0.5rem 0">@Model.SubReddit.Rules</p>
         </div>
     </div>
 
-    <div class="panel" style="width:150%; margin-top:100px;">
-        <div class="panel-header text-left" style="background-color: rgb(221, 189, 55);">
-            <div class="panel-title text-bold">Moderators of /R/@Model.SubReddit.Name</div>
+    <div class="panel main-panel">
+        <div class="panel-header bg-warning">
+            <div class="panel-title">moderators of /r/@Model.SubReddit.Name</div>
         </div>
-        <div class="panel-body" style="background-color:white" id="details">
+        <div class="panel-body">
             @foreach (var item in Model.SubReddit.Admins)
             {
-                <div class="tile">
-                    <div class="tile-content">
-                        <div class="tile-title text-bold">/u/@item.Username</div>
-                    </div>
-                </div>
+                <a href="/Profile?UserId=@item.Id" class="text-dark">/u/@item.Username</a>
             }
         </div>
-        <div class="panel-footer" style="background-color:white">
-            <div class="tile-content">
-                <a class="tile-title text-right" href="@Url.Action("Create","Posts")">View All Moderators</a>
-            </div>
+        <div class="panel-footer">
+            <a href="@Url.Action("Create","Posts")">View All Moderators</a>
         </div>
     </div>
 </aside>
-<style>
-
-    #details > * {
-        margin: 15px 0;
-    }
-
-    #aside {
-        text-align: unset;
-    }
-</style>

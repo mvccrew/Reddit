@@ -6,21 +6,21 @@
 
 @section styles
 {
-    <link href="~/Content/css/home.css" rel="stylesheet" />
+    <link href="~/Content/css/subreddit.css" rel="stylesheet" />
 }
 
-    @Html.HiddenFor(m => m.UserId)
-    @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-    @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
-    <section class="columns post-group" id="posts">
-        <!-- <br /><hr />@Model.SubReddit.Name <br /><hr />-->
-        @foreach (var item in Model.Posts)
+@Html.HiddenFor(m => m.UserId)
+@{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+@{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
+<section class="columns post-group">
+    <!-- <br /><hr />@Model.SubReddit.Name <br /><hr />-->
+    @foreach (var item in Model.Posts)
+    {
+        if (item.SubRedditId == Model.SubRedditId)
         {
-            if (item.SubRedditId == Model.SubRedditId)
-            {
-                { Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
-            }
+            { Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
         }
-    </section>
+    }
+</section>
 
-    @{ Html.RenderPartial("~/Views/Partials/_SubRedditDetails.cshtml", Model); }
+@{ Html.RenderPartial("~/Views/Partials/_SubRedditDetails.cshtml", Model); }

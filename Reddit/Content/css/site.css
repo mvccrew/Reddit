@@ -80,7 +80,6 @@ span.field-validation-error {
     margin: 4rem auto 2rem;
     max-width: 1000px;
     display: flex;
-    flex-flow: row wrap;
     justify-content: center;
 }
 
@@ -106,6 +105,9 @@ span.field-validation-error {
     html {
         font-size: 16px;
     }
+    #content-container {
+        padding: 0 1.5rem;
+    }
 }
 
 @media only screen and (min-width: 577px) and (max-width : 768px) {
@@ -115,6 +117,9 @@ span.field-validation-error {
     aside {
         display: none;
     }
+    #content-container {
+        padding: 0 1.5rem;
+    }
 }
 
 @media only screen and (max-width : 576px) {
@@ -123,5 +128,8 @@ span.field-validation-error {
     }
     aside {
         display: none;
+    }
+    #content-container {
+        padding: 0 1.5rem;
     }
 }

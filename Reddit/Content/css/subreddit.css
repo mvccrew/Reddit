@@ -1,0 +1,64 @@
+﻿@import url('components/post.css');
+
+.post-group {
+    flex-basis: 32rem;
+    margin: 0;
+}
+
+#subreddit-aside {
+    flex-basis: 15.5rem;
+    margin-left: 1.2rem;
+}
+
+#subreddit-aside .main-panel {
+    margin-bottom: 1.5rem;
+}
+
+    #subreddit-aside .main-panel .panel-header {
+        padding: 0.4rem 0 0.4rem 0.6rem;
+    }
+
+    #subreddit-aside .main-panel:not(.panel-header) {
+        background-color: #fff;
+    }
+
+    #subreddit-aside .main-panel .panel-body {
+        margin-top: 0.6rem;
+    }
+
+        #subreddit-aside .main-panel:first-child .panel-body p {
+            margin: 0.6rem 0 0.2rem 0;
+        }
+
+    #subreddit-aside .sub-name .tile-icon {
+        font-size: 1.5rem;
+    }
+
+    #subreddit-aside .sub-name .tile-content {
+        padding-top: 0.2rem;
+    }
+
+    #subreddit-aside .members {
+        margin-top: 0.6rem;
+    }
+
+    #subreddit-aside .members .tile-content p {
+        margin: 0;
+    }
+
+    #subreddit-aside .main-panel .panel-footer a:nth-child(2) {
+        margin-top: 0.4rem;
+    }
+
+    #subreddit-aside .secondary-panel {
+        background: #fff;
+        margin-top: 1.5rem;
+    }
+
+        #subreddit-aside .secondary-panel .panel-body .tile {
+            margin: 0.2rem 0;
+        }
+
+        #subreddit-aside .secondary-panel .tile-icon {
+            font-size: 1.5rem;
+        }

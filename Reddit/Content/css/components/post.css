@@ -1,0 +1,38 @@
+﻿.post {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    overflow-wrap: break-word;
+}
+
+    .post .card-title {
+        font-weight: 600;
+    }
+
+    .post .content-text {
+        text-align: justify;
+    }
+
+    .post .content-img {
+        max-height: 25rem;
+        margin: 0 auto;
+    }
+
+    .post .dot {
+        position: relative;
+        top: 5px;
+        font-size: 1.4rem;
+    }
+
+    .post .post-info {
+        font-size: 0.9rem;
+        padding-top: 9px;
+        display: flex;
+    }
+
+.post-info__comments {
+    margin: 0 0.7rem;
+}
+
+.post-info__mod-tools > * {
+    margin-left: 0.4rem;
+}
