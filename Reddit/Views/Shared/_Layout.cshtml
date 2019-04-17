@@ -94,6 +94,22 @@
             <p id="demo"></p>
         </footer>
     </div>
+    <script>
+        window.onload = function () {
+            var selItem = sessionStorage.getItem("SelItem");
+
+            if (!location.href.includes(selItem)) {
+                document.getElementsByClassName('subreddit-dropdown')[0].selectedIndex = 1;
+                return;
+            }
+
+            $('.subreddit-dropdown').val(selItem);
+        }
+        $('.subreddit-dropdown').change(function () {
+            var selVal = $(this).val();
+            sessionStorage.setItem("SelItem", selVal);
+        });
+    </script>
     @if (AuthManager.LoggedUser == null)
     {
         <script src="~/Scripts/authentication-modal.js"></script>
