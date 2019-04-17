@@ -1,11 +1,10 @@
 ﻿@model Reddit.ViewModels.Posts.EditVM
 @{
-    /**/
-
     ViewBag.Title = "Create";
 }
 @section styles {
     <style>
+
 
 
         .tab-pane {
@@ -17,76 +16,77 @@
             }
     </style>
 }
-<ul id="post-tab" class="tab tab-block">
-    <li class="tab-item active">
-        <a href="#home">Post</a>
-    </li>
-    <li class="tab-item">
-        <a href="#profile">Image&Video</a>
-    </li>
-    <li class="tab-item">
-        <a href="#messages">Link</a>
-    </li>
-</ul>       
- @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-
-<div class="tab-content">
-    @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.SubRedditId)
-        <div class="tab-pane active" id="home">
-            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
-            <input id="PostTypeId" name="PostTypeId" type="hidden" value="1" />
-            <div class="form-group">
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
+<section>
+    <ul id="post-tab" class="tab tab-block">
+        <li class="tab-item active">
+            <a href="#home">Post</a>
+        </li>
+        <li class="tab-item">
+            <a href="#profile">Image&Video</a>
+        </li>
+        <li class="tab-item">
+            <a href="#messages">Link</a>
+        </li>
+    </ul>
+    @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+    <div class="tab-content">
+        @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.SubRedditId)
+            <div class="tab-pane active" id="home">
+                <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
+                <input id="PostTypeId" name="PostTypeId" type="hidden" value="1" />
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-input", @placeholder = "Text (optional)", @rows = "3" })
+                </div>
+                <p>    <input formaction="Edit" type="submit" value="Save" /></p>
             </div>
-            <div class="form-group">
-                @Html.TextAreaFor(m => m.Content, new { @class = "form-input", @placeholder = "Text (optional)", @rows = "3" })
+        }
+        @using (Html.BeginForm("Edit", "Posts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.SubRedditId)
+            <div class="tab-pane" id="profile">
+                <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
+                <input id="PostTypeId" name="PostTypeId" type="hidden" value="2" />
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
+                </div>
+                <div class="form-group">
+                    <input type="file" name="image" style="width:150px;" /><br /><br />
+                </div>
+                <p>    <input formaction="Edit" type="submit" value="Save" /></p>
             </div>
-            <p>    <input formaction="Edit" type="submit" value="Save" /></p>
-        </div>
-    }
-    @using (Html.BeginForm("Edit", "Posts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.SubRedditId)
-        <div class="tab-pane" id="profile">
-            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
-            <input id="PostTypeId" name="PostTypeId" type="hidden" value="2" />
-            <div class="form-group">
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
+            @ViewBag.Message
+        }
+        @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.SubRedditId)
+            <div class="tab-pane" id="messages">
+                <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
+                <input id="PostTypeId" name="PostTypeId" type="hidden" value="3" />
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
+                </div>
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Content, new { @class = "form-input", @placeholder = "Url", @rows = "3" })
+                </div>
+                <p>    <input formaction="Edit" type="submit" value="Save" /></p>
             </div>
-            <div class="form-group">
-                <input type="file" name="image" style="width:150px;" /><br /><br />
-            </div>
-            <p>    <input formaction="Edit" type="submit" value="Save" /></p>
-        </div>
-        @ViewBag.Message
-    }
-    @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.SubRedditId)
-        <div class="tab-pane" id="messages">
-            <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
-            <input id="PostTypeId" name="PostTypeId" type="hidden" value="3" />
-            <div class="form-group">
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-input", @placeholder = "Title" })
-            </div>
-            <div class="form-group">
-                @Html.TextAreaFor(m => m.Content, new { @class = "form-input", @placeholder = "Url", @rows = "3" })
-            </div>
-            <p>    <input formaction="Edit" type="submit" value="Save" /></p>
-        </div>
-    }
-</div>
+        }
+    </div>
+</section>
 @section scripts {
     <script>
         function onTabClick(event) {

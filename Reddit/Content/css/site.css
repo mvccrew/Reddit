@@ -21,6 +21,10 @@ span.field-validation-error {
     margin-top: 0.25rem;
 }
 
+section:not([class]) {
+    flex: 1;
+}
+
 #main-container {
     display: flex;
     flex-direction: column;

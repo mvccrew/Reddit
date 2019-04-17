@@ -3,7 +3,7 @@
     ViewBag.Title = "Users";
 }
 
-<div>
+<section>
     <h1>Users</h1>
     <a style="text-decoration: none; float:right" href="@Url.Action("Edit", "Users")"><b>Create new</b></a>
     <form class="form-horizontal" action="/Users/Index" method="get">
@@ -89,4 +89,4 @@
         <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
         <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
     </select>
-</div>
+</section>

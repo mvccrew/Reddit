@@ -49,16 +49,3 @@
     #subreddit-aside .main-panel .panel-footer a:nth-child(2) {
         margin-top: 0.4rem;
     }
-
-    #subreddit-aside .secondary-panel {
-        background: #fff;
-        margin-top: 1.5rem;
-    }
-
-        #subreddit-aside .secondary-panel .panel-body .tile {
-            margin: 0.2rem 0;
-        }
-
-        #subreddit-aside .secondary-panel .tile-icon {
-            font-size: 1.5rem;
-        }

@@ -5,25 +5,27 @@
 }
 
 
-@{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-@using (Html.BeginForm("Edit", "Comments", FormMethod.Post, new { @style = "min-width: 100%"}))
-{
+<section>
+    @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+    @using (Html.BeginForm("Edit", "Comments", FormMethod.Post, new { @style = "min-width: 100%" }))
+    {
 
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-    @Html.HiddenFor(model => model.Id)
-    @Html.HiddenFor(model => model.PostId)
-    @Html.HiddenFor(model => model.UserId)
-    @Html.HiddenFor(model => model.ParentCommentId)
-    <div class="form-group">
-        @Html.LabelFor(model => model.Text, new { @class = "d-inline-block form-label" })
-        @Html.ValidationMessageFor(model => model.Text, null, new { @class = "text-error float-right" })
-        @Html.TextAreaFor(model => model.Text, new { @class = "form-input", placeholder = "Text" })
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary"/>
-        <a class="btn btn-secondary" href="@Url.Action("Index", "Comments", new { PostId = Model.PostId })">Cancel</a>
-    </div>
-}
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.PostId)
+        @Html.HiddenFor(model => model.UserId)
+        @Html.HiddenFor(model => model.ParentCommentId)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Text, new { @class = "d-inline-block form-label" })
+            @Html.ValidationMessageFor(model => model.Text, null, new { @class = "text-error float-right" })
+            @Html.TextAreaFor(model => model.Text, new { @class = "form-input", placeholder = "Text" })
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Comments", new { PostId = Model.PostId })">Cancel</a>
+        </div>
+    }
+</section>
 
