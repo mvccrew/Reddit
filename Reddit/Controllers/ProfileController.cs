@@ -40,7 +40,7 @@ namespace Reddit.Controllers
             EditVM model = new EditVM();
             model.PopulateModel(item);
 
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_EditProfile.cshtml", model);
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@ namespace Reddit.Controllers
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError(String.Empty, "Something went wrong :(");
-                return View(model);
+                return PartialView("~/Views/Partials/Edits/_EditProfile.cshtml", model);
             }
 
             UsersRepository repo = new UsersRepository();
@@ -59,7 +59,7 @@ namespace Reddit.Controllers
 
             repo.Save(item);
 
-            return RedirectToAction("Index", "Profile", new { UserId = item.Id });
+            return Content("");
         }
 
     }

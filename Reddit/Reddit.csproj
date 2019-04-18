@@ -176,9 +176,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\SubReddit\Edit.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditSubreddit.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditProfile.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Partials\Edits\_EditUser.cshtml" />
     <Content Include="Views\SubReddit\Index.cshtml" />

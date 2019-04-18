@@ -27,7 +27,7 @@ namespace Reddit.Controllers
             model.PopulateModel(item);
             PopulateEditVM(model);
 
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_EditSubreddit.cshtml", model);
         }
 
         [AuthenticationFilter(RequiredKarma = 0)]
@@ -36,7 +36,7 @@ namespace Reddit.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("~/Views/Partials/Edits/_EditSubreddit.cshtml", model);
             }
 
             SubRedditsRepository repo = new SubRedditsRepository();
@@ -51,7 +51,7 @@ namespace Reddit.Controllers
             repo.AddAdminToSubReddit(model.Id, model.UserId);
             repo.Subscribe(model.Id, model.UserId);
 
-            return RedirectToAction("Index", "SubReddit");
+            return Content("");
         }
 
         [AuthenticationFilter(RequiredKarma = int.MinValue)]

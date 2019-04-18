@@ -26,7 +26,7 @@
                 <a class="brand" href="/Home/Index">
                     <img src="~/Content/img/reddit.png" alt="logo">
                 </a>
-                <select class="subreddit-dropdown form-select" onchange="javascript:location.href = this.value;" id="mySelect">
+                <select class="subreddit-dropdown form-select">
                     <option disabled>REDDIT FEEDS</option>
                     <option value="@Url.Action("Index", "Home")">Home</option>
                     <option value="@Url.Action("GetAllSubreddits", "Home")">All</option>
@@ -46,7 +46,7 @@
                             }
                         }
                         <option disabled>OTHER</option>
-                        <option value="@Url.Action("Edit", "Profile", new { Id = AuthManager.LoggedUser.Id})">User Setting</option>
+                        <option value="/Profile?UserId=@AuthManager.LoggedUser.Id">User profile</option>
                     }
 
                 </select>
@@ -96,6 +96,12 @@
         </footer>
     </div>
     <script>
+        $('.subreddit-dropdown').change(function () {
+            var selVal = $(this).val();
+            sessionStorage.setItem("SelItem", selVal);
+            location.href = $(this).val();
+        });
+
         window.onload = function () {
             var selItem = sessionStorage.getItem("SelItem");
 
@@ -106,10 +112,6 @@
 
             $('.subreddit-dropdown').val(selItem);
         }
-        $('.subreddit-dropdown').change(function () {
-            var selVal = $(this).val();
-            sessionStorage.setItem("SelItem", selVal);
-        });
     </script>
     @if (AuthManager.LoggedUser == null)
     {

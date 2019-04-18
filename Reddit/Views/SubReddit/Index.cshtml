@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "SubRedditsIndex";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section>
@@ -24,7 +23,7 @@
                     {
                         <tr>
                             <td>@item.Name</td>
-                            <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Edit", "SubReddit", new { Id = item.Id })">Edit</a></td>
+                            <td><button class="edit-btn btn" data-id="@item.Id" data-action="/SubReddit/Edit">Edit</button></td>
                             <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
                             @if (Reddit.Models.AuthManager.LoggedUser == null)
                             {
