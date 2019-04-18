@@ -1,0 +1,41 @@
+﻿@model Reddit.ViewModels.Comments.EditVM
+
+<div class="modal edit-modal" id="editComment">
+    <a href="#" class="modal-overlay edit-modal-close" aria-label="Close"></a>
+    <div class="modal-container">
+        <div class="modal-header">
+            <a href="#" class="btn btn-clear float-right edit-modal-close" aria-label="Close"></a>
+            <div class="modal-title h5">Edit comment</div>
+        </div>
+        <div class="modal-body">
+            <div class="content">
+                @using (Ajax.BeginForm("Edit", "Comments", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "edit-container",
+                    OnSuccess = "editErrors"
+                }, new { id = "edit-comment-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.PostId)
+                    @Html.HiddenFor(model => model.UserId)
+                    @Html.HiddenFor(model => model.ParentCommentId)
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Text, new { @class = "d-inline-block form-label" })
+                        @Html.ValidationMessageFor(model => model.Text, null, new { @class = "text-error float-right" })
+                        @Html.TextAreaFor(model => model.Text, new { @class = "form-input", placeholder = "Text" })
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="modal-footer">
+            <p class="float-left">Be careful with what you're editing!</p>
+            <button class="btn btn-primary" form="edit-comment-form" type="submit">save</button>
+        </div>
+    </div>
+</div>
+

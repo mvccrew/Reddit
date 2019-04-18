@@ -1,6 +1,6 @@
 ﻿@model DataAccess.Entities.Post
 
-    <a href="@Url.Action("Edit", "Posts", new { Id = Model.Id, SubRedditId = Model.SubRedditId })">Edit</a>
+    <a class="edit-btn" href="#" data-action="/Posts/Edit" data-id="@Model.Id">Edit</a>
     <a class="text-error" href="@Url.Action("Delete", "Posts", new { Id = Model.Id })">Delete</a>
     @if (!Model.IsApproved)
     {

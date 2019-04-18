@@ -180,13 +180,13 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Partials\_EditUser.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditUser.cshtml" />
     <Content Include="Views\SubReddit\Index.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
-    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditPost.cshtml" />
     <Content Include="Views\Home\GetAllSubreddits.cshtml" />
     <Content Include="Views\Comments\Index.cshtml" />
-    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditComment.cshtml" />
     <Content Include="Views\Partials\_SearchBar.cshtml" />
     <Content Include="Views\Partials\_Vote.cshtml" />
     <Content Include="Views\Partials\_Login.cshtml" />

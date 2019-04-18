@@ -21,11 +21,22 @@ var triggerEditModal = () => {
         e.preventDefault();
         var id = $(this).data('id');
         var action = $(this).data('action');
-        $.get(`${action}`, { id: id != null ? id : null })
-            .done(function (data) {
-                $("#edit-container").empty().html(data);
-                $(".edit-modal").addClass("active");
-            });
+        if ($(this).hasClass('edit-comment')) {
+            var postId = $(this).data('post-id');
+            var parentCommentId = $(this).data('parent-id');
+            $.get(`${action}`, { id: id, PostId: postId, parentCommentId: parentCommentId })
+                .done(function (data) {
+                    $("#edit-container").empty().html(data);
+                    $(".edit-modal").addClass("active");
+                });
+        }
+        else {
+            $.get(`${action}`, { id: id })
+                .done(function (data) {
+                    $("#edit-container").empty().html(data);
+                    $(".edit-modal").addClass("active");
+                });
+        }
     });
 
     $(document).on('click', '.edit-modal-close', function () {

@@ -14,7 +14,6 @@
 }
 <section class="columns post-group" id="posts">
     @{ Html.RenderPartial("~/Views/Partials/_Post.cshtml", Model.Post); }
-    @{ Html.RenderPartial("~/Views/Comments/Edit.cshtml", new Reddit.ViewModels.Comments.EditVM()); }
 
     @foreach (var item in Model.Items)
     {
@@ -31,7 +30,7 @@
             </div>
             <div class="tile-action">
                 <a class="btn btn-primary">Reply</a>
-                <a class="btn btn-primary">Edit</a>
+                <a data-action="/Comments/Edit" data-id="@item.Id" data-post-id="@item.PostId" data-parent-id="@item.ParentCommentId" class="btn btn-primary edit-btn edit-comment">Edit</a>
                 <a class="btn btn-primary">Remove</a>
             </div>
         </div>

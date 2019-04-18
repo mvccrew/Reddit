@@ -25,7 +25,7 @@ namespace Reddit.Controllers
             model.PopulateModel(item);
             PopulateEditVM(model);
 
-            return PartialView("~/Views/Partials/_EditUser.cshtml", model);
+            return PartialView("~/Views/Partials/Edits/_EditUser.cshtml", model);
         }
 
         [HttpPost]
@@ -33,7 +33,7 @@ namespace Reddit.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("~/Views/Partials/_EditUser.cshtml", model);
+                return PartialView("~/Views/Partials/Edits/_EditUser.cshtml", model);
             }
 
             UsersRepository repo = new UsersRepository();

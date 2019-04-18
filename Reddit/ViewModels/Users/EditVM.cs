@@ -30,7 +30,6 @@ namespace Reddit.ViewModels.Users
         [DisplayName("Last name: ")]
         public string LastName { get; set; }
 
-        [Required]
         [DisplayName("Administrator: ")]
         public bool IsAdmin { get; set; }
 

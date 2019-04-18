@@ -104,7 +104,7 @@ namespace Reddit.Controllers
 
             //model.SubRedditId = model.SelectedSubReddit;
 
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_EditPost.cshtml", model);
         }
 
         [BanFilter]
@@ -138,7 +138,7 @@ namespace Reddit.Controllers
             postsRepo.Save(item);
 
 
-            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
+            return Content("");
         }
 
         [BanFilter]

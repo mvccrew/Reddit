@@ -48,7 +48,7 @@ namespace Reddit.Controllers
             {
                 model.PostId = PostId.Value;
             }
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_EditComment.cshtml", model);
         }
 
         [AuthenticationFilter(RequiredKarma = int.MinValue)]
@@ -57,7 +57,7 @@ namespace Reddit.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("~/Views/Partials/Edits/_EditComment.cshtml", model);
             }
 
             CommentsRepository repo = new CommentsRepository();
@@ -66,7 +66,7 @@ namespace Reddit.Controllers
 
             repo.Save(item);
 
-            return RedirectToAction("Index", "Comments", new { PostId = item.PostId });
+            return Content("");
         }
     }
 }
