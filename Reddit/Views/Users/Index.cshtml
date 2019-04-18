@@ -5,7 +5,6 @@
 
 <section>
     <h1>Users</h1>
-    <a style="text-decoration: none; float:right" href="@Url.Action("Edit", "Users")"><b>Create new</b></a>
     <form class="form-horizontal" action="/Users/Index" method="get">
         <div class="form-group text-center">
             <div class="col-3 col-mx-auto">
@@ -21,7 +20,8 @@
                 @Html.TextBoxFor(model => model.Filter.LastName, new { @class = "form-input" })
             </div>
         </div>
-        <input class="btn btn-primary" type="submit" value="Search" />
+        <input class="btn btn-primary" type="submit" value="search" />
+        <button class="btn btn-success edit-btn" data-action="/Users/Edit">new user</button>
     </form>
 
     <table class="table">
@@ -42,7 +42,7 @@
                 <td>@item.LastName</td>
                 <td>@item.IsAdmin</td>
                 <td colspan="2" style="border-bottom:none">
-                    <a class="btn btn-success" href="@Url.Action("Edit", "Users", new { Id = item.Id})">edit</a>
+                    <button class="btn btn-success edit-btn" data-action="/Users/Edit" data-id="@item.Id">edit</button>
                     <a style="margin-left: 10px;" class="btn btn-error" href="@Url.Action("Delete", "Users", new { Id = item.Id})">delete</a>
                 </td>
             </tr>

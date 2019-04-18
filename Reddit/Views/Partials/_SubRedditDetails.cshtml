@@ -52,7 +52,7 @@
         <div class="panel-body">
             @foreach (var item in Model.SubReddit.Admins)
             {
-                <a href="/Profile?UserId=@item.Id" class="text-dark">/u/@item.Username</a>
+                <a class="d-block text-dark" href="/Profile?UserId=@item.Id">/u/@item.Username</a>
             }
         </div>
         <div class="panel-footer">

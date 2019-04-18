@@ -76,6 +76,7 @@
             </section>
         </header>
         <main id="content-container" class="container">
+            <div id="edit-container"></div>
             @if (AuthManager.LoggedUser == null)
             {
                 <div id="login-container">
@@ -114,6 +115,7 @@
     {
         <script src="~/Scripts/authentication-modal.js"></script>
     }
+    <script src="~/Scripts/edit-modal.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

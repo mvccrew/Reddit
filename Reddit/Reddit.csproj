@@ -96,13 +96,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\components\post.css" />
     <Content Include="Content\css\debug.css" />
     <Content Include="Content\css\home.css" />
     <Content Include="Content\css\site.css" />
+    <Content Include="Content\css\subreddit.css" />
+    <Content Include="Content\img\community-avatar.jpg" />
+    <Content Include="Content\img\reddit-avatar.png" />
+    <Content Include="Content\img\reddit-banner.jpg" />
     <Content Include="Content\img\reddit-blue.jpg" />
     <Content Include="Content\img\reddit.png" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\edit-modal.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -174,7 +180,7 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Partials\_EditUser.cshtml" />
     <Content Include="Views\SubReddit\Index.cshtml" />
     <Content Include="Views\Posts\Index.cshtml" />
     <Content Include="Views\Posts\Edit.cshtml" />
