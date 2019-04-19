@@ -137,6 +137,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VotesController.cs" />
+    <Compile Include="FileFormats\Formats.cs" />
     <Compile Include="Filters\AuthenticationFilter.cs" />
     <Compile Include="Filters\BanFilter.cs" />
     <Compile Include="Filters\MuteFilter.cs" />

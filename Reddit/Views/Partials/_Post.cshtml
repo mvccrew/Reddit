@@ -32,9 +32,19 @@
     <div class="card-body">
         @if (Model.PostType == DataAccess.Entities.PostType.ImagePost)
         {
-            <div class="card-image">
-                <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" alt="img">
-            </div>
+            if (Reddit.FileFormats.Formats.VideoFormats.Contains(Model.Content.Substring(Model.Content.LastIndexOf(".") + 1).ToLower()))
+            {
+                <div class="card-image">
+                    <video src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" controls autoplay></video>
+                </div>
+            }
+
+            else
+            {
+                <div class="card-image">
+                    <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" alt="img">
+                </div>
+            }
         }
         else
         {
