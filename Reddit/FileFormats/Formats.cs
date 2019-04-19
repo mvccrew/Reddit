@@ -18,5 +18,12 @@ namespace Reddit.FileFormats
 
             }
         }
+        public static List<string> ImageFormats
+        {
+            get
+            {
+                return new List<string> {"tif","tiff","jpeg","jpg","jif","jfif","jp2","jpx","j2k","j2c","fpx","pcd","png" };
+            }
+        }
     }
 }
