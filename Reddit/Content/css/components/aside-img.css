@@ -1,0 +1,39 @@
+﻿aside {
+    flex-basis: 15.5rem;
+    margin-left: 1.2rem;
+}
+
+.main-panel .panel-header {
+    padding: 0.9rem;
+    background: url('../../img/reddit-banner.jpg') center center no-repeat;
+    background-size: cover;
+}
+
+.main-panel:not(.panel-header) {
+    background-color: #fff;
+}
+
+.main-panel .panel-body {
+    margin-top: 0.6rem;
+}
+
+    .main-panel .panel-body p {
+        margin: 0.6rem 0 0.2rem 0;
+    }
+
+.main-panel .panel-footer a:nth-child(2) {
+    margin-top: 0.4rem;
+}
+
+.secondary-panel {
+    background: #fff;
+    margin-top: 1.5rem;
+}
+
+    .secondary-panel .panel-body .tile {
+        margin: 0.2rem 0 0.8rem 0;
+    }
+
+    .secondary-panel .tile-icon {
+        font-size: 1.5rem;
+    }

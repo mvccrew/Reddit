@@ -1,4 +1,5 @@
 ﻿@import url('components/post.css');
+@import url('components/aside-img.css');
 
 .post-group {
     flex-basis: 32rem;
@@ -9,51 +10,19 @@
     margin: 0;
 }
 
-#profile-aside {
-    flex-basis: 15.5rem;
-    margin-left: 1.2rem;
+.main-panel .panel-header {
+    background: url('../img/reddit-banner.jpg') top center no-repeat;
+    background-size: cover;
 }
 
-    #profile-aside .main-panel .panel-header {
-        padding: 0.9rem;
-        background: url('../img/reddit-banner.jpg') top center no-repeat;
-        background-size: cover;
+.main-panel .tile .tile-subtitle {
+    margin-top: -0.2rem;
+}
+
+    .main-panel .tile .tile-subtitle i {
+        margin-right: 0.2rem;
     }
 
-    #profile-aside .main-panel:not(.panel-header) {
-        background-color: #fff;
-    }
-
-    #profile-aside .main-panel .panel-body {
-        margin-top: 0.6rem;
-    }
-
-        #profile-aside .main-panel .panel-body p {
-            margin: 0.6rem 0 0.2rem 0;
-        }
-
-    #profile-aside .main-panel .tile .tile-subtitle {
-        margin-top: -0.2rem;
-    }
-
-        #profile-aside .main-panel .tile .tile-subtitle i {
-            margin-right: 0.2rem;
-        }
-
-    #profile-aside .main-panel .panel-footer a:nth-child(2) {
-        margin-top: 0.4rem;
-    }
-
-    #profile-aside .secondary-panel {
-        background: #fff;
-        margin-top: 1.5rem;
-        padding-bottom: 0.3rem;
-    }
-
-        #profile-aside .secondary-panel .panel-body .tile {
-            margin: 0.2rem 0 0.8rem 0;
-        }
-
-        #profile-aside .secondary-panel .tile-icon {
-            font-size: 1.5rem;
-        }
+.secondary-panel {
+    padding-bottom: 0.3rem;
+}

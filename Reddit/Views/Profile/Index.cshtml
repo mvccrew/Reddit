@@ -51,7 +51,7 @@
             <a class="btn btn-primary btn-block" href="@Url.Action("Create", "Posts")">create post</a>
             @if (Reddit.Models.AuthManager.LoggedUser.Id == Model.UserId)
             {
-                <a class="btn btn-primary  edit-btn btn-block">edit profile</a>
+                <a data-id="@Model.UserId" data-action="/Profile/Edit" class="btn btn-primary edit-btn btn-block">edit profile</a>
             }
         </div>
     </div>

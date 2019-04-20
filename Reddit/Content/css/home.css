@@ -1,46 +1,7 @@
 ﻿@import url('components/post.css');
+@import url('components/aside-img.css');
 
 .post-group {
     flex-basis: 32rem;
     margin: 0;
 }
-
-#frontpage-aside {
-    flex-basis: 15.5rem;
-    margin-left: 1.2rem;
-}
-
-    #frontpage-aside .main-panel .panel-header {
-        padding: 0.9rem;
-        background: url('../img/reddit-banner.jpg') center center no-repeat;
-        background-size: cover;
-    }
-
-    #frontpage-aside .main-panel:not(.panel-header) {
-        background-color: #fff;
-    }
-
-    #frontpage-aside .main-panel .panel-body {
-        margin-top: 0.6rem;
-    }
-
-    #frontpage-aside .main-panel .panel-body p {
-        margin: 0.6rem 0 0.2rem 0;
-    }
-
-    #frontpage-aside .main-panel .panel-footer a:nth-child(2) {
-        margin-top: 0.4rem;
-    }
-
-    #frontpage-aside .secondary-panel {
-        background: #fff;
-        margin-top: 1.5rem;
-    }
-
-    #frontpage-aside .secondary-panel .panel-body .tile {
-        margin: 0.2rem 0 0.8rem 0;
-    }
-
-    #frontpage-aside .secondary-panel .tile-icon {
-        font-size: 1.5rem;
-    }
