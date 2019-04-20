@@ -1,85 +1,30 @@
 ﻿@model Reddit.ViewModels.SubReddit.IndexVM
 
 @{
-    ViewBag.Title = "SubRedditsIndex";
+    ViewBag.Title = "SubReddits";
 }
 
 <section>
-    <table>
-        <tr>
-            <td>
-                <h1 style="font-size:26px;">SubReddit</h1>
-            </td>
-        </tr>
+    <h1 class="text-center">Subreddits</h1>
+    @Html.HiddenFor(model => model.UserId)
+    @foreach (var item in Model.Items)
+    {
+        <div class="tile" style="background: #fff; padding: 0.5rem; margin-bottom: 1rem;">
+            <div class="tile-icon">
+                <i class="fas fa-globe text-primary"></i>
+            </div>
+            <div class="tile-content">
+                <h5 class="tile-title">/r/@item.Name</h5>
+                <p class="tile-subtitle">@item.Description</p>
+            </div>
+            <div class="tile-action">
+                <button class="edit-btn btn-success btn" data-id="@item.Id" data-action="/SubReddit/Edit">edit</button>
+                <button class="btn btn-error">delete</button>
+                <button class="btn btn-primary">subscribe</button>
+            </div>
+        </div>
+    }
 
-        <tr>
-            <td>
-                @Html.HiddenFor(model => model.UserId)
-                <table>
-                    <tr>
-                        <td><i>Name</i></td>
-                    </tr>
-                    @foreach (var item in Model.Items)
-                    {
-                        <tr>
-                            <td>@item.Name</td>
-                            <td><button class="edit-btn btn" data-id="@item.Id" data-action="/SubReddit/Edit">Edit</button></td>
-                            <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Delete", "SubReddit", new { Id = item.Id })">Delete</a></td>
-                            @if (Reddit.Models.AuthManager.LoggedUser == null)
-                            {
-                                <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Login", "Home")">Login to Subscribe</a></td>
-                            }
-                            else
-                            {
-                                <td><a class="button is-outlined is-info navbar-item" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">Subscribe</a></td>
-                            }
-                        </tr>
-                    }
-                </table>
-                @{
-                    string pageLink = "?";
-                    for (int i = 0; i < this.Request.QueryString.Count; i++)
-                    {
-                        if (this.Request.QueryString.GetKey(i) != "Pager.Page")
-                        {
-                            pageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
-                        }
-                    }
-                }
-                <ul style="list-style-type:none;">
-                    @for (int i = 0; i < Model.Pager.PagesCount; i++)
-                    {
-                        <li style="float:left;">
-                            <a href="/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(pageLink)Pager.Page=@(i+1)" style="text-decoration:none; font-weight:@(Model.Pager.Page == (i+1) ? "bold" : "normal")">@(i + 1)</a>
-                        </li>
-                    }
-                </ul>
-                <script>
-                        function ddlItemsPerpage_OnChange() {
-                            @{
-                                string itemsPerPageLink = "?";
-                                for (int i = 0; i < this.Request.QueryString.Count; i++)
-                                {
-                                    if (!this.Request.QueryString.GetKey(i).StartsWith("Pager"))
-                                    {
-                                        itemsPerPageLink += this.Request.QueryString.GetKey(i) + "=" + Url.Encode(this.Request.QueryString[i]) + "&";
-                                    }
-                                }
-                            }
-
-                            var link = "/@this.ViewContext.RouteData.Values["controller"]/@this.ViewContext.RouteData.Values["action"]@Html.Raw(itemsPerPageLink)" + "Pager.ItemsPerPage=" + $("#ddlItemsPerpage").val();
-
-                            window.location.href = link;
-                        }
-                </script>
-                <select id="ddlItemsPerpage" onchange="ddlItemsPerpage_OnChange();">
-                    <option value="10" @(Model.Pager.ItemsPerPage == 10 ? "selected" : "")>10</option>
-                    <option value="50" @(Model.Pager.ItemsPerPage == 50 ? "selected" : "")>50</option>
-                    <option value="100" @(Model.Pager.ItemsPerPage == 100 ? "selected" : "")>100</option>
-                </select>
-            </td>
-        </tr>
-    </table>
 </section>
 
 
