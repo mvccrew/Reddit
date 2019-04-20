@@ -1,7 +1,7 @@
 ﻿@model Reddit.ViewModels.SubReddit.IndexVM
 
 @{
-    ViewBag.Title = "SubReddits";
+    ViewBag.Title = "Subreddits";
 }
 
 <section>
@@ -9,18 +9,18 @@
     @Html.HiddenFor(model => model.UserId)
     @foreach (var item in Model.Items)
     {
-        <div class="tile" style="background: #fff; padding: 0.5rem 0.5rem 0 0.5rem; margin-bottom: 1rem;">
+        <div class="tile" style="background: #fff; padding: 0.5rem 0.5rem 0 0.5rem; margin-top: 1.2rem;">
             <div class="tile-icon">
                 <i class="fas fa-globe text-primary"></i>
             </div>
             <div class="tile-content">
-                <h5 class="tile-title">/r/@item.Name</h5>
-                <p class="tile-subtitle">@item.Description</p>
+                <a href="/Posts?SubRedditId=@item.Id" class="tile-title h5 text-dark">/r/@item.Name</a>
+                <p style="margin: 1rem 0;" class="tile-subtitle">@item.Description</p>
             </div>
             <div class="tile-action">
                 <button class="edit-btn btn-success btn" data-id="@item.Id" data-action="/SubReddit/Edit">edit</button>
-                <button class="btn btn-error">delete</button>
-                <button class="btn btn-primary">subscribe</button>
+                <a href="/SubReddit/Delete/@item.Id" class="btn btn-error">delete</a>
+                <a href="/SubReddit/Subscribe/@item.Id" class="btn btn-primary">subscribe</a>
             </div>
         </div>
     }

@@ -1,7 +1,2 @@
 ﻿@import url('components/post.css');
 @import url('components/aside-img.css');
-
-.post-group {
-    flex-basis: 32rem;
-    margin: 0;
-}

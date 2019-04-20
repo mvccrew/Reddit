@@ -1,11 +1,6 @@
 ﻿@import url('components/post.css');
 @import url('components/aside-img.css');
 
-.post-group {
-    flex-basis: 32rem;
-    margin: 0;
-}
-
 .columns {
     margin: 0;
 }
@@ -16,7 +11,7 @@
 }
 
 .main-panel .tile .tile-subtitle {
-    margin-top: -0.2rem;
+    margin: -0.2rem 0 0.4rem 0;
 }
 
     .main-panel .tile .tile-subtitle i {
