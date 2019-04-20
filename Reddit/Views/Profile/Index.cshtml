@@ -1,117 +1,97 @@
 ﻿@model Reddit.ViewModels.Profile.IndexVM
 
 @{
-    ViewBag.Title = "ProfileIndex";
+    ViewBag.Title = "Profile";
 }
 
 @section styles
 {
-    <link href="~/Content/css/home.css" rel="stylesheet" />
+    <link href="~/Content/css/profile.css" rel="stylesheet" />
 }
 
 @{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
 
-<section class="columns post-group" id="posts">
+<section class="columns post-group">
     @foreach (var item in Model.Posts)
     {
         { Html.RenderPartial("~/Views/Partials/_Post.cshtml", item); }
     }
-    @foreach (var item in Model.Comments)
-    {
-        @item.Rating
-        <a href="/Comments?PostId=@item.PostId">@item.Text</a>
-    }
+    @*    @foreach (var item in Model.Comments)
+        {
+            @item.Rating
+            <a href="/Comments?PostId=@item.PostId">@item.Text</a>
+        } *@
 </section>
 
+<aside id="profile-aside">
+    <div class="panel main-panel">
+        <div class="panel-header"></div>
+        <div class="panel-body">
 
-<aside id="aside" class="text-center">
-    <div class="panel">
-        <div class="panel-header text-left" style="background-color: rgb(66, 176, 244)">
-            <div class="panel-title text-bold float-left">u/@Model.User.Username</div>
-        </div>
-        <div class="panel-nav">
-            <!-- navigation components: tabs, breadcrumbs or pagination -->
-        </div>
-        <div class="panel-body" style="background-color:white" id="details">
-            <div class="tile">
-                <div class="tile-content">
-                    <div class="tile-title text-bold ">Karma</div>
+            <h5>u/@Model.User.Username</h5>
+            <div class="columns">
+                <div class="tile col-4 tile-centered">
                     <div class="tile-content">
-                        <div class="tile-title text-bold ">♦ @Model.User.Karma</div>
+                        <p class="tile-title text-dark">Karma</p>
+                        <p class="tile-subtitle text-gray"><i class="fas fa-meteor text-primary"></i>@Model.User.Karma</p>
                     </div>
+
                 </div>
-                <div class="tile-content">
-                    <div class="tile-title text-bold text-center ">Cake Day</div>
+                <div class="tile col-6 col-ml-auto tile-centered">
                     <div class="tile-content">
-                        <div class="tile-title text-bold text-center">@Model.User.CreationDate</div>
+                        <p class="tile-title text-dark">Cake day</p>
+                        <p class="tile-subtitle text-gray"><i class="fas fa-birthday-cake text-primary"></i>@(Model.User.CreationDate.ToString("MMMM d, yyyy"))</p>
                     </div>
+
                 </div>
             </div>
         </div>
-        <div class="panel-footer" style="background-color:white">
-            <div class="tile-content">
-                <a class="btn btn-primary btn-block" href="@Url.Action("Create","Posts")">Create Post</a>
-                <a class="edit-btn btn btn-primary btn-block" data-action="/Profile/Edit" data-id="@Model.UserId">Edit</a>
-            </div>
+
+        <div class="panel-footer">
+            <a class="btn btn-primary btn-block" href="@Url.Action("Create", "Posts")">create post</a>
+            @if (Reddit.Models.AuthManager.LoggedUser.Id == Model.UserId)
+            {
+                <a class="btn btn-primary  edit-btn btn-block">edit profile</a>
+            }
         </div>
     </div>
+    <div class="panel secondary-panel">
+        <div class="panel-header text-left">
+            <div class="panel-title h5">Moderator of</div>
+        </div>
+        <div class="panel-body">
+            @foreach (DataAccess.Entities.SubReddit item in Model.User.AdminToSubReddits)
+            {
+                <div class="tile tile-centered">
+                    <div class="tile-icon">
+                        <i class="fas fa-globe text-primary"></i>
+                    </div>
+                    <div class="tile-content ">
+                        <a href="/Posts?SubRedditId=@item.Id" class="tile-title text-dark">/r/@item.Name</a>
+                        <p class="tile-subtitle text-gray">@item.SubscribedUsers.Count() members</p>
+                    </div>
+                    <div class="tile-action">
+                        @if (Reddit.Models.AuthManager.LoggedUser != null)
+                        {
+                            if (item.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
+                            && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == item.Id))
+                            {
+                                <a class="btn" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">unsubscribe</a>
 
-    <div class="panel">
-        <div class="panel-header text-left" style="background-color: rgb(255, 255, 255)">
-            <div class="panel-title text-bold float-left">YOU'RE A MODERATOR OF THESE COMMUNITIES</div>
-        </div>
-        <div class="panel-nav">
-            <!-- navigation components: tabs, breadcrumbs or pagination -->
-        </div>
-        <div class="panel-body" style="background-color:white" id="details">
-            <div class="tile">
-                @if (Model.User.AdminToSubReddits.Count() < 1)
-                {
-                    <div class="tile-content">
-                        <div class="tile-title text-bold ">none :(</div>
+                            }
+                            else
+                            {
+                                <a class="btn btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">subscribe</a>
+                            }
+
+                        }
+                        else
+                        {
+                            <a class="btn btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = item.Id })">subscribe</a>
+                        }
                     </div>
-                }
-                @foreach (DataAccess.Entities.SubReddit sr in Model.User.AdminToSubReddits)
-                {
-                    <div class="tile-content">
-                        <div class="tile-title text-bold "><a href="@Url.Action("Index", "Posts", new { SubRedditId = sr.Id})">r/@sr.Name</a></div>
-                        <div class="tile-content">
-                            <div class="tile-title text-bold ">@sr.SubscribedUsers.Count() Members</div>
-                        </div>
-                    </div>
-                    if (!(sr.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id
-                                    && m.SubscribedToSubReddits.Any(srr => srr.Id == sr.Id))))
-                    {
-                        <div class="tile-content" style="padding-bottom:10px;">
-                            <a class="btn btn-primary btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = sr.Id })">Subscribe</a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="tile-content" style="padding-bottom:10px;">
-                            <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = sr.Id })">Unsubscribe</a>
-                        </div>
-                    }
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
 </aside>
-
-<style>
-
-    #details > * {
-        margin: 15px 0;
-    }
-
-    #aside {
-        text-align: unset;
-        max-width: 17rem;
-    }
-    #aside .panel:nth-child(2){
-        margin-top: 2rem;
-    }
-    .tile-icon a {
-        display: block;
-    }
-</style>

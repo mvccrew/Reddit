@@ -38,25 +38,9 @@
     }
 
     #frontpage-aside .secondary-panel .panel-body .tile {
-        margin: 0.2rem 0;
+        margin: 0.2rem 0 0.8rem 0;
     }
 
     #frontpage-aside .secondary-panel .tile-icon {
         font-size: 1.5rem;
     }
-
-
-
-@media only screen and (min-width: 577px) and (max-width : 768px) {
-    .post-group {
-        float: none;
-        margin: 0 auto;
-    }
-}
-
-@media only screen and (max-width : 576px) {
-    .post-group {
-        float: none;
-        margin: 0 auto;
-    }
-}
