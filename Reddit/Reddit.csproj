@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\components\aside-img.css" />
     <Content Include="Content\css\components\post.css" />
     <Content Include="Content\css\debug.css" />
     <Content Include="Content\css\home.css" />
