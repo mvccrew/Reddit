@@ -5,6 +5,12 @@
 @section styles
 {
     <link href="~/Content/css/home.css" rel="stylesheet" />
+    <style>
+        .post:hover{
+            border: 1px solid #999;
+            border-radius: 0.3rem;
+        }
+    </style>
 }
 <section class="columns post-group" id="frontpage">
     @if (Reddit.Models.AuthManager.LoggedUser != null)

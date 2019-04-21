@@ -15,7 +15,6 @@ namespace Reddit.Controllers
     [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class ProfileController : Controller
     {
-        
         [HttpGet]
         public ActionResult Index(IndexVM model)
         {

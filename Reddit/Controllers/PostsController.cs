@@ -51,6 +51,7 @@ namespace Reddit.Controllers
             EditVM model = new EditVM();
 
             model.SubRedditsList = new List<SelectListItem>();
+            model.UserId = AuthManager.LoggedUser.Id;
 
             SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
             List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthManager.LoggedUser.Id).ToList();
@@ -125,13 +126,91 @@ namespace Reddit.Controllers
 
             if ((Request.Files["image"] != null) && (!String.IsNullOrEmpty(Request.Files["image"].FileName)) && (Request.Files["image"].ContentLength > 0))
             {
-                string file_path = Server.MapPath("~/Content/img/post_images/");
-                Request.Files["image"].SaveAs(file_path + Request.Files["image"].FileName);
-                model.Content = file_path + Request.Files["image"].FileName;
+                if (FileFormats.Formats.ImageFormats.Contains(Request.Files["image"].FileName.Split('.').Last().ToLower()) ||
+                    FileFormats.Formats.VideoFormats.Contains(Request.Files["image"].FileName.Split('.').Last().ToLower()))
+                {
+                    string file_path = Server.MapPath("~/Content/img/post_images/");
+                    Request.Files["image"].SaveAs(file_path + Request.Files["image"].FileName);
+                    model.Content = file_path + Request.Files["image"].FileName;
+                    model.PopulateEntity(item);
+                    postsRepo.Save(item);
+                    return RedirectToAction("Index", "Posts", new { SubRedditId = model.SubRedditId });
+                }
+                else
+                {
+                    ModelState.AddModelError("notSupportedFormat", "This format is not supported :(");
+
+                    model.SubRedditsList = new List<SelectListItem>();
+
+                    List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthManager.LoggedUser.Id).ToList();
+
+                    foreach (SubReddit subReddit in subscribedSubReddits)
+                    {
+                        if (!(AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)) ||
+                            AuthManager.LoggedUser.MutedInSubReddits.Any(sr => sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id))))
+                            model.SubRedditsList.Add(
+                            new SelectListItem()
+                            {
+                                Value = subReddit.Id.ToString(),
+                                Text = subReddit.Name,
+                                Selected = subReddit.Id == model.SelectedSubReddit
+                            });
+                    }
+                    return View("Create", model);
+                }
             }
-            else
+            model.PopulateEntity(item);
+            postsRepo.Save(item);
+
+            return Content("");
+        }
+        /*public ActionResult Edit(EditVM model, FormCollection form)
+        {
+            if (!ModelState.IsValid)
             {
-                ViewData["file_path"] = "Upload failed!";
+                return View("Create");
+            }
+            SubRedditsRepository subRedditsRepo = new SubRedditsRepository();
+            PostsRepository postsRepo = new PostsRepository();
+
+            Post item = new Post();
+            if (model.SubRedditId == 0)
+                model.SubRedditId = model.SelectedSubReddit;
+
+            if ((Request.Files["image"] != null) && (!String.IsNullOrEmpty(Request.Files["image"].FileName)) && (Request.Files["image"].ContentLength > 0))
+            {
+                if ((FileFormats.Formats.VideoFormats.Contains(Request.Files["image"].ToString().Substring(Request.Files["image"].ToString().LastIndexOf(".") + 1).ToLower()))
+                  || FileFormats.Formats.ImageFormats.Contains(Request.Files["image"].ToString().Substring(Request.Files["image"].ToString().LastIndexOf(".") + 1).ToLower()))
+                {
+                    string file_path = Server.MapPath("~/Content/img/post_images/");
+                    Request.Files["image"].SaveAs(file_path + Request.Files["image"].FileName);
+                    model.Content = file_path + Request.Files["image"].FileName;
+                    model.PopulateEntity(item);
+                    postsRepo.Save(item);
+                    return RedirectToAction("Index", "Posts", new { SubRedditId = model.SubRedditId });
+                }
+                else
+                {
+                    ModelState.AddModelError("notSupportedFormat", "This format is not supported :(");
+
+                    model.SubRedditsList = new List<SelectListItem>();
+
+                    List<SubReddit> subscribedSubReddits = subRedditsRepo.GetMySubscribes(AuthManager.LoggedUser.Id).ToList();
+
+                    foreach (SubReddit subReddit in subscribedSubReddits)
+                    {
+                        if (!(AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)) ||
+                            AuthManager.LoggedUser.MutedInSubReddits.Any(sr => sr.MutedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id))))
+                            model.SubRedditsList.Add(
+                            new SelectListItem()
+                            {
+                                Value = subReddit.Id.ToString(),
+                                Text = subReddit.Name,
+                                Selected = subReddit.Id == model.SelectedSubReddit
+                            });
+                    }
+                    return View("Create", model);
+                }
             }
 
             model.PopulateEntity(item);
@@ -139,7 +218,8 @@ namespace Reddit.Controllers
 
 
             return Content("");
-        }
+        }*/
+
 
         [BanFilter]
         [MuteFilter]

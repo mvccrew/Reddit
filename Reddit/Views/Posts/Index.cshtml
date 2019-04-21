@@ -10,8 +10,12 @@
 }
 
 @Html.HiddenFor(m => m.UserId)
-@{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
-@{ Model.User = Reddit.Models.AuthManager.LoggedUser; }
+@if (Reddit.Models.AuthManager.LoggedUser != null)
+{
+    { Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
+    { Model.User = Reddit.Models.AuthManager.LoggedUser; }
+}
+
 <section class="columns post-group">
     <!-- <br /><hr />@Model.SubReddit.Name <br /><hr />-->
     @foreach (var item in Model.Posts)

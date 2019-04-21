@@ -1,6 +1,6 @@
 @model DataAccess.Entities.Post
 
-<article class="card post">
+<article onclick="location.href='@Url.Action("Index", "Comments", new { PostId = Model.Id})';" style="cursor:pointer;" class="card post">
     <div class="card-header">
         <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">
             @Model.Title
@@ -35,15 +35,19 @@
             if (Reddit.FileFormats.Formats.VideoFormats.Contains(Model.Content.Substring(Model.Content.LastIndexOf(".") + 1).ToLower()))
             {
                 <div class="card-image">
-                    <video src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" controls autoplay></video>
+                    <video src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" controls></video>
                 </div>
             }
 
-            else
+            else if (Reddit.FileFormats.Formats.ImageFormats.Contains(Model.Content.Substring(Model.Content.LastIndexOf(".") + 1).ToLower()))
             {
                 <div class="card-image">
                     <img src="~/Content/img/post_images/@Model.Content.Split('\\').Last()" class="img-responsive content-img" alt="img">
                 </div>
+            }
+            else
+            {
+
             }
         }
         else

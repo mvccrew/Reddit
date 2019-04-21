@@ -28,7 +28,6 @@
             <a href="#messages">Link</a>
         </li>
     </ul>
-    @{ Model.UserId = Reddit.Models.AuthManager.LoggedUser.Id; }
     <div class="tab-content">
         @using (Html.BeginForm("Edit", "Posts", FormMethod.Post, new { id = "form-create" }))
         {
@@ -54,6 +53,7 @@
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.SubRedditId)
+            <p class="text-center">@Html.ValidationMessage("notSupportedFormat", new { @class = "text-error" })</p>
             <div class="tab-pane" id="profile">
                 <div>@Html.DropDownListFor(model => model.SelectedSubReddit, Model.SubRedditsList, "Choose SubReddit..") @Html.ValidationMessageFor(model => model.SelectedSubReddit)</div>
                 <input id="PostTypeId" name="PostTypeId" type="hidden" value="2" />

@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+HEAD
 ﻿/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -1301,7 +1301,6 @@ $.format = $.validator.format;
 		}
 	});
 })(jQuery);
-=======
 ﻿/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -2604,4 +2603,3 @@ $.format = $.validator.format;
 		}
 	});
 })(jQuery);
- 4467e79b78c24af7f97ea16bb6010a1768258f79
