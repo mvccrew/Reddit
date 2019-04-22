@@ -20,6 +20,8 @@ namespace DataAccess.Repositories
 
         public DbSet<Vote> Votes { get; set; }
 
+        public DbSet<Rule> Rules { get; set; }
+
         public RedditDb() : base("name=RedditDbConnection")
         {
             Database.SetInitializer<RedditDb>(new RedditDbInitializer());
@@ -29,6 +31,7 @@ namespace DataAccess.Repositories
             this.Comments = this.Set<Comment>();
             this.Posts = this.Set<Post>();
             this.Votes = this.Set<Vote>();
+            this.Rules = this.Set<Rule>();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -96,6 +99,10 @@ namespace DataAccess.Repositories
 
             modelBuilder.Entity<User>()
                 .Property(u => u.CreationDate)
+                .HasColumnType("datetime2");
+
+            modelBuilder.Entity<Rule>()
+                .Property(r => r.CreationDate)
                 .HasColumnType("datetime2");
 
             modelBuilder.Entity<SubReddit>()

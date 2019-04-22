@@ -31,16 +31,17 @@ namespace Reddit.ViewModels.SubReddit
 
         [DisplayName("Rules:")]
         [Required(ErrorMessage = "This field is required")]
-        public string Rules { get; set; }
-        
+        public List<Rule> Rules { get; set; }
+
         public override void PopulateModel(DataAccess.Entities.SubReddit item)
         {
+            Rules = new List<Rule>();
             Id = item.Id;
             UserId = item.UserId;
             Name = item.Name;
             Description = item.Description;
             Theme = item.Theme;
-            Rules = item.Rules;
+            Rules = item.Rules == null ? new List<Rule>(5) { null, null, null, null, null} : item.Rules.ToList();
         }
 
         public override void PopulateEntity(DataAccess.Entities.SubReddit item)

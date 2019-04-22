@@ -51,11 +51,15 @@
                         @Html.ValidationMessageFor(model => model.Theme, null, new { @class = "text-error float-right" })
                         @Html.TextBoxFor(model => model.Theme, new { @class = "form-input", placeholder = "Theme" })
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Rules, new { @class = "d-inline-block form-label" })
-                        @Html.ValidationMessageFor(model => model.Rules, null, new { @class = "text-error float-right" })
-                        @Html.TextAreaFor(model => model.Rules, new { @class = "form-input", placeholder = "Rules" })
-                    </div>
+                    
+                        for (int i = 0; i < 5; i++)
+                        {
+                        <div class="form-group">
+                            @Html.HiddenFor(m => m.Rules[i].Id)
+                            @Html.HiddenFor(m => m.Rules[i].SubRedditId)
+                            @Html.TextBoxFor(m => m.Rules[i].Text, new { @class = "form-input", placeholder = "Rules" })
+                        </div>
+                        }
                 }
             </div>
         </div>

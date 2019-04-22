@@ -22,7 +22,7 @@ namespace Reddit.FileFormats
         {
             get
             {
-                return new List<string> {"gif","tif","tiff","jpeg","jpg","jif","jfif","jp2","jpx","j2k","j2c","fpx","pcd","png" };
+                return new List<string> {"webp", "gif","tif","tiff","jpeg","jpg","jif","jfif","jp2","jpx","j2k","j2c","fpx","pcd","png" };
             }
         }
     }

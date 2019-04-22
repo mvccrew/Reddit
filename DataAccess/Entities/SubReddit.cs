@@ -15,7 +15,7 @@ namespace DataAccess.Entities
 
         public string Theme { get; set; }
 
-        public string Rules { get; set; }
+        public virtual ICollection<Rule> Rules { get; set; }
         
         public int UserId { get; set; }
         [ForeignKey("UserId")]

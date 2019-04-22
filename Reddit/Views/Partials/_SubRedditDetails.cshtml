@@ -40,9 +40,12 @@
         <div class="panel-header bg-warning">
             <div class="panel-title">/r/@Model.SubReddit.Name rules</div>
         </div>
-        <div class="panel-body">
-            <p style="margin: 0 0 0.5rem 0">@Model.SubReddit.Rules</p>
-        </div>
+        @foreach (DataAccess.Entities.Rule rule in Model.SubReddit.Rules)
+        {
+            <div class="panel-body">
+                <p style="margin: 0 0 0.5rem 0">@rule.Text</p>
+            </div>
+        }
     </div>
 
     <div class="panel main-panel">
