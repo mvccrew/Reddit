@@ -17,9 +17,12 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44303</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
-    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>
+    </IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>
+    </IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
@@ -135,6 +138,7 @@
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\RulesController.cs" />
     <Compile Include="Controllers\SubRedditController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="ViewModels\Profile\EditVM.cs" />
     <Compile Include="ViewModels\Profile\FilterVM.cs" />
     <Compile Include="ViewModels\Profile\IndexVM.cs" />
+    <Compile Include="ViewModels\Rules\EditVM.cs" />
     <Compile Include="ViewModels\Share\BaseEditVM.cs" />
     <Compile Include="ViewModels\Share\BaseFilterVM.cs" />
     <Compile Include="ViewModels\Share\BaseIndexVM.cs" />
@@ -199,6 +204,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Partials\_Register.cshtml" />
     <Content Include="Views\Partials\_SubRedditDetails.cshtml" />
+    <Content Include="Views\Rules\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -209,7 +215,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\post_images\" />
-    <Folder Include="Views\Rules\" />
     <Folder Include="Views\Votes\" />
   </ItemGroup>
   <ItemGroup>

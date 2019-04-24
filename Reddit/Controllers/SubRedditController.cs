@@ -34,15 +34,15 @@ namespace Reddit.Controllers
         [HttpPost]
         public override ActionResult Edit(EditVM model)
         {
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return PartialView("~/Views/Partials/Edits/_EditSubreddit.cshtml", model);
-            }*/
-
+            }
+            RulesRepository ruleRepo = new RulesRepository();
             SubRedditsRepository repo = new SubRedditsRepository();
             SubReddit item = new SubReddit();
             model.PopulateEntity(item);
-
+            model.Rules = ruleRepo.GetAll(a => a.SubRedditId == item.Id);
             repo.Save(item);
 
             model.Id = item.Id;

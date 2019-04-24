@@ -24,7 +24,7 @@
         </div>
         <div class="panel-footer">
             @if (!(Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
-                && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == Model.SubReddit.Id)))
+    && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == Model.SubReddit.Id)))
             {
                 <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">subscribe</a>
             }
@@ -32,19 +32,27 @@
             {
                 <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">unsubscribe</a>
             }
-            <a class="btn btn-block btn-primary" href="@Url.Action("Create","Posts")">create post</a>
+            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "Posts")">create post</a>
         </div>
     </div>
 
     <div class="panel main-panel">
         <div class="panel-header bg-warning">
             <div class="panel-title">/r/@Model.SubReddit.Name rules</div>
+            @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
+            {
+                <div class="panel-title float-right">
+                    <a class="btn btn-block btn-primary" href="@Url.Action("Add", "Rules", new { SubRedditId = Model.SubRedditId })">Add rule</a>
+                </div>
+            }
         </div>
+        @{var count = 1; }
         @foreach (DataAccess.Entities.Rule rule in Model.SubReddit.Rules)
         {
             <div class="panel-body">
-                <p style="margin: 0 0 0.5rem 0">@rule.Text</p>
+                <p style="margin: 0 0 0.5rem 0">@count . @rule.Text</p>
             </div>
+            count++;
         }
     </div>
 

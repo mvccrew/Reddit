@@ -2,7 +2,7 @@
 
 <article onclick="location.href='@Url.Action("Index", "Comments", new { PostId = Model.Id})';" style="cursor:pointer;" class="card post">
     <div class="card-header">
-        <a class="card-title h4 text-dark" href="/Comments?PostId=@Model.Id">
+        <a class="card-title h4 text-dark" href="@Url.Action("Index", "Comments", new { PostId = Model.Id})">
             @Model.Title
         </a>
         <div class="card-subtitle h5">
@@ -96,7 +96,7 @@
                     @{ Html.RenderPartial("~/Views/Partials/_Vote.cshtml", new Reddit.ViewModels.Votes.VoteVM(contentId: Model.Id, type: "Post", rating: Model.Rating)); }
                 </div>
             <div class="post-info__comments">
-                <span><a href="/Comments?PostId=@Model.Id" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</a></span>
+                <span><a href="@Url.Action("Index", "Comments", new { PostId = Model.Id})" style="text-decoration:none"><i class="fas fa-comment-alt"></i>&nbsp;@Model.Comments.Count()</a></span>
             </div>
             @if (Reddit.Models.AuthManager.LoggedUser != null)
             {

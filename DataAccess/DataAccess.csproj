@@ -61,6 +61,7 @@
     <Compile Include="Repositories\PostsRepository.cs" />
     <Compile Include="Repositories\RedditDb.cs" />
     <Compile Include="Repositories\RedditDbInitializer.cs" />
+    <Compile Include="Repositories\RulesRepository.cs" />
     <Compile Include="Repositories\SubRedditsRepository.cs" />
     <Compile Include="Repositories\UnitOfWork.cs" />
     <Compile Include="Repositories\UsersRepository.cs" />

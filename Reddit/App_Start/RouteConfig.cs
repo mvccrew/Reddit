@@ -16,13 +16,23 @@ namespace Reddit
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             SubRedditsRepository repo = new SubRedditsRepository();
+            PostsRepository postsRepository = new PostsRepository();
+
             List<SubReddit> items = repo.GetAll(null);
+            List<Post> posts = postsRepository.GetAll(null);
             foreach (SubReddit sr in items)
             {
                 routes.MapRoute(
                     name: "SubReddit" + sr.Id,
-                    url: sr.Name,
+                    url: "r/" + sr.Name,
                     defaults: new { controller = "Posts", action = "Index", SubRedditId = sr.Id });
+                foreach (Post item in posts.Where(a => a.SubRedditId==sr.Id))
+                {
+                    routes.MapRoute(
+                    name: "Post" + item.Id,
+                    url: "r/" + sr.Name +"/" + "comments"+ '/' + getTitleForURL(item.Title.ToLower()),
+                    defaults: new { controller = "Comments", action = "Index", PostId = item.Id });
+                }
             }
 
             routes.MapRoute(
@@ -30,6 +40,16 @@ namespace Reddit
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional}
             );
+        }
+        public static string getTitleForURL(string title)
+        {
+            var charsToRemove = new string[] { "@", ",", ".", ";", "'","-" };
+            foreach (var c in charsToRemove)
+            {
+                title = title.Replace(c, string.Empty);
+            }
+            title = title.Replace(" ", "_");
+            return title;
         }
     }
 }
