@@ -62,14 +62,14 @@
             <div class="panel-title h5">Trending communities</div>
         </div>
         <div class="panel-body">
-            @foreach (var item in Model.SubReddits.OrderByDescending(a => a.SubscribedUsers.Count()).Take(5))
+            @foreach (var item in Model.TrendingSubReddits.OrderByDescending(a => a.SubscribedUsers.Count()).Take(5))
             {
             <div class="tile tile-centered">
                 <div class="tile-icon">
                     <i class="fas fa-globe text-primary"></i>
                 </div>
                 <div class="tile-content ">
-                    <a href="/Posts?SubRedditId=@item.Id" class="tile-title text-dark">/r/@item.Name</a>
+                    <a href="@Url.Action("Index", "Posts", new { SubRedditId = item.Id })" class="tile-title text-dark">/r/@item.Name</a>
                     <p class="tile-subtitle text-gray">@item.SubscribedUsers.Count() members</p>
                 </div>
                 <div class="tile-action">

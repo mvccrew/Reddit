@@ -30,7 +30,7 @@ namespace Reddit.ViewModels.SubReddit
         public string Theme { get; set; }
 
         [DisplayName("Rules:")]
-        [Required(ErrorMessage = "This field is required")]
+        //[Required(ErrorMessage = "This field is required")]
         public List<Rule> Rules { get; set; }
 
         public override void PopulateModel(DataAccess.Entities.SubReddit item)

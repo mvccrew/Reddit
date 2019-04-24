@@ -13,7 +13,7 @@
             <div class="card-subtitle text-gray" style="border-bottom-width:thin; border-bottom-color:rgba(0, 0, 0, 0.1); border-bottom-style:solid">...</div>
         </div>
         <div class="card-body">
-            @if (Model.SubReddits.Count() > 0)
+            @if (Model.SubReddits.Count() > 0 || Model.Users.Count() > 0)
             {
                 foreach (var item in Model.SubReddits)
                 {

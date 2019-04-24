@@ -34,10 +34,10 @@ namespace Reddit.Controllers
         [HttpPost]
         public override ActionResult Edit(EditVM model)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 return PartialView("~/Views/Partials/Edits/_EditSubreddit.cshtml", model);
-            }
+            }*/
 
             SubRedditsRepository repo = new SubRedditsRepository();
             SubReddit item = new SubReddit();
@@ -99,14 +99,14 @@ namespace Reddit.Controllers
             return Redirect(Request.UrlReferrer.ToString());
         }
 
-        public ActionResult UnSubscribe(int id)
+        /*public ActionResult UnSubscribe(int id)
         {
             SubRedditsRepository repo = new SubRedditsRepository();
 
             repo.UnSubscribe(id,AuthManager.LoggedUser.Id);
 
             return Redirect(Request.UrlReferrer.ToString());
-        }
+        }*/
 
     }
 }

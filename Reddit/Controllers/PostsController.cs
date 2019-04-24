@@ -163,7 +163,9 @@ namespace Reddit.Controllers
             model.PopulateEntity(item);
             postsRepo.Save(item);
 
-            return Content("");
+            return RedirectToAction("Index", "Posts", new { SubRedditId = model.SubRedditId });
+
+            //return Content("");
         }
 
         [BanFilter]

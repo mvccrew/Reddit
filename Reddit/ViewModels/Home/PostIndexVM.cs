@@ -10,5 +10,7 @@ namespace Reddit.ViewModels.Home
     {
         public List<Post> Posts { get; set; }
         public List<DataAccess.Entities.SubReddit> SubReddits { get; set; }
+
+        public List<DataAccess.Entities.SubReddit> TrendingSubReddits { get; set; }
     }
 }

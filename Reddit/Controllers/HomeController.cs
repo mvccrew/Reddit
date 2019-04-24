@@ -21,6 +21,7 @@ namespace Reddit.Controllers
             SubRedditsRepository subRedditsRepository = new SubRedditsRepository();
 
             model.Posts = repo.GetAll(p => p.IsApproved == true).OrderByDescending(a => a.Rating).ToList();
+            model.TrendingSubReddits = subRedditsRepository.GetAll(null);
             if (AuthManager.LoggedUser != null)
             {
                 model.SubReddits = subRedditsRepository.GetAll(null)
