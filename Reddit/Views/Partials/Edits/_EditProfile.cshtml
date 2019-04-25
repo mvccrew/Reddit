@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <p class="float-left">Be careful with what you're editing!</p>
+            <p class="float-left">Be careful with what you're @(Model.Id > 0 ? "editing" : "creating")!</p>
             <button class="btn btn-primary" form="edit-profile-form" type="submit">save</button>
         </div>
     </div>

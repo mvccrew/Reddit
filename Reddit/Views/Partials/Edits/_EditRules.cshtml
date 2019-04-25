@@ -1,41 +1,37 @@
-﻿@model Reddit.ViewModels.Comments.EditVM
-
-<div class="modal edit-modal" id="editComment">
+﻿@model Reddit.ViewModels.Rules.EditVM
+<div class="modal edit-modal" id="editRule">
     <a href="#" class="modal-overlay edit-modal-close" aria-label="Close"></a>
     <div class="modal-container">
         <div class="modal-header">
             <a href="#" class="btn btn-clear float-right edit-modal-close" aria-label="Close"></a>
-            <div class="modal-title h5">Edit comment</div>
+            <div class="modal-title h5">@(Model.Id > 0 ? "Edit" : "New") rule</div>
         </div>
         <div class="modal-body">
             <div class="content">
-                @using (Ajax.BeginForm("Edit", "Comments", new AjaxOptions
+                @using (Ajax.BeginForm("Add", "Rules", new AjaxOptions
                 {
                     HttpMethod = "POST",
                     InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "edit-container",
                     OnSuccess = "editErrors"
-                }, new { id = "edit-comment-form" }))
+                }, new { id = "edit-rule-form" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true)
-
                     @Html.HiddenFor(model => model.Id)
-                    @Html.HiddenFor(model => model.PostId)
-                    @Html.HiddenFor(model => model.UserId)
-                    @Html.HiddenFor(model => model.ParentCommentId)
+                    @Html.HiddenFor(model => model.SubRedditId)
                     <div class="form-group">
                         @Html.LabelFor(model => model.Text, new { @class = "d-inline-block form-label" })
                         @Html.ValidationMessageFor(model => model.Text, null, new { @class = "text-error float-right" })
-                        @Html.TextAreaFor(model => model.Text, new { @class = "form-input", placeholder = "Text" })
+                        @Html.TextBoxFor(model => model.Text, new { @class = "form-input", placeholder = "Username" })
                     </div>
+
                 }
             </div>
         </div>
         <div class="modal-footer">
-            <p class="float-left">Be careful with what you're @(Model.Id > 0 ? "editing" : "posting")!</p>
-            <button class="btn btn-primary" form="edit-comment-form" type="submit">save</button>
+            <p class="float-left">Be careful with what you're @(Model.Id > 0 ? "editing" : "creating")!</p>
+            <button class="btn btn-primary" form="edit-rule-form" type="submit">save</button>
         </div>
     </div>
 </div>
-

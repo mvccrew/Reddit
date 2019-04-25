@@ -24,12 +24,23 @@ var triggerEditModal = () => {
         if ($(this).hasClass('edit-comment')) {
             var postId = $(this).data('post-id');
             var parentCommentId = $(this).data('parent-id');
-            $.get(`${action}`, { id: id, PostId: postId, parentCommentId: parentCommentId })
+            $.get(`${action}`, { id: id, PostId: postId, parentCommentId: parentCommentId, SubRedditId: subRedditId })
                 .done(function (data) {
                     $("#edit-container").empty().html(data);
                     $(".edit-modal").addClass("active");
                 });
         }
+        // tova lichno IVILIN GO E PISAL DA SE ZNAE
+        else if ($(this).hasClass('edit-rule'))
+        {
+            var subRedditId = $(this).data('sub-id');
+            $.get(`${action}`, { id: id, SubRedditId: subRedditId })
+                .done(function (data) {
+                    $("#edit-container").empty().html(data);
+                    $(".edit-modal").addClass("active");
+                });
+        }
+            // DO tuka e IVILIN
         else {
             $.get(`${action}`, { id: id })
                 .done(function (data) {

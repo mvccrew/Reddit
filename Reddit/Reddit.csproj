@@ -204,7 +204,7 @@
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Partials\_Register.cshtml" />
     <Content Include="Views\Partials\_SubRedditDetails.cshtml" />
-    <Content Include="Views\Rules\Add.cshtml" />
+    <Content Include="Views\Partials\Edits\_EditRules.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

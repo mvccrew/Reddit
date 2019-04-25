@@ -26,7 +26,7 @@ namespace Reddit.Controllers
                 model.SubRedditId = SubRedditId.Value;
             }
 
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_EditRules.cshtml", model);
         }
         [HttpPost]
         public ActionResult Add(EditVM model)
@@ -42,7 +42,7 @@ namespace Reddit.Controllers
 
             repo.Save(item);
 
-            return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
+            return Content("");
         }
 
     }
