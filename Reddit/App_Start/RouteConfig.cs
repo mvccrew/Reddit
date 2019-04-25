@@ -44,12 +44,11 @@ namespace Reddit
                 defaults: new { controller = "Profile", action = "Index", UserId = item.Id }
                  );
             }
-
-            /*foreach(var item in Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits)
+            /*foreach (var item in Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits)
             {
                 routes.MapRoute(
-                name: "PostsCreate",
-                url: "r/" + item.Name + "/submit"  ,
+                name: "Something" ,
+                url: "r/" + item.Name + "/submit",
                 defaults: new { controller = "Posts", action = "Create", id = UrlParameter.Optional }
                  );
             }

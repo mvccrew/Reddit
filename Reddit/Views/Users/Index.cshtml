@@ -44,6 +44,7 @@
                 <td colspan="2" style="border-bottom:none">
                     <button class="btn btn-success edit-btn" data-action="/Users/Edit" data-id="@item.Id">edit</button>
                     <a style="margin-left: 10px;" class="btn btn-error" href="@Url.Action("Delete", "Users", new { Id = item.Id})">delete</a>
+
                 </td>
             </tr>
         }

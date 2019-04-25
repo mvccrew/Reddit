@@ -100,12 +100,12 @@
             </div>
             @if (Reddit.Models.AuthManager.LoggedUser != null)
             {
-                <div class="post-info__mod-tools">
-                    @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
-                    {
-                        { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
-                    }
-                </div>
+            <div class="post-info__mod-tools">
+                @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
+                {
+                    { Html.RenderPartial("~/Views/Partials/_ModTools.cshtml", Model); }
+                }
+            </div>
             }
         </div>
         <div class="post-share float-right d-inline-block">
