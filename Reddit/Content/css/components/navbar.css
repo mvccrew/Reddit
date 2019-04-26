@@ -40,3 +40,36 @@
 .navbar .user-section *:not(:last-child) {
     margin-right: 0.8rem;
 }
+
+.navbar .navbar-bars {
+    display: none;
+    position: absolute;
+    top: 9px;
+    right: 0;
+    font-size: 1.2rem;
+}
+
+.navbar .navbar-responsive {
+    flex-basis: 100%;
+    display: flex !important;
+}
+
+@media only screen and (min-width: 577px) and (max-width : 768px) {
+    .navbar section:not(:first-child) {
+        display: none;
+    }
+
+    #bars {
+        display: block;
+    }
+}
+
+@media only screen and (max-width : 576px) {
+    .navbar section:not(:first-child) {
+        display: none;
+    }
+
+    #bars {
+        display: block;
+    }
+}

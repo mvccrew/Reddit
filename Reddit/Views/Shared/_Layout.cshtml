@@ -76,6 +76,9 @@
                     <a href="/Home/Logout" class="btn btn-block">log out</a>
                 }
             </section>
+            <section id="bars" class="navbar-section navbar-bars">
+                <a class="text-dark" href="javascript:void(0);" onclick="myFunction()"><i class="fas fa-bars"></i></a>
+            </section>
         </header>
         <main id="content-container" class="container">
             <div id="edit-container"></div>
@@ -98,6 +101,12 @@
         </footer>
     </div>
     <script>
+        function myFunction() {
+            const navbarItems = document.querySelectorAll('.navbar section:not(:first-child)');
+            navbarItems.forEach(item => {
+                item.classList.toggle("navbar-responsive");
+            });
+        } 
         $('.subreddit-dropdown').change(function () {
             var selVal = $(this).val();
             sessionStorage.setItem("SelItem", selVal);
