@@ -22,10 +22,12 @@
 <body>
     <div id="main-container">
         <header id="header-container" class="navbar">
-            <section class="navbar-section">
+            <section class="navbar-section navbar-brand">
                 <a class="brand" href="/Home/Index">
                     <img src="~/Content/img/reddit.png" alt="logo">
                 </a>
+            </section>
+            <section class="navbar-section navbar-select">
                 <select class="subreddit-dropdown form-select">
                     <option disabled>REDDIT FEEDS</option>
                     <option value="@Url.Action("Index", "Home")">Home</option>

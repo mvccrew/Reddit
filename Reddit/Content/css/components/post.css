@@ -1,11 +1,11 @@
 ﻿.post-group {
     flex-basis: 32rem;
     margin: 0;
+    max-height: fit-content;
 }
 
 .post {
     width: 100%;
-    max-height: fit-content;
     margin-bottom: 1.5rem;
     overflow-wrap: break-word;
 }
