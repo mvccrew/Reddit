@@ -1,4 +1,5 @@
 ﻿@model Reddit.ViewModels.Rules.EditVM
+
 <div class="modal edit-modal" id="editRule">
     <a href="#" class="modal-overlay edit-modal-close" aria-label="Close"></a>
     <div class="modal-container">
@@ -23,7 +24,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.Text, new { @class = "d-inline-block form-label" })
                         @Html.ValidationMessageFor(model => model.Text, null, new { @class = "text-error float-right" })
-                        @Html.TextBoxFor(model => model.Text, new { @class = "form-input", placeholder = "Username" })
+                        @Html.TextAreaFor(model => model.Text, new { @class = "form-input", placeholder = "Enter rule", rows="2" })
                     </div>
 
                 }

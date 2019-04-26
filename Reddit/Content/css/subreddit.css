@@ -10,7 +10,7 @@
 }
 
     .main-panel .panel-header {
-        padding: 0.4rem 0 0.4rem 0.6rem;
+        padding: 0.4rem 0.4rem 0.4rem 0.6rem;
     }
 
     .main-panel:not(.panel-header) {
