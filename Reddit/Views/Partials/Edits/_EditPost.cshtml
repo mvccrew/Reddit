@@ -23,6 +23,7 @@
                     @Html.HiddenFor(model => model.Id)
                     @Html.HiddenFor(model => model.SubRedditId)
                     @Html.HiddenFor(Model => Model.PostTypeId)
+                    @Html.HiddenFor(model => model.Rating)
                     <div class="form-group">
                         @Html.LabelFor(model => model.Title, new { @class = "d-inline-block form-label" })
                         @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-error float-right" })

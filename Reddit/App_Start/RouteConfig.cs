@@ -28,13 +28,13 @@ namespace Reddit
                     name: "SubReddit" + sr.Id,
                     url: "r/" + sr.Name,
                     defaults: new { controller = "Posts", action = "Index", SubRedditId = sr.Id });
-                foreach (Post item in posts.Where(a => a.SubRedditId==sr.Id))
+                /*foreach (Post item in posts.Where(a => a.SubRedditId==sr.Id))
                 {
                     routes.MapRoute(
                     name: "Post" + item.Id,
                     url: "r/" + sr.Name +"/" + "comments"+ '/' + getTitleForURL(item.Title.ToLower()),
                     defaults: new { controller = "Comments", action = "Index", PostId = item.Id });
-                }
+                }*/
             }
             foreach (User item in users)
             {

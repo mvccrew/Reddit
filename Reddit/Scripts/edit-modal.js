@@ -41,6 +41,7 @@ var triggerEditModal = () => {
                 });
         }
             // DO tuka e IVILIN
+            // AHAHAHHAHAHA
         else {
             $.get(`${action}`, { id: id })
                 .done(function (data) {

@@ -22,6 +22,8 @@ namespace Reddit.ViewModels.Posts
 
         public int UserId { get; set; }
 
+        public int Rating { get; set; }
+
         public DataAccess.Entities.SubReddit SubReddit { get; set; }
 
         public PostType PostType { get; set; }
@@ -57,6 +59,7 @@ namespace Reddit.ViewModels.Posts
             }
             Title = item.Title;
             Content = item.Content;
+            Rating = item.Rating;
         }
 
         public void PopulateEntity(Post item)
@@ -75,6 +78,7 @@ namespace Reddit.ViewModels.Posts
             item.Content = Content;
             item.CreationDate = DateTime.Now;
             item.IsApproved = false;
+            item.Rating = Rating;
         }
     }
 }
