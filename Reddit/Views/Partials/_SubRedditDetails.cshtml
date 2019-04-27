@@ -2,7 +2,7 @@
 
 <aside id="subreddit-aside">
     <div class="panel main-panel">
-        <div class="panel-header bg-warning">
+        <div style="background-color: @(Model.SubReddit.Theme); color: #fff;" class="panel-header">
             <div class="panel-title">community details</div>
         </div>
         <div class="panel-body">
@@ -37,7 +37,7 @@
     </div>
 
     <div class="panel main-panel">
-        <div class="panel-header bg-warning">
+        <div style="background-color: @(Model.SubReddit.Theme); color: #fff;" class="panel-header">
             <div style="margin-top: 2px;" class="panel-title float-left">/r/@Model.SubReddit.Name rules</div>
             @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
             {
@@ -54,11 +54,15 @@
                 <p style="margin: 0 0 0.5rem 0">@count. @rule.Text</p>
                 count++;
             }
+            @if (count == 1)
+            {
+                <p style="margin: 0 0 0.5rem 0" class="text-error">No rules have been added yet!</p>
+            }
         </div>
     </div>
 
     <div class="panel main-panel">
-        <div class="panel-header bg-warning">
+        <div style="background-color: @(Model.SubReddit.Theme); color: #fff;" class="panel-header">
             <div class="panel-title">moderators of /r/@Model.SubReddit.Name</div>
         </div>
         <div class="panel-body">
