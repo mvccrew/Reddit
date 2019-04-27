@@ -8,7 +8,7 @@
         <div class="panel-body">
             <div class="sub-name tile tile-centered">
                 <div class="tile-icon">
-                    <i class="fas fa-globe text-warning"></i>
+                    <i style="color: @(Model.SubReddit.Theme)" class="fas fa-globe"></i>
                 </div>
                 <div class="tile-content">
                     <h5>/r/@Model.SubReddit.Name</h5>
@@ -32,7 +32,7 @@
             {
                 <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">unsubscribe</a>
             }
-            <a class="btn btn-block btn-primary" href="@Url.Action("Create", "Posts")">create post</a>
+            <a data-action="/Posts/Create" class="btn btn-block btn-primary edit-btn">create post</a>
         </div>
     </div>
 

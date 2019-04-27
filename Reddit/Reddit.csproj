@@ -129,6 +129,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\authentication-modal.js" />
+    <Content Include="Scripts\post-tabs.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -200,12 +201,12 @@
     <Content Include="Views\Partials\_Vote.cshtml" />
     <Content Include="Views\Partials\_Login.cshtml" />
     <Content Include="Views\Partials\_Post.cshtml" />
-    <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Partials\_ModTools.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Partials\_Register.cshtml" />
     <Content Include="Views\Partials\_SubRedditDetails.cshtml" />
     <Content Include="Views\Partials\Edits\_EditRules.cshtml" />
+    <Content Include="Views\Partials\Edits\_CreatePost.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

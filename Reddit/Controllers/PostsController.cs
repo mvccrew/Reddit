@@ -73,7 +73,7 @@ namespace Reddit.Controllers
                     });
             }
 
-            return View(model);
+            return PartialView("~/Views/Partials/Edits/_CreatePost.cshtml", model);
         }
 
         [BanFilter]

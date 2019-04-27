@@ -48,7 +48,7 @@
         </div>
 
         <div class="panel-footer">
-            <a class="btn btn-primary btn-block" href="@Url.Action("Create", "Posts")">create post</a>
+            <a data-action="/Posts/Create" class="btn btn-primary btn-block edit-btn">create post</a>
             @if (Reddit.Models.AuthManager.LoggedUser.Id == Model.UserId)
             {
                 <a data-id="@Model.UserId" data-action="/Profile/Edit" class="btn btn-primary edit-btn btn-block">edit profile</a>
