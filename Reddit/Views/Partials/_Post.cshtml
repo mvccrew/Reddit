@@ -1,7 +1,7 @@
 @model DataAccess.Entities.Post
 
-<article onclick="location.href='@Url.Action("Index", "Comments", new { PostId = Model.Id})';" style="cursor:pointer;" class="card post">
-    <div class="card-header">
+<article class="card post">
+    <div onclick="location.href='@Url.Action("Index", "Comments", new { PostId = Model.Id})';" style="cursor:pointer;" class="card-header">
         <a class="card-title h4 text-dark" href="@Url.Action("Index", "Comments", new { PostId = Model.Id})">
             @Model.Title
         </a>

@@ -22,7 +22,7 @@ var triggerModal = (event) => {
     const loginModal = document.getElementById("loginModal");
     const registerModal = document.getElementById("registerModal");
     const redirectToRegister = document.getElementById("redirectToRegister");
-    const closeLinks = document.querySelectorAll("[href='#close']");
+    const closeLinks = document.querySelectorAll(".authenticate-close");
 
     login.addEventListener('click', () => {
         loginModal.classList.add('active');

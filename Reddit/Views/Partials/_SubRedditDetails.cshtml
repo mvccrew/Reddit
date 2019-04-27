@@ -38,12 +38,12 @@
 
     <div class="panel main-panel">
         <div class="panel-header bg-warning">
-            <div class="panel-title float-left">/r/@Model.SubReddit.Name rules</div>
+            <div style="margin-top: 2px;" class="panel-title float-left">/r/@Model.SubReddit.Name rules</div>
             @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
             {
                 <div class="add-rule float-right">
                     <!--<a class="btn btn-block btn-primary" href="@Url.Action("Add", "Rules", new { SubRedditId = Model.SubRedditId })">Add rule</a>-->
-                    <a data-sub-id="@Model.SubRedditId" data-action="/Rules/Add" class="btn btn-sm btn-error edit-btn edit-rule">Add rule</a>
+                    <a data-sub-id="@Model.SubRedditId" data-action="/Rules/Add" class="btn btn-sm btn-error edit-btn edit-rule">add rule</a>
                 </div>
             }
         </div>
