@@ -9,17 +9,20 @@
     @Html.HiddenFor(model => model.UserId)
     @foreach (var item in Model.Items)
     {
-        <div class="tile" style="background: #fff; padding: 0.5rem 0.5rem 0 0.5rem; margin-top: 1.2rem;">
+        <div class="tile" style="background: #fff; padding: 0.5rem; margin-top: 1.2rem;">
             <div class="tile-icon">
-                <i class="fas fa-globe text-primary"></i>
+                <i style="font-size: 1.2rem; color: @(item.Theme)" class="fas fa-globe"></i>
             </div>
-            <div class="tile-content">
+            <div style="padding-right: 1rem;" class="tile-content">
                 <a href="/Posts?SubRedditId=@item.Id" class="tile-title h5 text-dark">/r/@item.Name</a>
-                <p style="margin: 1rem 0;" class="tile-subtitle">@item.Description</p>
+                <p style="margin: 1rem 0; text-align: justify;" class="tile-subtitle">@item.Description</p>
             </div>
-            <div class="tile-action">
-                <button class="edit-btn btn-success btn" data-id="@item.Id" data-action="/SubReddit/Edit">edit</button>
-                <a href="/SubReddit/Delete/@item.Id" class="btn btn-error">delete</a>
+            <div style="align-self: flex-end" class="tile-action">
+                @if (Reddit.Models.AuthManager.LoggedUser != null)
+                {
+                    <button class="edit-btn btn-success btn" data-id="@item.Id" data-action="/SubReddit/Edit">edit</button>
+                    <a href="/SubReddit/Delete/@item.Id" class="btn btn-error">delete</a>
+                }
                 <a href="/SubReddit/Subscribe/@item.Id" class="btn btn-primary">subscribe</a>
             </div>
         </div>
