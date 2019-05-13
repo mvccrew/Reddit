@@ -18,8 +18,8 @@ namespace Reddit.Filters
             if (url.Contains('='))
             SubRedditId = Int32.Parse(url.Split('=').Last());
 
-            if (AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.Id == (int)SubRedditId && 
-                sr.BannedUsers.Any(u => u.Id == AuthManager.LoggedUser.Id)))
+            if (AuthManager.LoggedUser != null && 
+                AuthManager.LoggedUser.BannedInSubReddits.Any(sr => sr.Id == (int)SubRedditId))
             {
                 filterContext.Result = new RedirectResult("/Home/Index/#banned");
             }

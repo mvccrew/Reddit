@@ -15,7 +15,6 @@ using System.Web.Routing;
 
 namespace Reddit.Controllers
 {   
-    [AuthenticationFilter(RequiredKarma = int.MinValue)]
     public class PostsController : Controller
     {
         [BanFilter]
@@ -26,7 +25,7 @@ namespace Reddit.Controllers
                 model.SubRedditId = (int)SubRedditId;
             }
             PostsRepository repo = new PostsRepository();
-            if(AuthManager.LoggedUser.AdminToSubReddits.Any(m => m.Admins.Any(a => a.Id==AuthManager.LoggedUser.Id)))
+            if(AuthManager.LoggedUser != null && AuthManager.LoggedUser.AdminToSubReddits.Any(sr => sr.Id == model.SubRedditId))
             {
                 model.Posts = repo.GetAll(m => m.SubRedditId == model.SubRedditId).OrderByDescending(a => a.Rating).ToList();
             }
@@ -44,6 +43,7 @@ namespace Reddit.Controllers
             return View(model);
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [BanFilter]
         [MuteFilter]
         [HttpGet]
@@ -76,6 +76,7 @@ namespace Reddit.Controllers
             return PartialView("~/Views/Partials/Edits/_CreatePost.cshtml", model);
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [BanFilter]
         [MuteFilter]
         [HttpGet]
@@ -109,6 +110,7 @@ namespace Reddit.Controllers
             return PartialView("~/Views/Partials/Edits/_EditPost.cshtml", model);
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [BanFilter]
         [MuteFilter]
         [HttpPost]
@@ -169,6 +171,7 @@ namespace Reddit.Controllers
             //return Content("");
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [BanFilter]
         [MuteFilter]
         [HttpGet]
@@ -183,6 +186,7 @@ namespace Reddit.Controllers
             return RedirectToAction("Index", "Posts", new { SubRedditId = item.SubRedditId });
         }
 
+        [AuthenticationFilter(RequiredKarma = int.MinValue)]
         [BanFilter]
         [MuteFilter]
         public ActionResult Approve(int id)

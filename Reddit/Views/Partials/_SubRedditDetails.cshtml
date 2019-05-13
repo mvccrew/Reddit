@@ -23,14 +23,15 @@
             <p>@Model.SubReddit.Description</p>
         </div>
         <div class="panel-footer">
-            @if (!(Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id)
-    && Reddit.Models.AuthManager.LoggedUser.SubscribedToSubReddits.Any(m => m.Id == Model.SubReddit.Id)))
+            @if (Reddit.Models.AuthManager.LoggedUser != null &&
+                Model.SubReddit.SubscribedUsers.Any(m => m.Id == Reddit.Models.AuthManager.LoggedUser.Id))
             {
-                <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">subscribe</a>
+                <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">unsubscribe</a>
+
             }
             else
             {
-                <a class="btn btn-block" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">unsubscribe</a>
+                <a class="btn btn-block btn-primary" href="@Url.Action("Subscribe", "SubReddit", new { Id = Model.SubRedditId })">subscribe</a>
             }
             <a data-action="/Posts/Create" class="btn btn-block btn-primary edit-btn">create post</a>
         </div>
@@ -39,7 +40,8 @@
     <div class="panel main-panel">
         <div style="background-color: @(Model.SubReddit.Theme); color: #fff;" class="panel-header">
             <div style="margin-top: 2px;" class="panel-title float-left">/r/@Model.SubReddit.Name rules</div>
-            @if (Model.SubReddit.Admins.Where(u => u.AdminToSubReddits.Any(sr => sr.Admins.Any(us => us.Id == Reddit.Models.AuthManager.LoggedUser.Id))).Count() > 0)
+            @if (Reddit.Models.AuthManager.LoggedUser != null &&
+                Model.SubReddit.Admins.Any(a => a.Id == Reddit.Models.AuthManager.LoggedUser.Id))
             {
                 <div class="add-rule float-right">
                     <!--<a class="btn btn-block btn-primary" href="@Url.Action("Add", "Rules", new { SubRedditId = Model.SubRedditId })">Add rule</a>-->
